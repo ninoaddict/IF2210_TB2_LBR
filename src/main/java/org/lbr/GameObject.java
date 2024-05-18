@@ -1,4 +1,4 @@
-package IF2210_TB2_LBR.src;
+package org.lbr;
 
 public class GameObject {
     private String name;

@@ -1,4 +1,5 @@
-package IF2210_TB2_LBR.src;
+package org.lbr;
+
 public class Product extends GameObject {
     private String product_type;
     private int add_weigth;
