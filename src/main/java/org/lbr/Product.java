@@ -2,12 +2,12 @@ package org.lbr;
 
 public class Product extends GameObject {
     private String product_type;
-    private int add_weigth;
+    private int add_weight;
 
-    public Product(String name, int price, String product_type_, int add_weigth_) {
+    public Product(String name, int price, String product_type_, int add_weight_) {
         super(name, price);
         this.product_type = product_type_;
-        this.add_weigth = add_weigth_;
+        this.add_weight = add_weight_;
     }
 
     // getter
@@ -15,14 +15,14 @@ public class Product extends GameObject {
         return product_type;
     }
 
-    public int getAddWeigth() {
-        return add_weigth;
+    public int getAddweight() {
+        return add_weight;
     }
 
     @Override
     public String toString() {
         return "Name: " + this.getName() + "\nPrice: " + this.getPrice() + "\nProduct Type: " + product_type
-                + "\nAdd Weight: " + add_weigth;
+                + "\nAdd Weight: " + add_weight;
     }
 
     // setter
@@ -30,7 +30,7 @@ public class Product extends GameObject {
         this.product_type = newProductType;
     }
 
-    public void setAddWeigth(int newAddWeigth) {
-        this.add_weigth = newAddWeigth;
+    public void setAddweight(int newAddweight) {
+        this.add_weight = newAddweight;
     }
 }
