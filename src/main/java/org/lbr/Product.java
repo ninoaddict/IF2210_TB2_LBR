@@ -15,14 +15,14 @@ public class Product extends GameObject {
         return product_type;
     }
 
-    public int getAddweight() {
+    public int getAddWeight() {
         return add_weight;
     }
 
     @Override
     public String toString() {
-        return "Name: " + this.getName() + "\nPrice: " + this.getPrice() + "\nProduct Type: " + product_type
-                + "\nAdd Weight: " + add_weight;
+        return getTypeObject() + "\nName: " + this.getName() + "\nPrice: " + this.getPrice() + "\nProduct Type: " + product_type
+                + "\nAdd Weight: " + add_weight + "\nType: " + getProductType();
     }
 
     // setter
@@ -30,7 +30,7 @@ public class Product extends GameObject {
         this.product_type = newProductType;
     }
 
-    public void setAddweight(int newAddweight) {
-        this.add_weight = newAddweight;
+    public void setAddWeight(int newAddWeight) {
+        this.add_weight = newAddWeight;
     }
 }

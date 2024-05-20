@@ -6,12 +6,8 @@ public class Accelerate extends Item {
     }
 
     @Override
-    public void runEffect(Cultivable c) throws Exception {
-        if (c.getClass().getSimpleName().equals("Animal")) {
-            ((Animal) c).addWeight(8);
-            return;
-        }
-
-        ((Plant) c).setAge(((Plant) c).getAge() + 2);
+    public void runEffect(Cultivable cultivable) throws Exception {
+        cultivable.addActiveItem(this);
+        cultivable.accelerate();
     }
 }

@@ -1,19 +1,16 @@
 package org.lbr;
 
-import java.util.ArrayList;
-
-public class Plant extends GameObject implements Cultivable {
-    private int age_to_ready;
+public class Plant extends Cultivable {
+    private final int age_to_ready;
     private int age;
-    private ArrayList<Product> products;
-    private int is_protected;
 
-    public Plant(String name, int price, int age_to_ready_, int age_, ArrayList<Product> products_) {
+    public Plant(String name, int price, int age_to_ready_, int age_, Product product) {
         super(name, price);
         this.age_to_ready = age_to_ready_;
         this.age = age_;
-        this.products = products_;
-        this.is_protected = 0;
+        this.product = product;
+        this.is_protected = false;
+        this.is_trap = false;
     }
 
     // getter
@@ -29,18 +26,16 @@ public class Plant extends GameObject implements Cultivable {
         return age;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
-    }
-
-    public int getProtectedStatus() {
+    public boolean getProtectedStatus() {
         return is_protected;
     }
 
+    public boolean getTrapStatus() { return is_trap; }
+
     @Override
     public String toString() {
-        return "Name: " + this.getName() + "\nPrice: " + this.getPrice() + "\nAge To Ready: " + age_to_ready
-                + "\nAge: " + age + "\nProducts: " + products + "\nReady: " + isReady();
+        return getTypeObject() + "\nName: " + this.getName() + "\nPrice: " + this.getPrice() + "\nProtected: " + isProtected() + "\nTrap: " + isTrap() + "\nAge To Ready: " + getAgeToReady()
+                + "\nAge: " + getAge() + "\nProduct: " + getProduct().getName() + "\nReady: " + isReady();
     }
 
     // setter
@@ -52,28 +47,11 @@ public class Plant extends GameObject implements Cultivable {
         age = newAge;
     }
 
-    public void setProducts(ArrayList<Product> newProducts) {
-        products = newProducts;
-    }
-
-    public void setProtectionTrap() {
-        this.is_protected = 2;
-    }
-
-    public void setProtectionYes() {
-        this.is_protected = 1;
-    }
-
-    public void setProtectionNo() {
-        this.is_protected = 0;
+    public void setProducts(Product newProduct) {
+        product = newProduct;
     }
 
     //
-    @Override
-    public void harvest() {
-        return;
-    }
-
     public void addAge(int addedAge) throws Exception {
         setAge(this.getAge() + addedAge);
     }
@@ -82,4 +60,35 @@ public class Plant extends GameObject implements Cultivable {
         setAge(this.getAge() - reducedAge);
     }
 
+    public void accelerate() {
+        try {
+            this.addAge(2);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void delay() {
+        try {
+            this.reduceAge(2);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void protect() {
+        try {
+            this.setProtectionYes();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void trap() {
+        try {
+            this.setTrapYes();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

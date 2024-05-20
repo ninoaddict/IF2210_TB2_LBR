@@ -27,7 +27,7 @@ public class GameObject extends Exception {
 
     @Override
     public String toString() {
-        return "Name: " + name + " \nPrice: " + price;
+        return getTypeObject() + "\nName: " + name + " \nPrice: " + price;
     }
 
     // setter

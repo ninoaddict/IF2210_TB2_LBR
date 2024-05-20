@@ -6,12 +6,8 @@ public class Trap extends Item {
     }
 
     @Override
-    public void runEffect(Cultivable c) {
-        if (c.getClass().getSimpleName().equals("Animal")) {
-            ((Animal) c).enableTrap();
-            return;
-        }
-        ((Plant) c).enableTrap();
+    public void runEffect(Cultivable cultivable) throws Exception {
+        cultivable.addActiveItem(this);
+        cultivable.trap();
     }
-
 }

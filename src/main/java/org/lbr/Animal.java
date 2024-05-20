@@ -1,27 +1,21 @@
 package org.lbr;
 
-import java.util.ArrayList;
 
-public class Animal extends GameObject {
-    private int weight_to_ready;
+public abstract class Animal extends Cultivable {
+    private final int weight_to_ready;
     private int weight;
-    private ArrayList<Product> products;
-    private int is_protected;
-    private int is_trap;
 
-    public Animal(String name, int price, int weight_to_ready_, int weight_, ArrayList<Product> products_) {
+    public Animal(String name, int price, int weight_to_ready_, int weight_, Product product_) {
         super(name, price);
         this.weight_to_ready = weight_to_ready_;
         this.weight = weight_;
-        this.products = products_;
-        this.is_protected = 0;
+        this.product = product_;
+        this.is_protected = false;
+        this.is_trap = false;
     }
 
-    public void eat() {
-    };
-
-    public void harvest() {
-    };
+    // abstract class
+    public abstract void eat(Product p) throws Exception;
 
     // getter
     public boolean isReady() {
@@ -32,22 +26,24 @@ public class Animal extends GameObject {
         return weight_to_ready;
     }
 
-    public int getweight() {
+    public int getWeight() {
         return weight;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public int getProtectedStatus() {
+    public boolean getProtectedStatus() {
         return is_protected;
     }
 
+    public boolean getTrapStatus() { return is_trap; }
+
     @Override
     public String toString() {
-        return "Name: " + this.getName() + "\nPrice: " + this.getPrice() + "\nWeight To Ready: " + weight_to_ready
-                + "\nWeight: " + weight + "\nProducts: " + products + "\nReady: " + isReady();
+        return getTypeObject() + "\nName: " + getName() + "\nPrice: " + getPrice() + "\nProtected: " + isProtected() + "\nTrap: " + isTrap() + "\nWeight: "
+                + getWeightToReady() + "\nWeight: " + getWeight() + "\nProduct: " + getProduct().getName() + "\nReady: " + isReady();
     }
 
     // setter
@@ -59,27 +55,48 @@ public class Animal extends GameObject {
 
     }
 
-    public void setProducts(ArrayList<Product> newProducts) {
-        products = newProducts;
-    }
-
-    public void setProtectionTrap() {
-        this.is_protected = 2;
-    }
-
-    public void setProtectionYes() {
-        this.is_protected = 1;
-    }
-
-    public void setProtectionNo() {
-        this.is_protected = 0;
+    public void setProducts(Product newProduct) {
+        product = newProduct;
     }
 
     public void addWeight(int addedWeight) throws Exception {
-        setWeight(this.getweight() + addedWeight);
+        setWeight(this.getWeight() + addedWeight);
     }
 
     public void reduceWeight(int reducedWeight) throws Exception {
-        setWeight(this.getweight() - reducedWeight);
+        setWeight(this.getWeight() - reducedWeight);
     }
+
+    public void accelerate() {
+        try {
+            this.addWeight(8);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void delay() {
+        try {
+            this.reduceWeight(5);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void protect() {
+        try {
+            this.setProtectionYes();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void trap() {
+        try {
+            this.setTrapYes();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

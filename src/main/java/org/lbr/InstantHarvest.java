@@ -7,11 +7,7 @@ public class InstantHarvest extends Item {
 
     @Override
     public void runEffect(Cultivable c) {
-        if (c.getClass().getSimpleName().equals("Animal")) {
-            ((Animal) c).harvest();
-            return;
-        }
-        ((Plant) c).harvest();
+
     }
 
 }

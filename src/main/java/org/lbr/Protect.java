@@ -6,12 +6,8 @@ public class Protect extends Item {
     }
 
     @Override
-    public void runEffect(Cultivable c) {
-        if (c.getClass().getSimpleName().equals("Animal")) {
-            ((Animal) c).setProtectionYes();
-            return;
-        }
-        ((Plant) c).setProtectionYes();
+    public void runEffect(Cultivable cultivable) throws Exception {
+        cultivable.addActiveItem(this);
+        cultivable.protect();
     }
-
 }
