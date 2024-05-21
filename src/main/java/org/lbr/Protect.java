@@ -1,8 +1,8 @@
 package org.lbr;
 
 public class Protect extends Item {
-    public Protect(String name, int price) {
-        super(name, price);
+    public Protect() {
+        super("PROTECT");
     }
 
     @Override

@@ -4,8 +4,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 public class Omnivore extends Animal {
-    public Omnivore(String name, int price, int weight_to_ready_, int weight_, Product product_) {
-        super(name, price, weight_to_ready_, weight_, product_);
+    private static Map<String, Omnivore> omnivoreMap = new HashMap<String, Omnivore>();
+
+    static {
+        omnivoreMap.put("AYAM", new Omnivore("AYAM",5, new Product("TELUR")));
+        omnivoreMap.put("BERUANG", new Omnivore("BERUANG",25, new Product("DAGING_BERUANG")));
+    }
+
+    public Omnivore(String name, int weight_to_ready, Product product){
+        super(name,weight_to_ready,product);
+    }
+
+    public Omnivore(String name, int weight_to_ready, int weight, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems) {
+        super(name, weight_to_ready, weight, product, is_protected, is_trap, activeItems);
+    }
+
+    public Omnivore (Omnivore other){
+        super(other);
     }
 
     public Omnivore(String name){
@@ -20,5 +35,8 @@ public class Omnivore extends Animal {
             System.out.println(e.getMessage());
         }
     }
-
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

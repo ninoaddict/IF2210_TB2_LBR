@@ -1,8 +1,8 @@
 package org.lbr;
 
 public class Accelerate extends Item {
-    public Accelerate(String name, int price) {
-        super(name, price);
+    public Accelerate() {
+        super("ACCELERATE");
     }
 
     @Override

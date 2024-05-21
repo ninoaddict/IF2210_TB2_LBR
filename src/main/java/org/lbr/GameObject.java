@@ -1,6 +1,6 @@
 package org.lbr;
 
-public class GameObject extends Exception {
+public abstract class GameObject extends Exception {
     private String name;
 
     public GameObject(String name_) {
@@ -13,15 +13,12 @@ public class GameObject extends Exception {
     }
 
     public String getTypeObject() {
-        String temp = this.getClass().getSimpleName();
-        return temp;
-        // int lastIdxDot = temp.lastIndexOf(".");
-        // return temp.substring(lastIdxDot + 1, temp.length());
+        return this.getClass().getSimpleName();
     }
 
     @Override
     public String toString() {
-        return getTypeObject() + "\nName: " + name + " \nPrice: " + price;
+        return getTypeObject() + "\nName: " + name;
     }
 
     // setter

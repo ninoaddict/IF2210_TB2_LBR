@@ -8,11 +8,18 @@ public abstract class Cultivable extends GameObject {
     protected ArrayList<Item> activeItems;
     protected Product product;
 
-    public Cultivable(String name, int price){
-        super(name,price);
+    public Cultivable(String name){
+        super(name);
         is_protected = false;
         is_trap = false;
         activeItems = new ArrayList<Item>();
+    }
+
+    public Cultivable(String name, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems){
+        super(name);
+        this.is_protected = is_protected;
+        this.is_trap = is_trap;
+        this.activeItems = activeItems;
     }
 
     // getter
@@ -44,7 +51,7 @@ public abstract class Cultivable extends GameObject {
 
     @Override
     public String toString() {
-        return getTypeObject() + "\nName: " + getName() + "\nPrice: " + getPrice() + "\nProtected: " + isProtected() + "\nTrap: " + isTrap();
+        return super.toString() + "\nProtected: " + getIsProtected() + "\nTrap: " + getIsTrap();
     }
 
     public void addActiveItem(Item item){

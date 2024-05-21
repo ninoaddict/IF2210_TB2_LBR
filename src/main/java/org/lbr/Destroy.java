@@ -1,8 +1,8 @@
 package org.lbr;
 
 public class Destroy extends Item {
-    public Destroy(String name, int price) {
-        super(name, price);
+    public Destroy() {
+        super("DESTROY");
     }
 
     @Override

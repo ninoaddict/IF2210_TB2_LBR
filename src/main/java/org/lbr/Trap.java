@@ -1,8 +1,8 @@
 package org.lbr;
 
 public class Trap extends Item {
-    public Trap(String name, int price) {
-        super(name, price);
+    public Trap() {
+        super("TRAP");
     }
 
     @Override

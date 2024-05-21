@@ -1,8 +1,8 @@
 package org.lbr;
 
 public class InstantHarvest extends Item {
-    public InstantHarvest(String name, int price) {
-        super(name, price);
+    public InstantHarvest() {
+        super("INSTANT_HARVEST");
     }
 
     @Override
