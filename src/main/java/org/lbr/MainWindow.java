@@ -100,7 +100,7 @@ class RoundedPanel extends JPanel
     public RoundedPanel(int radius) {
         super();
         this.setPreferredSize(new Dimension(90, 120));
-        this.setBackground(Color.green);
+        this.setBackground(new Color(213,220,246));
         this.setOpaque(false);
         this.setLayout(new GridLayout());
         JLabel awaJLabel = new JLabel("HAHAA");
@@ -147,6 +147,7 @@ class RoundButton extends JButton {
 	    super(label);
 	    this.setPreferredSize(new Dimension(50, 40));
         this.setBackground(Color.white);
+        this.setForeground(Color.white);
         this.setText(label);
         this.setFocusPainted(false);
 
@@ -218,7 +219,7 @@ public class MainWindow extends JPanel {
     }
     public void initComponent() {
         mainPanel = new JPanel();
-        mainPanel.setBackground(Color.orange);
+        mainPanel.setBackground(new Color(170,193,237));
         mainPanel.setPreferredSize(new Dimension(800, 600));
         mainPanel.setLayout(new GridBagLayout());
         panel_atas  = new JPanel();
@@ -235,7 +236,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.weightx = 1.0;
         panel_atas.setPreferredSize(new Dimension(500, 20));
         panel_atas.setBackground(Color.blue);
-        panel_atas.setOpaque(true);
+        panel_atas.setOpaque(false);
         mainPanel.add(panel_atas, gridBagConstraints);
         gridBagConstraints.weighty = 4.0;
 
@@ -243,7 +244,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 1;
         panel_tengah.setBackground(Color.yellow);
         panel_tengah.setPreferredSize(new Dimension(100, 420));
-        panel_tengah.setOpaque(true);
+        panel_tengah.setOpaque(false);
         mainPanel.add(panel_tengah, gridBagConstraints);
         gridBagConstraints.weighty = 0.1;
 
@@ -251,12 +252,14 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 2;
         panel_bawah.setBackground(Color.red);
         panel_bawah.setPreferredSize(new Dimension(100, 140));
+        panel_bawah.setOpaque(false);
         mainPanel.add(panel_bawah, gridBagConstraints);
 
         panel_tengah.setLayout(new GridBagLayout());
 
         JPanel card_grid_panel = new JPanel();
         card_grid_panel.setBackground(new Color(0,108,103));
+        card_grid_panel.setOpaque(false);
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -272,6 +275,7 @@ public class MainWindow extends JPanel {
 
         JPanel button_grid_panel = new JPanel();
         button_grid_panel.setBackground(Color.MAGENTA);
+        button_grid_panel.setOpaque(false);
 
         panel_tengah.add(button_grid_panel, gridBagConstraints);
 
@@ -342,7 +346,9 @@ public class MainWindow extends JPanel {
         
         for(int i = 0; i < 6; i++) {
         	gridBagConstraints.gridy = i;
-        	button_grid_panel.add(new RoundButton(button_name_array[i]), gridBagConstraints);
+        	RoundButton jtempButton = new RoundButton(button_name_array[i]);
+        	jtempButton.setForeground(Color.black);
+        	button_grid_panel.add(jtempButton, gridBagConstraints);
         }
         
         //gridBagConstraints.insets = 
@@ -351,7 +357,8 @@ public class MainWindow extends JPanel {
         RoundedPanel uwuPanel = new RoundedPanel(15);
         uwuPanel.setLayout(new GridBagLayout());
         uwuPanel.setPreferredSize(new Dimension(300, 40));
-        uwuPanel.setBackground(Color.yellow);
+        uwuPanel.setBackground(Color.white);
+        uwuPanel.setOpaque(false);
         
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -387,6 +394,7 @@ public class MainWindow extends JPanel {
                 
         JPanel moniesJPanel = new JPanel();
         moniesJPanel.setPreferredSize(new Dimension(150, 50));
+        moniesJPanel.setOpaque(false);
         panel_atas.add(moniesJPanel, gridBagConstraints);
         
         moniesJPanel.setLayout(new GridBagLayout());
@@ -395,29 +403,48 @@ public class MainWindow extends JPanel {
         newGridBagConstraints.gridx = 0;
         newGridBagConstraints.gridy = 0;
         newGridBagConstraints.fill = GridBagConstraints.BOTH;
-        newGridBagConstraints.weightx = 1.0;
+        newGridBagConstraints.weightx = 0.75;
         newGridBagConstraints.weighty = 1.0;
-        
-        ImageIcon imageIcon = new ImageIcon("images/gold-coin.png"); // load the image to a imageIcon
+        ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/images/gold-coin.png"));
         Image image = imageIcon.getImage(); // transform it 
-        Image newimg = image.getScaledInstance(10, 10,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        Image newimg = image.getScaledInstance(15, 15,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         imageIcon = new ImageIcon(newimg);  // transform it back
         
         JLabel myselfMoniesJPanel = new JLabel("Player 1");
         myselfMoniesJPanel.setBackground(Color.green);
-        myselfMoniesJPanel.setOpaque(true);
-        myselfMoniesJPanel.setIcon(imageIcon);
-        myselfMoniesJPanel.setHorizontalAlignment(JLabel.RIGHT);
+        myselfMoniesJPanel.setOpaque(false);
+        newGridBagConstraints.insets = new Insets(0, 10, 0, 0);
         moniesJPanel.add(myselfMoniesJPanel, newGridBagConstraints);
         
         JLabel hisMoniesJPanel = new JLabel("Player 2");
         hisMoniesJPanel.setBackground(Color.red);
-        hisMoniesJPanel.setOpaque(true);
+        hisMoniesJPanel.setOpaque(false);
         newGridBagConstraints.gridy = 1;
-        hisMoniesJPanel.setIcon(imageIcon);
 
         moniesJPanel.add(hisMoniesJPanel, newGridBagConstraints);
+        
+        JLabel howMuchMyMoneyJLabel = new JLabel("20");
+        howMuchMyMoneyJLabel.setBackground(Color.cyan);
+        howMuchMyMoneyJLabel.setOpaque(false);
+        howMuchMyMoneyJLabel.setIcon(imageIcon);
+        howMuchMyMoneyJLabel.setHorizontalAlignment(JLabel.RIGHT);
+        howMuchMyMoneyJLabel.setHorizontalTextPosition(SwingConstants.LEADING);
+        newGridBagConstraints.gridx = 1;
+        newGridBagConstraints.gridy = 0;
+        newGridBagConstraints.insets = new Insets(0, 0, 0, 10);
+        newGridBagConstraints.weightx = 1.0;
 
+        moniesJPanel.add(howMuchMyMoneyJLabel, newGridBagConstraints);
+        
+        JLabel howMuchHisMoneyJLabel = new JLabel("20");
+        howMuchHisMoneyJLabel.setBackground(Color.orange);
+        howMuchHisMoneyJLabel.setOpaque(false);
+        howMuchHisMoneyJLabel.setIcon(imageIcon);
+        howMuchHisMoneyJLabel.setHorizontalAlignment(JLabel.RIGHT);
+        howMuchHisMoneyJLabel.setHorizontalTextPosition(SwingConstants.LEADING);
+        newGridBagConstraints.gridy = 1;
+        moniesJPanel.add(howMuchHisMoneyJLabel, newGridBagConstraints);
+        
 
         
         
