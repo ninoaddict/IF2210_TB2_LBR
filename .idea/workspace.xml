@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87750fff-8301-4d7f-a5fd-d6230a6d8c90" name="Changes" comment="&quot;Feat: Cultivable, GameObject, and Product&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Card.java" afterDir="false" />
     </list>
     <list id="b124778a-b2e1-487c-8e83-7f51fc9a40b8" name="Changes by adril" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +36,10 @@
     &quot;accountId&quot;: &quot;bcf3de82-7445-47fd-be63-35c8bcafa6ad&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -113,7 +117,7 @@
       <workItem from="1716188852072" duration="250000" />
       <workItem from="1716195645265" duration="1067000" />
       <workItem from="1716211984973" duration="5419000" />
-      <workItem from="1716288648067" duration="649000" />
+      <workItem from="1716288648067" duration="2931000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Feat: Cultivable, GameObject, and Product&quot;">
       <option name="closed" value="true" />
