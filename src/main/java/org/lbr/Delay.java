@@ -1,8 +1,8 @@
 package org.lbr;
 
 public class Delay extends Item {
-    public Delay(String name, int price) {
-        super(name, price);
+    public Delay() {
+        super("DELAY");
     }
 
     @Override

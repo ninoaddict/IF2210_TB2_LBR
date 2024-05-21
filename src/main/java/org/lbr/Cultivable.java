@@ -8,39 +8,50 @@ public abstract class Cultivable extends GameObject {
     protected ArrayList<Item> activeItems;
     protected Product product;
 
-    public Cultivable(String name, int price){
-        super(name,price);
+    public Cultivable(String name){
+        super(name);
         is_protected = false;
         is_trap = false;
         activeItems = new ArrayList<Item>();
     }
 
-    // getter
-    public boolean isProtected(){return is_protected;}
+    public Cultivable(String name, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems){
+        super(name);
+        this.is_protected = is_protected;
+        this.is_trap = is_trap;
+        this.activeItems = activeItems;
+    }
 
-    public boolean isTrap(){return is_trap;}
+    // getter
+    public boolean getIsProtected(){
+        return is_protected;
+    }
+
+    public boolean getIsTrap(){
+        return is_trap;
+    }
+
 
     public Product getProduct() {
         return product;
     }
 
+    public ArrayList<Item> getActiveItems() {
+        return activeItems;
+    }
+
     //setter
-    public void setProtectionYes() {this.is_protected = true;}
-
-    public void setProtectionNo() {this.is_protected = false;}
-
-    public void setTrapYes() {
-        this.is_trap = true;
+    public void enableProtect() {
+        this.is_protected = true;
     }
 
-    public void setTrapNo() {
-        this.is_trap = false;
+    public void enableTrap() {
+        this.is_protected = true;
     }
-
 
     @Override
     public String toString() {
-        return getTypeObject() + "\nName: " + getName() + "\nPrice: " + getPrice() + "\nProtected: " + isProtected() + "\nTrap: " + isTrap();
+        return super.toString() + "\nProtected: " + getIsProtected() + "\nTrap: " + getIsTrap();
     }
 
     public void addActiveItem(Item item){

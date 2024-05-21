@@ -1,8 +1,32 @@
 package org.lbr;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Herbivore extends Animal {
-    public Herbivore(String name, int price, int weight_to_ready_, int weight_, Product product_) {
-        super(name, price, weight_to_ready_, weight_, product_);
+    private static Map<String, Herbivore> herbivoreMap = new HashMap<String, Herbivore>();
+
+    static {
+        herbivoreMap.put("SAPI", new Herbivore("SAPI",10, new Product("SUSU")));
+        herbivoreMap.put("DOMBA", new Herbivore("DOMBA",12, new Product("DAGING_DOMBA")));
+        herbivoreMap.put("KUDA", new Herbivore("KUDA",14, new Product("DAGING_KUDA")));
+    }
+
+    public Herbivore(String name, int weight_to_ready, Product product){
+        super(name,weight_to_ready,product);
+    }
+
+    public Herbivore(String name, int weight_to_ready, int weight, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems) {
+        super(name, weight_to_ready, weight, product, is_protected, is_trap, activeItems);
+    }
+
+    public Herbivore (Herbivore other){
+        super(other);
+    }
+
+    public Herbivore(String name){
+        this(herbivoreMap.get(name));
     }
 
     @Override
@@ -11,6 +35,10 @@ public class Herbivore extends Animal {
             throw new Exception("Hewan ini hanya bisa makan-makanan dari tanaman");
         }
         this.addWeight((p.getAddWeight()));
+    }
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
 

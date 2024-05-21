@@ -18,7 +18,6 @@ public class Player {
 
         this.deck_remaining = 40 ;
         this.hand_deck = hand_deck;
-
     }
 
     public Player(int gulden, ArrayList<ArrayList<Cultivable>> field, int deck_remaining, ArrayList<GameObject> hand_deck){
@@ -154,7 +153,7 @@ public class Player {
     }
 
     public void buy(String name, Shop shop) throws Exception {
-        Product product = shop.contructProduct(name);
+        Product product = new Product(name);
         if (product == null) {
             throw new Exception("Key is not found");
         }
@@ -183,24 +182,4 @@ public class Player {
         shop.addProduct(product);
         reduceGulden(product.getPrice());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

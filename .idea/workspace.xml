@@ -5,9 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87750fff-8301-4d7f-a5fd-d6230a6d8c90" name="Changes" comment="&quot;Feat: Cultivable, GameObject, and Product&quot;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/lbr/BearAttack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Accelerate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Accelerate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Carnivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Carnivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Cultivable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Cultivable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Delay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Delay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Destroy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Destroy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Herbivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Herbivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/InstantHarvest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/InstantHarvest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Omnivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Omnivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Plant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Protect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Protect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Trap.java" afterDir="false" />
     </list>
     <list id="b124778a-b2e1-487c-8e83-7f51fc9a40b8" name="Changes by adril" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +51,9 @@
     &quot;accountId&quot;: &quot;bcf3de82-7445-47fd-be63-35c8bcafa6ad&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -40,22 +63,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MainFrame.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/gui&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/IdeaProjects/uwu/IF2210_TB2_LBR&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/adril/ITB Files/Semester IV/OOP/tubes/IF2210_TB2_LBR/src/main/java/org/lbr/Main.java&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainFrame.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging feat/gui",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/IdeaProjects/uwu/IF2210_TB2_LBR",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/adril/ITB Files/Semester IV/OOP/tubes/IF2210_TB2_LBR/src/main/java/org/lbr/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.lbr.MainFrame" />
