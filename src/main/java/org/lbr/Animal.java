@@ -1,27 +1,26 @@
 package org.lbr;
 
-
 import java.util.ArrayList;
 
 public abstract class Animal extends Cultivable {
     private final int weight_to_ready;
     private int weight;
 
-    public Animal(String name, int weight_to_ready_, Product product_) {
-        super(name);
+    public Animal(String name, int weight_to_ready_, Product product_, String imageUrlPath) {
+        super(name, imageUrlPath);
         this.weight_to_ready = weight_to_ready_;
         this.weight = 0;
         this.product = product_;
     }
-    public Animal(String name, int weight_to_ready_, int weight_, Product product_, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems) {
-        super(name,is_protected,is_trap,activeItems);
+    public Animal(String name, int weight_to_ready_, int weight_, Product product_, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {
+        super(name,is_protected,is_trap,activeItems, imageUrlPath);
         this.weight_to_ready = weight_to_ready_;
         this.weight = weight_;
         this.product = product_;
     }
 
     public Animal(Animal other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems());
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath());
         this.weight_to_ready = other.getWeightToReady();
         this.weight = other.getWeight();
         this.product = other.product ;

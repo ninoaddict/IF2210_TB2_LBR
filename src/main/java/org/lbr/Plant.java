@@ -10,27 +10,27 @@ public class Plant extends Cultivable {
     private static Map<String, Plant> plantMap = new HashMap<String, Plant>();
 
     static {
-        plantMap.put("BIJI_JAGUNG", new Plant("BIJI_JAGUNG", 3, new Product("JAGUNG")));
-        plantMap.put("BIJI_LABU", new Plant("BIJI_LABU", 5, new Product("LABU") ));
-        plantMap.put("BIJI_STROBERI", new Plant("BIJI_STROBERI", 4, new Product("STROBERI")));
+        plantMap.put("BIJI_JAGUNG", new Plant("BIJI_JAGUNG", 3, new Product("JAGUNG"), "/images/biji_jagung.png"));
+        plantMap.put("BIJI_LABU", new Plant("BIJI_LABU", 5, new Product("LABU"), "/images/biji_labu.png"));
+        plantMap.put("BIJI_STROBERI", new Plant("BIJI_STROBERI", 4, new Product("STROBERI"), "/images/biji_stroberi.png"));
     }
 
-    public Plant(String name, int age_to_ready_, Product product) {
-        super(name);
+    public Plant(String name, int age_to_ready_, Product product, String imageUrlPath) {
+        super(name, imageUrlPath);
         this.age_to_ready = age_to_ready_;
         this.age = 0 ;
         this.product = product;
     }
 
-    public Plant(String name, int age_to_ready_, int age_, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems) {
-        super(name, is_protected, is_trap, activeItems);
+    public Plant(String name, int age_to_ready_, int age_, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {
+        super(name, is_protected, is_trap, activeItems, imageUrlPath);
         this.age_to_ready = age_to_ready_;
         this.product = product;
         this.age = age_ ;
     }
 
     public Plant(Plant other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems());
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath());
         this.age_to_ready = other.getAgeToReady();
         this.age = other.getAge();
         this.product = other.product ;
