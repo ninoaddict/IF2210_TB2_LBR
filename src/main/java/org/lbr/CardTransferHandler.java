@@ -17,15 +17,6 @@ class CardTransferHandler extends TransferHandler {
         return new GameObjectTransferable(gameObject);
     }
 
-//    @Override
-//    protected void exportDone(JComponent c, Transferable t, int action) {
-//        if (action == MOVE) {
-//            Card card = (Card) c;
-//            GameObject gameObject = card.getGameObject();
-//            System.out.println(gameObject.getParent().getRow() + " " + gameObject.getParent().getCol());
-//        }
-//    }
-
     @Override
     public boolean canImport(TransferHandler.TransferSupport support) {
         return support.isDataFlavorSupported(GameObjectTransferable.GAME_OBJECT_FLAVOR);
@@ -45,12 +36,12 @@ class CardTransferHandler extends TransferHandler {
                 return false;
             }
             Card sourceCard = droppedGameObject.getParent();
-            System.out.println(sourceCard.getRow() + " " + sourceCard.getCol());
 
             // Check if the source is also the target card
             if (sourceCard.equals(targetCard)) {
                 return false;
             }
+            System.out.println(sourceCard.getRow() + " " + sourceCard.getCol());
 
             if (sourceCard.getCurrentPosition() == Card.FIELD && targetCard.getCurrentPosition() == Card.DECK) {
                 return false;

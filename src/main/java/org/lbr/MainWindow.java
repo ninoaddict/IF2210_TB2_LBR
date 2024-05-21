@@ -321,7 +321,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel();
 
-        panel_bawah.add(new Card(null, null, 4, 0, Card.DECK), gridBagConstraints);
+        panel_bawah.add(new Card(new Herbivore("DOMBA"), null, 4, 0, Card.DECK), gridBagConstraints);
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         for(int i = 1; i < 6; i++) {
         	gridBagConstraints.gridx = i;
@@ -358,8 +358,6 @@ public class MainWindow extends JPanel {
         	jtempButton.setForeground(Color.black);
         	button_grid_panel.add(jtempButton, gridBagConstraints);
         }
-        
-        //gridBagConstraints.insets = 
         
         panel_atas.setLayout(new GridBagLayout());
         RoundedPanel uwuPanel = new RoundedPanel(15);

@@ -2,7 +2,7 @@ package org.lbr;
 
 public class Protect extends Item {
     public Protect() {
-        super("PROTECT", "/images/protect.png");
+        super("Protect", "/images/protect.png");
     }
 
     @Override

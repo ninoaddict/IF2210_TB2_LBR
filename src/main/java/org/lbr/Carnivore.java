@@ -8,7 +8,7 @@ public class Carnivore extends Animal{
     private static Map<String, Carnivore> carnivoreMap = new HashMap<String, Carnivore>();
 
     static {
-        carnivoreMap.put("HIU_DARAT", new Carnivore("HIU_DARAT",20, new Product("SIRIP_HIU"), "/images/hiu_darat.png"));
+        carnivoreMap.put("HIU_DARAT", new Carnivore("Hiu Darat",20, new Product("SIRIP_HIU"), "/images/hiu_darat.png"));
     }
 
     public Carnivore(String name, int weight_to_ready, Product product, String imageUrlPath){

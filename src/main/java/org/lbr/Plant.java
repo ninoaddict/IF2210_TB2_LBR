@@ -10,9 +10,9 @@ public class Plant extends Cultivable {
     private static Map<String, Plant> plantMap = new HashMap<String, Plant>();
 
     static {
-        plantMap.put("BIJI_JAGUNG", new Plant("BIJI_JAGUNG", 3, new Product("JAGUNG"), "/images/biji_jagung.png"));
-        plantMap.put("BIJI_LABU", new Plant("BIJI_LABU", 5, new Product("LABU"), "/images/biji_labu.png"));
-        plantMap.put("BIJI_STROBERI", new Plant("BIJI_STROBERI", 4, new Product("STROBERI"), "/images/biji_stroberi.png"));
+        plantMap.put("BIJI_JAGUNG", new Plant("Biji Jagung", 3, new Product("JAGUNG"), "/images/biji_jagung.png"));
+        plantMap.put("BIJI_LABU", new Plant("Biji Labu", 5, new Product("LABU"), "/images/biji_labu.png"));
+        plantMap.put("BIJI_STROBERI", new Plant("Biji Stroberi", 4, new Product("STROBERI"), "/images/biji_stroberi.png"));
     }
 
     public Plant(String name, int age_to_ready_, Product product, String imageUrlPath) {

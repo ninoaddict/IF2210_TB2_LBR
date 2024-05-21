@@ -2,7 +2,7 @@ package org.lbr;
 
 public class Trap extends Item {
     public Trap() {
-        super("TRAP", "/images/trap.png");
+        super("Trap", "/images/trap.png");
     }
 
     @Override
