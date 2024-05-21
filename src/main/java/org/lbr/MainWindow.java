@@ -3,7 +3,10 @@ package org.lbr;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -100,7 +103,7 @@ class RoundedPanel extends JPanel
     public RoundedPanel(int radius) {
         super();
         this.setPreferredSize(new Dimension(90, 120));
-        this.setBackground(new Color(213,220,246));
+        this.setBackground(new Color(107, 181, 230));
         this.setOpaque(false);
         this.setLayout(new GridLayout());
         JLabel awaJLabel = new JLabel("HAHAA");
@@ -209,8 +212,38 @@ class RoundButton extends JButton {
 	  }
 }
 
+
+class panel_with_image extends JPanel {
+	
+	BufferedImage curBufferedImage;
+	
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(tmp, 0, 0, null);
+	    g2d.dispose();
+
+	    return dimg;
+	}  
+	
+	public panel_with_image() {
+		try {
+		curBufferedImage = resize(ImageIO.read(new File("C:\\Users\\Lenovo\\IdeaProjects\\uwu\\IF2210_TB2_LBR\\src\\main\\resources\\images\\bgguioop.jpg")), 800, 800);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		// TODO Auto-generated constructor stub
+	}
+	
+	protected void paintComponent(Graphics g) {
+	    g.drawImage(curBufferedImage, 0, 0, null);
+	}
+}
+
 public class MainWindow extends JPanel {
-    public JPanel mainPanel;
+    public panel_with_image mainPanel;
     private JPanel panel_atas;
     private JPanel panel_tengah;
     private JPanel panel_bawah;
@@ -218,7 +251,8 @@ public class MainWindow extends JPanel {
 
     }
     public void initComponent() {
-        mainPanel = new JPanel();
+
+        mainPanel = new panel_with_image();
         mainPanel.setBackground(new Color(170,193,237));
         mainPanel.setPreferredSize(new Dimension(800, 600));
         mainPanel.setLayout(new GridBagLayout());
@@ -429,7 +463,7 @@ public class MainWindow extends JPanel {
 
         moniesJPanel.add(hisMoniesJPanel, newGridBagConstraints);
         
-        JLabel howMuchMyMoneyJLabel = new JLabel("20");
+        JLabel howMuchMyMoneyJLabel = new JLabel("1120");
         howMuchMyMoneyJLabel.setBackground(Color.cyan);
         howMuchMyMoneyJLabel.setOpaque(false);
         howMuchMyMoneyJLabel.setIcon(imageIcon);
