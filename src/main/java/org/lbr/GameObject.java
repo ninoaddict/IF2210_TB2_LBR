@@ -2,9 +2,29 @@ package org.lbr;
 
 public abstract class GameObject extends Exception {
     private String name;
+    private String imgUrlPath;
+    private Card parent;
 
-    public GameObject(String name_) {
+    public GameObject(String name_, String imgUrlPath) {
         this.name = name_;
+        this.imgUrlPath = imgUrlPath;
+        this.parent = null;
+    }
+
+    public String getImgUrlPath() {
+        return imgUrlPath;
+    }
+
+    public void setImgUrlPath(String imgUrlPath) {
+        this.imgUrlPath = imgUrlPath;
+    }
+
+    public Card getParent() {
+        return parent;
+    }
+
+    public void setParent(Card parent) {
+        this.parent = parent;
     }
 
     // getter

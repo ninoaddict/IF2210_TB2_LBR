@@ -297,7 +297,6 @@ public class MainWindow extends JPanel {
 
         //inside_card_grid_panel.setPreferredSize(new Dimension(50, 50));
 
-
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         gridBagConstraints.gridx = 0;
@@ -312,18 +311,25 @@ public class MainWindow extends JPanel {
                 card_grid_panel.add(new RoundedPanel(15), gridBagConstraints);
             }
         }
-        
+
+        panel_bawah.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.WHITE));
         panel_bawah.setLayout(new GridBagLayout());
-        
         gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.insets = new Insets(7, 7, 7, 7);
+        gridBagConstraints.insets = new Insets(7, 27, 7, 7);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        
-        for(int i = 0; i < 6; i++) {
+        JLabel temp = new JLabel();
+        panel_bawah.add(new RoundedPanel(15), gridBagConstraints);
+
+        gridBagConstraints.insets = new Insets(7, 7, 7, 7);
+        for(int i = 1; i < 6; i++) {
         	gridBagConstraints.gridx = i;
         	panel_bawah.add(new RoundedPanel(15), gridBagConstraints);
         }
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.weightx = 1.0;
+        panel_bawah.add(temp, gridBagConstraints);
         
         button_grid_panel.setLayout(new GridBagLayout());
         
@@ -444,10 +450,6 @@ public class MainWindow extends JPanel {
         howMuchHisMoneyJLabel.setHorizontalTextPosition(SwingConstants.LEADING);
         newGridBagConstraints.gridy = 1;
         moniesJPanel.add(howMuchHisMoneyJLabel, newGridBagConstraints);
-        
-
-        
-        
         
         gridBagConstraints.anchor = GridBagConstraints.CENTER;
         gridBagConstraints.gridx = 1;

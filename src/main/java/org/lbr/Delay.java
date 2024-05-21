@@ -2,7 +2,7 @@ package org.lbr;
 
 public class Delay extends Item {
     public Delay() {
-        super("DELAY");
+        super("DELAY", "/images/delay.png");
     }
 
     @Override

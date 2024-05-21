@@ -8,15 +8,15 @@ public abstract class Cultivable extends GameObject {
     protected ArrayList<Item> activeItems;
     protected Product product;
 
-    public Cultivable(String name){
-        super(name);
+    public Cultivable(String name, String imageUrlPath){
+        super(name, imageUrlPath);
         is_protected = false;
         is_trap = false;
         activeItems = new ArrayList<Item>();
     }
 
-    public Cultivable(String name, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems){
-        super(name);
+    public Cultivable(String name, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath){
+        super(name, imageUrlPath);
         this.is_protected = is_protected;
         this.is_trap = is_trap;
         this.activeItems = activeItems;
