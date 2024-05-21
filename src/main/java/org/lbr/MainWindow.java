@@ -398,7 +398,7 @@ public class MainWindow extends JPanel {
         newGridBagConstraints.weightx = 1.0;
         newGridBagConstraints.weighty = 1.0;
         
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\uwu\\IF2210_TB2_LBR\\gold-coin.png"); // load the image to a imageIcon
+        ImageIcon imageIcon = new ImageIcon("images/gold-coin.png"); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it 
         Image newimg = image.getScaledInstance(10, 10,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         imageIcon = new ImageIcon(newimg);  // transform it back
