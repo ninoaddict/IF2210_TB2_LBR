@@ -99,10 +99,14 @@ class RoundedPanel extends JPanel
 
     public RoundedPanel(int radius) {
         super();
-        this.setPreferredSize(new Dimension(80, 110));
+        this.setPreferredSize(new Dimension(90, 120));
         this.setBackground(Color.green);
         this.setOpaque(false);
-        this.add(new JLabel("UWUWUWUW"));
+        this.setLayout(new GridLayout());
+        JLabel awaJLabel = new JLabel("HAHAA");
+        awaJLabel.setForeground(Color.black);
+        awaJLabel.setPreferredSize(new Dimension(10, 10));
+        //this.add(awaJLabel);
         cornerRadius = radius;
     }
 
@@ -114,7 +118,6 @@ class RoundedPanel extends JPanel
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
         Dimension arcs = new Dimension(cornerRadius, cornerRadius);
         int width = getWidth();
         int height = getHeight();
@@ -128,18 +131,21 @@ class RoundedPanel extends JPanel
             graphics.setColor(getBackground());
         }
     	//graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //graphics.setStroke(new BasicStroke);
         graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
-        graphics.setColor(getForeground());
+       
+        graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
+        //graphics.setColor(getForeground());
         //graphics.setStroke(new BasicStroke((float) 1.0));
         //graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
-        graphics.dispose();
+        super.paintComponent(g);
     }
 }
 
 class RoundButton extends JButton {
 	  public RoundButton(String label) {
 	    super(label);
-	    this.setPreferredSize(new Dimension(50, 50));
+	    this.setPreferredSize(new Dimension(50, 40));
         this.setBackground(Color.white);
         this.setText(label);
         this.setFocusPainted(false);
@@ -163,7 +169,7 @@ class RoundButton extends JButton {
 
 	// Paint the round background and label.
 	  protected void paintComponent(Graphics g) {
-	        Dimension arcs = new Dimension(15, 15);
+	        Dimension arcs = new Dimension(7, 7);
 	        int width = getWidth();
 	        int height = getHeight();
 	    	((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -227,7 +233,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridheight = 1;
         gridBagConstraints.weighty = 2.0;
         gridBagConstraints.weightx = 1.0;
-        panel_atas.setPreferredSize(new Dimension(100, 50));
+        panel_atas.setPreferredSize(new Dimension(500, 20));
         panel_atas.setBackground(Color.blue);
         panel_atas.setOpaque(true);
         mainPanel.add(panel_atas, gridBagConstraints);
@@ -236,15 +242,15 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridheight = 1;
         gridBagConstraints.gridy = 1;
         panel_tengah.setBackground(Color.yellow);
-        panel_tengah.setPreferredSize(new Dimension(100, 400));
+        panel_tengah.setPreferredSize(new Dimension(100, 420));
         panel_tengah.setOpaque(true);
         mainPanel.add(panel_tengah, gridBagConstraints);
-        gridBagConstraints.weighty = 1.25;
+        gridBagConstraints.weighty = 0.1;
 
         gridBagConstraints.gridheight = 1;
         gridBagConstraints.gridy = 2;
         panel_bawah.setBackground(Color.red);
-        panel_bawah.setPreferredSize(new Dimension(100, 100));
+        panel_bawah.setPreferredSize(new Dimension(100, 140));
         mainPanel.add(panel_bawah, gridBagConstraints);
 
         panel_tengah.setLayout(new GridBagLayout());
@@ -256,7 +262,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weightx = 0.25;
         gridBagConstraints.weighty = 1.0;
 
         panel_tengah.add(card_grid_panel, gridBagConstraints);
@@ -342,9 +348,9 @@ public class MainWindow extends JPanel {
         //gridBagConstraints.insets = 
         
         panel_atas.setLayout(new GridBagLayout());
-        JPanel uwuPanel = new JPanel();
+        RoundedPanel uwuPanel = new RoundedPanel(15);
         uwuPanel.setLayout(new GridBagLayout());
-        uwuPanel.setPreferredSize(new Dimension(120, 80));
+        uwuPanel.setPreferredSize(new Dimension(300, 40));
         uwuPanel.setBackground(Color.yellow);
         
         gridBagConstraints = new GridBagConstraints();
@@ -353,25 +359,80 @@ public class MainWindow extends JPanel {
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new Insets(10, 10, 10, 10);
         
         JLabel labelNext = new JLabel("Number of Turn: 1");
         labelNext.setBackground(Color.red);
+        labelNext.setOpaque(false);
         
         uwuPanel.add(labelNext, gridBagConstraints);
         
         RoundButton roundButton = new RoundButton("Next Turn");
         roundButton.setBackground(Color.black);
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.0;
+        gridBagConstraints.weightx = 0.0;
+        gridBagConstraints.insets = new Insets(3, 10, 3, 10);
+
         
         uwuPanel.add(roundButton, gridBagConstraints);
         
         gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.anchor = GridBagConstraints.CENTER;
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weightx = 0.0;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new Insets(0, 20, 0, 80);
+                
+        JPanel moniesJPanel = new JPanel();
+        moniesJPanel.setPreferredSize(new Dimension(150, 50));
+        panel_atas.add(moniesJPanel, gridBagConstraints);
         
+        moniesJPanel.setLayout(new GridBagLayout());
+        
+        GridBagConstraints newGridBagConstraints = new GridBagConstraints();
+        newGridBagConstraints.gridx = 0;
+        newGridBagConstraints.gridy = 0;
+        newGridBagConstraints.fill = GridBagConstraints.BOTH;
+        newGridBagConstraints.weightx = 1.0;
+        newGridBagConstraints.weighty = 1.0;
+        
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\uwu\\IF2210_TB2_LBR\\gold-coin.png"); // load the image to a imageIcon
+        Image image = imageIcon.getImage(); // transform it 
+        Image newimg = image.getScaledInstance(10, 10,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        imageIcon = new ImageIcon(newimg);  // transform it back
+        
+        JLabel myselfMoniesJPanel = new JLabel("Player 1");
+        myselfMoniesJPanel.setBackground(Color.green);
+        myselfMoniesJPanel.setOpaque(true);
+        myselfMoniesJPanel.setIcon(imageIcon);
+        myselfMoniesJPanel.setHorizontalAlignment(JLabel.RIGHT);
+        moniesJPanel.add(myselfMoniesJPanel, newGridBagConstraints);
+        
+        JLabel hisMoniesJPanel = new JLabel("Player 2");
+        hisMoniesJPanel.setBackground(Color.red);
+        hisMoniesJPanel.setOpaque(true);
+        newGridBagConstraints.gridy = 1;
+        hisMoniesJPanel.setIcon(imageIcon);
+
+        moniesJPanel.add(hisMoniesJPanel, newGridBagConstraints);
+
+
+        
+        
+        
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.weightx = 0.0;
         panel_atas.add(uwuPanel, gridBagConstraints);
+        
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.gridx = 2;
+        JPanel emptJPanel = new JPanel();
+        emptJPanel.setOpaque(false);
+        panel_atas.add(emptJPanel, gridBagConstraints);
+
         
         //panel_atas.setLayout(new GridBagLayout());
         mainPanel.setVisible(true);
