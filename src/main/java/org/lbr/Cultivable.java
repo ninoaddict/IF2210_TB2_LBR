@@ -16,27 +16,31 @@ public abstract class Cultivable extends GameObject {
     }
 
     // getter
-    public boolean isProtected(){return is_protected;}
+    public boolean getIsProtected(){
+        return is_protected;
+    }
 
-    public boolean isTrap(){return is_trap;}
+    public boolean getIsTrap(){
+        return is_trap;
+    }
+
 
     public Product getProduct() {
         return product;
     }
 
+    public ArrayList<Item> getActiveItems() {
+        return activeItems;
+    }
+
     //setter
-    public void setProtectionYes() {this.is_protected = true;}
-
-    public void setProtectionNo() {this.is_protected = false;}
-
-    public void setTrapYes() {
-        this.is_trap = true;
+    public void enableProtect() {
+        this.is_protected = true;
     }
 
-    public void setTrapNo() {
-        this.is_trap = false;
+    public void enableTrap() {
+        this.is_protected = true;
     }
-
 
     @Override
     public String toString() {

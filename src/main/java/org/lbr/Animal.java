@@ -93,7 +93,7 @@ public abstract class Animal extends Cultivable {
 
     public void trap() {
         try {
-            this.setTrapYes();
+            this.enableTrap();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

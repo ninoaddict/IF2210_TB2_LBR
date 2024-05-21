@@ -4,44 +4,147 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87750fff-8301-4d7f-a5fd-d6230a6d8c90" name="Changes" comment="&quot;Feat: Cultivable, GameObject, and Product&quot;" />
+    <list default="true" id="87750fff-8301-4d7f-a5fd-d6230a6d8c90" name="Changes" comment="feat: add Player and Shop into entities&#10; &#10;Co-authored-by: scifo04 &lt;scifohutahaean@gmail.com&gt; &#10;Co-authored-by: Bbennn &lt;sihombingbenjamin2004@gmail.com&gt;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/lbr/BearAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Carnivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Carnivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Cultivable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Cultivable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Omnivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Omnivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Plant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Shop.java" afterDir="false" />
+    </list>
+    <list id="5ab99a79-c2f6-48d1-b5d2-3fef82e51bc8" name="Changes by Marvin Scifo" comment="" />
+    <list id="9f618170-f93c-4a44-a7c5-0584e86a2bd6" name="Changes by sihom" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Accelerate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Accelerate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Carnivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Carnivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Cultivable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Cultivable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Delay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Delay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Destroy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Destroy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Herbivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Herbivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/InstantHarvest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/InstantHarvest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Omnivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Omnivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Protect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Protect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Trap.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/scifo04/IF2210_TB2_LBR",
-    "accountId": "bcf3de82-7445-47fd-be63-35c8bcafa6ad"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;BertoRichardo&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/scifo04/IF2210_TB2_LBR.git&quot;,
+    &quot;accountId&quot;: &quot;f91939fa-f6b8-4084-aec8-ec8919b806d1&quot;
+  }
+}</component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/org/lbr/Cultivable.java">
+      <ranges>
+        <range start1="10" end1="12" start2="10" end2="12" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="15" end1="15" start2="15" end2="22" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="18" end1="19" start2="25" end2="28" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="20" end1="21" start2="29" end2="33" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="25" end1="25" start2="37" end2="41" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="27" end1="33" start2="43" end2="45" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="35" end1="37" start2="47" end2="49" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="39" end1="40" start2="51" end2="51" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="42" end1="43" start2="53" end2="54" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/org/lbr/Carnivore.java">
+      <ranges>
+        <range start1="1" end1="1" start2="1" end2="6" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="2" end1="4" start2="7" end2="15" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="6" end1="6" start2="17" end2="30" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="13" end1="13" start2="37" end2="42" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java">
+      <ranges>
+        <range start1="2" end1="3" start2="2" end2="3" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="4" end1="5" start2="4" end2="4" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="6" end1="7" start2="5" end2="6" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="8" end1="9" start2="7" end2="7" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="15" end1="19" start2="13" end2="13" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="21" end1="25" start2="15" end2="16" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="29" end1="30" start2="20" end2="21" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="36" end1="40" start2="27" end2="27" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/org/lbr/Omnivore.java">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="4" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="4" end1="6" start2="6" end2="23" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="8" end1="8" start2="25" end2="28" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+        <range start1="17" end1="18" start2="37" end2="41" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/org/lbr/Animal.java">
+      <ranges>
+        <range start1="3" end1="3" start2="3" end2="5" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="7" end1="9" start2="9" end2="11" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="10" end1="11" start2="12" end2="13" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="12" end1="14" start2="14" end2="14" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="15" end1="15" start2="15" end2="28" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="44" end1="46" start2="57" end2="58" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="87" end1="88" start2="99" end2="100" changelist="9f618170-f93c-4a44-a7c5-0584e86a2bd6" />
+        <range start1="95" end1="96" start2="107" end2="108" changelist="87750fff-8301-4d7f-a5fd-d6230a6d8c90" />
+      </ranges>
+    </file>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2gdShAH46joSo0f8bsMHA6kvC9t" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/adril/ITB Files/Semester IV/OOP/tubes/IF2210_TB2_LBR/src/main/java/org/lbr/Main.java",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Entities&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/adril/ITB Files/Semester IV/OOP/tubes/IF2210_TB2_LBR/src/main/java/org/lbr/Main.java&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -59,6 +162,13 @@
       <option name="presentableId" value="Default" />
       <updated>1716026078454</updated>
       <workItem from="1716026079551" duration="418000" />
+      <workItem from="1716184994301" duration="1348000" />
+      <workItem from="1716189085030" duration="1212000" />
+      <workItem from="1716193023158" duration="4229000" />
+      <workItem from="1716201177018" duration="5168000" />
+      <workItem from="1716207004888" duration="1849000" />
+      <workItem from="1716211708350" duration="9958000" />
+      <workItem from="1716269866943" duration="7026000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Feat: Cultivable, GameObject, and Product&quot;">
       <option name="closed" value="true" />
@@ -68,25 +178,39 @@
       <option name="project" value="LOCAL" />
       <updated>1716026386633</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: add Player and Shop into entities&#10; &#10;Co-authored-by: scifo04 &lt;scifohutahaean@gmail.com&gt; &#10;Co-authored-by: Bbennn &lt;sihombingbenjamin2004@gmail.com&gt;">
+      <option name="closed" value="true" />
+      <created>1716215241045</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716215241045</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;Feat: Cultivable, GameObject, and Product&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Feat: Cultivable, GameObject, and Product&quot;" />
+    <MESSAGE value="feat: add Player and Shop into entities&#10; &#10;Co-authored-by: scifo04 &lt;scifohutahaean@gmail.com&gt; &#10;Co-authored-by: Bbennn &lt;sihombingbenjamin2004@gmail.com&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add Player and Shop into entities&#10; &#10;Co-authored-by: scifo04 &lt;scifohutahaean@gmail.com&gt; &#10;Co-authored-by: Bbennn &lt;sihombingbenjamin2004@gmail.com&gt;" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/lbr/Main.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Tubes_2$Main.ic" NAME="Main Coverage Results" MODIFIED="1716137052299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>org.lbr.*</FILTER>
+    </SUITE>
   </component>
 </project>

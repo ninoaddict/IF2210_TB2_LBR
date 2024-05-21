@@ -1,7 +1,18 @@
 package org.lbr;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Carnivore extends Animal{
-    public Carnivore(String name, int price, int weight_to_ready, int weight, Product product){
-        super(name,price,weight_to_ready, weight, product);
+    private static Map<String, Carnivore> carnivoreMap = new HashMap<String, Carnivore>();
+
+    static {
+        carnivoreMap.put("HIU_DARAT", new Carnivore("HIU_DARAT",20, new Product("SIRIP_HIU")));
+    }
+
+    public Carnivore(String name, int weight_to_ready, Product product){
+        super(name,weight_to_ready,product);
     }
 
     @Override

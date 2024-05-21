@@ -2,20 +2,14 @@ package org.lbr;
 
 public class GameObject extends Exception {
     private String name;
-    private int price;
 
-    public GameObject(String name_, int price_) {
+    public GameObject(String name_) {
         this.name = name_;
-        this.price = price_;
     }
 
     // getter
     public String getName() {
         return name;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public String getTypeObject() {
@@ -33,10 +27,6 @@ public class GameObject extends Exception {
     // setter
     void setName(String newName) {
         name = newName;
-    }
-
-    void setPrice(int newPrice) {
-        price = newPrice;
     }
 
 }
