@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87750fff-8301-4d7f-a5fd-d6230a6d8c90" name="Changes" comment="&quot;Feat: Cultivable, GameObject, and Product&quot;">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/biji_stroberi.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/CardTransferHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/CardTransferHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/MainWindow.java" afterDir="false" />
     </list>
     <list id="b124778a-b2e1-487c-8e83-7f51fc9a40b8" name="Changes by adril" comment="" />
@@ -43,7 +46,7 @@
   &quot;isMigrated&quot;: true
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -60,7 +63,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "feat/gui",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Lenovo/IdeaProjects/uwu/IF2210_TB2_LBR",
+    "last_opened_file_path": "C:/Users/adril/ITB Files/Semester IV/OOP/tubes/oop_with_gradle",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,6 +77,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\adril\ITB Files\Semester IV\OOP\tubes\IF2210_TB2_LBR\src\main\resources\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\IdeaProjects\uwu\IF2210_TB2_LBR\src\main\resources\images" />
     </key>
@@ -120,6 +126,7 @@
       <workItem from="1716195645265" duration="1067000" />
       <workItem from="1716211984973" duration="5419000" />
       <workItem from="1716288648067" duration="2931000" />
+      <workItem from="1716311830990" duration="4535000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Feat: Cultivable, GameObject, and Product&quot;">
       <option name="closed" value="true" />

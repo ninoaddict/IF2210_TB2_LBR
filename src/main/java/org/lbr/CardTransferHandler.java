@@ -12,8 +12,19 @@ class CardTransferHandler extends TransferHandler {
 
     @Override
     protected Transferable createTransferable(JComponent c) {
-        return new GameObjectTransferable(((Card) c).getGameObject());
+        Card card = (Card) c;
+        GameObject gameObject = card.getGameObject();
+        return new GameObjectTransferable(gameObject);
     }
+
+//    @Override
+//    protected void exportDone(JComponent c, Transferable t, int action) {
+//        if (action == MOVE) {
+//            Card card = (Card) c;
+//            GameObject gameObject = card.getGameObject();
+//            System.out.println(gameObject.getParent().getRow() + " " + gameObject.getParent().getCol());
+//        }
+//    }
 
     @Override
     public boolean canImport(TransferHandler.TransferSupport support) {
@@ -34,8 +45,9 @@ class CardTransferHandler extends TransferHandler {
                 return false;
             }
             Card sourceCard = droppedGameObject.getParent();
+            System.out.println(sourceCard.getRow() + " " + sourceCard.getCol());
 
-            // check if the source is also the target card
+            // Check if the source is also the target card
             if (sourceCard.equals(targetCard)) {
                 return false;
             }
@@ -44,9 +56,10 @@ class CardTransferHandler extends TransferHandler {
                 return false;
             }
 
-            GameObject temp = targetCard.getGameObject();
+            GameObject targetGameObject = targetCard.getGameObject();
             targetCard.setGameObject(droppedGameObject);
-            sourceCard.setGameObject(temp);
+            sourceCard.setGameObject(targetGameObject);  // Explicitly set to null
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
