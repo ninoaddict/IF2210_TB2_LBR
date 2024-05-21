@@ -308,7 +308,12 @@ public class MainWindow extends JPanel {
             for(int j = 0; j < 5; j++){
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
-                card_grid_panel.add(new RoundedPanel(15), gridBagConstraints);
+
+                if (i == 3 && j == 3) {
+                    card_grid_panel.add(new Card(new Product("SUSU"), null, i, j, Card.FIELD), gridBagConstraints);;
+                } else {
+                    card_grid_panel.add(new Card(null, null, i, j, Card.FIELD), gridBagConstraints);
+                }
             }
         }
 
@@ -320,12 +325,11 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel();
-        panel_bawah.add(new RoundedPanel(15), gridBagConstraints);
-
+        panel_bawah.add(new Card(null, null, 5, 0, Card.DECK), gridBagConstraints);
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         for(int i = 1; i < 6; i++) {
         	gridBagConstraints.gridx = i;
-        	panel_bawah.add(new RoundedPanel(15), gridBagConstraints);
+            panel_bawah.add(new Card(new Product("SUSU"), null, 5, i, Card.DECK), gridBagConstraints);
         }
         gridBagConstraints.gridx = 6;
         gridBagConstraints.weightx = 1.0;
