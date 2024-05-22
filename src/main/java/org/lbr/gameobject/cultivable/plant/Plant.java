@@ -24,6 +24,7 @@ public class Plant extends Cultivable {
         this.age_to_ready = age_to_ready_;
         this.age = 0 ;
         this.product = product;
+        //is_active already in super -> default : true
     }
 
     public Plant(String name, int age_to_ready_, int age_, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {

@@ -57,11 +57,11 @@ public class GameEngine {
     }
 
     public GameEngine() {
-        currPlayer = new Player[2];
-        currTurn = 1;
-        currPlayer[0] = new Player(new ArrayList<>());
-        currPlayer[1] = new Player(new ArrayList<>());
-        timerService = Executors.newScheduledThreadPool(1);
+//        currPlayer = new Player[2];
+//        currTurn = 1;
+//        currPlayer[0] = new Player();
+//        currPlayer[1] = new Player();
+//        timerService = Executors.newScheduledThreadPool(1);
     }
 
     // getter
@@ -71,10 +71,6 @@ public class GameEngine {
 
     public void nextTurn() {
         currTurn++;
-        if (currTurn >= 20) {
-            winner = getWinner();
-        }
-        run();
     }
 
     public int getCurrPlayer() {
@@ -116,7 +112,7 @@ public class GameEngine {
         ArrayList<GameObject> gameObjects = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 4; i++) {
-            int randomInt = random.nextInt(15); // 0 to 14
+            int randomInt = random.nextInt(23); // 0 to 14
             gameObjects.add(constructGameObject(randomInt));
         }
         return gameObjects;
@@ -134,7 +130,11 @@ public class GameEngine {
 
     public void defaultSetup() {
         // Initialize or reset game state if needed
-
+        currPlayer = new Player[2];
+        currTurn = 1;
+        currPlayer[0] = new Player();
+        currPlayer[1] = new Player();
+        timerService = Executors.newScheduledThreadPool(1);
     }
 
     public void WaitParalelly(int seconds) {
@@ -167,6 +167,7 @@ public class GameEngine {
             }
             nextTurn();
         }
+        System.out.println(getWinner());
         timerService.shutdown();
     }
 }

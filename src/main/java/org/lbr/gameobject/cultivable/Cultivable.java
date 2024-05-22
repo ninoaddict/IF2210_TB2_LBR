@@ -21,7 +21,12 @@ public abstract class Cultivable extends GameObject {
         is_active = true;
     }
 
-    public Cultivable(String name, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath, boolean is_active, Product product ){
+    public Cultivable(String name, boolean is_protected,
+                      boolean is_trap,
+                      ArrayList<Item> activeItems,
+                      String imageUrlPath,
+                      boolean is_active,
+                      Product product ){
         super(name, imageUrlPath);
         this.is_protected = is_protected;
         this.is_trap = is_trap;
@@ -67,6 +72,11 @@ public abstract class Cultivable extends GameObject {
     @Override
     public String toString() {
         return super.toString() + "\nProtected: " + getIsProtected() + "\nTrap: " + getIsTrap();
+    }
+
+    // method
+    public void inactivateCultivable(){
+        this.is_active = false;
     }
 
     public void addActiveItem(Item item){

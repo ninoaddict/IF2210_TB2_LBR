@@ -57,7 +57,7 @@ public class Player {
     }
 
     public GameObject getHandIdx(int idx){
-        return  hand_deck.get(idx);
+        return hand_deck.get(idx);
     }
 
     public Product getCoorProduct(int row, int col) {
@@ -89,14 +89,8 @@ public class Player {
         }
     }
 
-    public void setNullField(int row, int col) throws  Exception {
-        setCultivable(null, row, col);
-    }
-
-    public void setHandIdx(GameObject object, int idx) throws  Exception {
-
+    public void setHandIdx(GameObject object, int idx){
         hand_deck.set(idx, object);
-
     }
 
     public void addToHandDeck(GameObject object) {
@@ -119,6 +113,10 @@ public class Player {
     }
 
     // method
+    public void inactiveCell(int row, int col){
+        getCultivable(row, col).inactivateCultivable();
+    }
+
     public void addGulden(int addedGulden){
         setGulden(getGulden()  + addedGulden);
     }
@@ -141,7 +139,7 @@ public class Player {
     }
 
     public boolean isFieldCellEmpty(int row, int col){
-        return getCultivable(row,col) == null;
+        return !getCultivable(row, col).getIsActive();
     }
 
     public boolean isFieldCellProtected(int row, int col){
@@ -152,7 +150,7 @@ public class Player {
         return !isFieldCellEmpty(row,col) && getCultivable(row, col).getIsTrap();
     }
 
-    public boolean addCultivable(Cultivable cultivable) throws Exception {
+    public void addCultivable(Cultivable cultivable) throws Exception {
         boolean added = false;
         int i = 0;
         while ((i < 4) && !added) {
@@ -164,7 +162,8 @@ public class Player {
                 }
             }
         }
-        return added;
+
+        throw new Exception("FAILED TO ADD CULTIVABLE");
     }
 
     public void harvest(int row, int col) throws Exception {
@@ -176,7 +175,7 @@ public class Player {
         }
 
         addToHandDeck(getCoorProduct(row, col));
-        setNullField(row, col);
+        inactiveCell(row, col);
     }
 
     public void buy(Product product, Shop shop) throws Exception {
@@ -189,8 +188,8 @@ public class Player {
         }
 
         addToHandDeck(product);
-        addGulden(product.getPrice());
         shop.reduceProduct(product);
+        reduceGulden(product.getPrice());
     }
 
     public void sell(int idx, Shop shop) throws Exception {
@@ -201,6 +200,6 @@ public class Player {
 
         removeHandDeck(idx);
         shop.addProduct(product);
-        reduceGulden(product.getPrice());
+        addGulden(product.getPrice());
     }
 }

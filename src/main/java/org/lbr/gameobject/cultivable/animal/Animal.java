@@ -15,6 +15,7 @@ public abstract class Animal extends Cultivable {
         this.weight_to_ready = weight_to_ready_;
         this.weight = 0;
         this.product = product_;
+        //is_active already in super
     }
     public Animal(String name, int weight_to_ready_, int weight_, Product product_, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {
         super(name,is_protected,is_trap,activeItems, imageUrlPath);
