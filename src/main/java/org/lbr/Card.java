@@ -18,6 +18,7 @@ public class Card extends JPanel {
     private int currentPosition;
 
     public Card(GameObject gameObject, Player owner, int row, int col, int currentPosition) {
+    	System.out.println("INSTANSIASI!!!!!!!");
         this.gameObject = gameObject;
         this.owner = owner;
         this.currentPosition = currentPosition;
@@ -30,7 +31,7 @@ public class Card extends JPanel {
 
         this.label = new JLabel();
         this.setOpaque(false);
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(new Color(192, 255, 228));
         this.setPreferredSize(new Dimension(90, 120));
         this.setLayout(new GridBagLayout());
 
@@ -95,8 +96,8 @@ public class Card extends JPanel {
         graphics.setColor(getBackground());
         graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); // paint background
         graphics.setColor(getForeground());
-        graphics.setStroke(new BasicStroke((float)1.5));
-        graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); // border
+        //graphics.setStroke(new BasicStroke((float)1.5));
+        //graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); // border
     }
 
     public void updateCardDisplay() {
@@ -107,8 +108,16 @@ public class Card extends JPanel {
             label.setHorizontalAlignment(JLabel.CENTER);
             nameLabel.setText("<html><body style='text-align:center'>" + this.gameObject.getName() + "</body></html>");
         } else {
+        	System.out.println("HERE");
+        	System.out.println(gameObject == null);
             label.setIcon(null);
             nameLabel.setText("");
+            this.revalidate();
+            this.label.revalidate();
+            this.label.repaint();
+            this.nameLabel.revalidate();
+            this.nameLabel.repaint();
+            this.repaint();
         }
     }
 
@@ -116,6 +125,10 @@ public class Card extends JPanel {
         this.gameObject = gameObject;
         if (this.gameObject != null) {
             this.gameObject.setParent(this);
+        }else {
+        	System.out.println("Now this null");
+        	System.out.println(this.getRow());
+        	System.out.println(this.getCol());
         }
 
         System.out.println("Card at (" + row + "," + col + ") set to " + (gameObject == null ? "null" : gameObject.getName()));
@@ -124,7 +137,7 @@ public class Card extends JPanel {
     }
 
     public GameObject getGameObject() {
-        return gameObject;
+        return this.gameObject;
     }
 
     public int getCol() {

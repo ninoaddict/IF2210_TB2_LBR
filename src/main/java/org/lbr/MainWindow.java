@@ -230,7 +230,7 @@ class panel_with_image extends JPanel {
 	
 	public panel_with_image() {
 		try {
-		curBufferedImage = resize(ImageIO.read(new File("C:\\Users\\Lenovo\\IdeaProjects\\uwu\\IF2210_TB2_LBR\\src\\main\\resources\\images\\bgguioop.jpg")), 800, 800);
+		curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -337,17 +337,23 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 0;
 
         //inside_card_grid_panel.add(new DummyCard(), gridBagConstraints);
-
+        
+        Card[][] uwuCards = new Card[4][5];
+        
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 5; j++){
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
 
+                Card awaCard;
                 if (i == 3 && j == 3) {
-                    card_grid_panel.add(new Card(new Product("SUSU"), null, i, j, Card.FIELD), gridBagConstraints);;
+                	awaCard = new Card(new Product("SUSU"), null, i, j, Card.FIELD);
                 } else {
-                    card_grid_panel.add(new Card(null, null, i, j, Card.FIELD), gridBagConstraints);
+                	awaCard = new Card(null, null, i, j, Card.FIELD);
                 }
+                uwuCards[i][j] = awaCard;
+                card_grid_panel.add(awaCard, gridBagConstraints);
+
             }
         }
 
@@ -392,6 +398,17 @@ public class MainWindow extends JPanel {
         	gridBagConstraints.gridy = i;
         	RoundButton jtempButton = new RoundButton(button_name_array[i]);
         	jtempButton.setForeground(Color.black);
+        	jtempButton.addActionListener(new ActionListener() { 
+        		  public void actionPerformed(ActionEvent e) { 
+        		    for(int i = 0; i < 4; i++) {
+        		    	for(int j = 0; j < 5; j++) {
+        		    		System.out.print(uwuCards[i][j].getGameObject());
+        		    		System.out.print(" ");
+        		    	}
+        		    	System.out.println();
+        		    }
+        		  } 
+        		} );
         	button_grid_panel.add(jtempButton, gridBagConstraints);
         }
         

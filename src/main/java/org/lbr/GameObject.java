@@ -1,6 +1,6 @@
 package org.lbr;
 
-public abstract class GameObject extends Exception {
+public abstract class GameObject {
     private String name;
     private String imgUrlPath;
     private Card parent;
