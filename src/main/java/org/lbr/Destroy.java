@@ -2,7 +2,7 @@ package org.lbr;
 
 public class Destroy extends Item {
     public Destroy() {
-        super("DESTROY", "/images/destroy.png");
+        super("Destroy", "/images/destroy.png");
     }
 
     @Override

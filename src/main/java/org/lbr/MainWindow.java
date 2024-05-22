@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -103,7 +102,7 @@ class RoundedPanel extends JPanel
     public RoundedPanel(int radius) {
         super();
         this.setPreferredSize(new Dimension(90, 120));
-        this.setBackground(new Color(107, 181, 230));
+        this.setBackground(new Color(213,220,246));
         this.setOpaque(false);
         this.setLayout(new GridLayout());
         JLabel awaJLabel = new JLabel("HAHAA");
@@ -212,7 +211,6 @@ class RoundButton extends JButton {
 	  }
 }
 
-
 class panel_with_image extends JPanel {
 	
 	BufferedImage curBufferedImage;
@@ -242,6 +240,7 @@ class panel_with_image extends JPanel {
 	}
 }
 
+
 public class MainWindow extends JPanel {
     public panel_with_image mainPanel;
     private JPanel panel_atas;
@@ -251,7 +250,6 @@ public class MainWindow extends JPanel {
 
     }
     public void initComponent() {
-
         mainPanel = new panel_with_image();
         mainPanel.setBackground(new Color(170,193,237));
         mainPanel.setPreferredSize(new Dimension(800, 600));
@@ -337,23 +335,12 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 0;
 
         //inside_card_grid_panel.add(new DummyCard(), gridBagConstraints);
-        
-        Card[][] uwuCards = new Card[4][5];
-        
+
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 5; j++){
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
-
-                Card awaCard;
-                if (i == 3 && j == 3) {
-                	awaCard = new Card(new Product("SUSU"), null, i, j, Card.FIELD);
-                } else {
-                	awaCard = new Card(null, null, i, j, Card.FIELD);
-                }
-                uwuCards[i][j] = awaCard;
-                card_grid_panel.add(awaCard, gridBagConstraints);
-
+                card_grid_panel.add(new Card(null, null, i, j, Card.FIELD), gridBagConstraints);
             }
         }
 
@@ -365,12 +352,15 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel();
-        panel_bawah.add(new Card(null, null, 5, 0, Card.DECK), gridBagConstraints);
+
+        panel_bawah.add(new Card(new Herbivore("DOMBA"), null, 4, 0, Card.DECK), gridBagConstraints);
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         for(int i = 1; i < 6; i++) {
         	gridBagConstraints.gridx = i;
-            panel_bawah.add(new Card(new Product("SUSU"), null, 5, i, Card.DECK), gridBagConstraints);
+            Card card = new Card(new Product("SUSU"), null, 4, i, Card.DECK);
+            panel_bawah.add(card, gridBagConstraints);
         }
+
         gridBagConstraints.gridx = 6;
         gridBagConstraints.weightx = 1.0;
         panel_bawah.add(temp, gridBagConstraints);
@@ -398,21 +388,8 @@ public class MainWindow extends JPanel {
         	gridBagConstraints.gridy = i;
         	RoundButton jtempButton = new RoundButton(button_name_array[i]);
         	jtempButton.setForeground(Color.black);
-        	jtempButton.addActionListener(new ActionListener() { 
-        		  public void actionPerformed(ActionEvent e) { 
-        		    for(int i = 0; i < 4; i++) {
-        		    	for(int j = 0; j < 5; j++) {
-        		    		System.out.print(uwuCards[i][j].getGameObject());
-        		    		System.out.print(" ");
-        		    	}
-        		    	System.out.println();
-        		    }
-        		  } 
-        		} );
         	button_grid_panel.add(jtempButton, gridBagConstraints);
         }
-        
-        //gridBagConstraints.insets = 
         
         panel_atas.setLayout(new GridBagLayout());
         RoundedPanel uwuPanel = new RoundedPanel(15);
@@ -484,7 +461,7 @@ public class MainWindow extends JPanel {
 
         moniesJPanel.add(hisMoniesJPanel, newGridBagConstraints);
         
-        JLabel howMuchMyMoneyJLabel = new JLabel("1120");
+        JLabel howMuchMyMoneyJLabel = new JLabel("20");
         howMuchMyMoneyJLabel.setBackground(Color.cyan);
         howMuchMyMoneyJLabel.setOpaque(false);
         howMuchMyMoneyJLabel.setIcon(imageIcon);

@@ -7,8 +7,8 @@ public class Omnivore extends Animal {
     private static Map<String, Omnivore> omnivoreMap = new HashMap<String, Omnivore>();
 
     static {
-        omnivoreMap.put("AYAM", new Omnivore("AYAM",5, new Product("TELUR"), "/images/ayam.png"));
-        omnivoreMap.put("BERUANG", new Omnivore("BERUANG",25, new Product("DAGING_BERUANG"), "/images/beruang.png"));
+        omnivoreMap.put("AYAM", new Omnivore("Ayam",5, new Product("TELUR"), "/images/ayam.png"));
+        omnivoreMap.put("BERUANG", new Omnivore("Beruang",25, new Product("DAGING_BERUANG"), "/images/beruang.png"));
     }
 
     public Omnivore(String name, int weight_to_ready, Product product, String imageUrlPath){

@@ -12,13 +12,9 @@ class CardTransferHandler extends TransferHandler {
 
     @Override
     protected Transferable createTransferable(JComponent c) {
-    	GameObject uwuGameObject = ((Card) c).getGameObject();
-    	int r = ((Card) c).getRow();
-    	int m = ((Card) c).getCol();
-    	if(uwuGameObject == null) {
-    		System.out.println("Picking null value!");
-    	}
-        return new GameObjectTransferable(uwuGameObject);
+        Card card = (Card) c;
+        GameObject gameObject = card.getGameObject();
+        return new GameObjectTransferable(gameObject);
     }
 
     @Override
@@ -37,32 +33,24 @@ class CardTransferHandler extends TransferHandler {
             GameObject droppedGameObject = (GameObject) support.getTransferable()
                     .getTransferData(GameObjectTransferable.GAME_OBJECT_FLAVOR);
             if (droppedGameObject == null) {
-            	System.out.println("Dropped null");
                 return false;
             }
             Card sourceCard = droppedGameObject.getParent();
 
-            // check if the source is also the target card
+            // Check if the source is also the target card
             if (sourceCard.equals(targetCard)) {
                 return false;
             }
+            System.out.println(sourceCard.getRow() + " " + sourceCard.getCol());
 
             if (sourceCard.getCurrentPosition() == Card.FIELD && targetCard.getCurrentPosition() == Card.DECK) {
                 return false;
             }
 
-            GameObject temp = targetCard.getGameObject();
+            GameObject targetGameObject = targetCard.getGameObject();
             targetCard.setGameObject(droppedGameObject);
-            sourceCard.setGameObject(temp);
-            if(targetCard.getGameObject() == null) {
-            	System.out.println("Target card null");
-            }
-            if(sourceCard.getGameObject() == null) {
-            	System.out.println("Source card null");
-            }
-            if(targetCard.getGameObject().equals(sourceCard.getGameObject())) {
-            	System.out.println("WUh");
-            }
+            sourceCard.setGameObject(targetGameObject);  // Explicitly set to null
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,9 +65,6 @@ class GameObjectTransferable implements Transferable {
     private final GameObject gameObject;
 
     public GameObjectTransferable(GameObject gameObject) {
-    	if(gameObject == null) {
-    		System.out.println("AWAUNUL");
-    	}
         this.gameObject = gameObject;
     }
 

@@ -2,7 +2,7 @@ package org.lbr;
 
 public class Accelerate extends Item {
     public Accelerate() {
-        super("ACCELERATE", "/images/accelerate.png");
+        super("Accelerate", "/images/accelerate.png");
     }
 
     @Override

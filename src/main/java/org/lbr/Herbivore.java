@@ -8,9 +8,9 @@ public class Herbivore extends Animal {
     private static Map<String, Herbivore> herbivoreMap = new HashMap<String, Herbivore>();
 
     static {
-        herbivoreMap.put("SAPI", new Herbivore("SAPI",10, new Product("SUSU"), "/images/sapi.png"));
-        herbivoreMap.put("DOMBA", new Herbivore("DOMBA",12, new Product("DAGING_DOMBA"), "/images/domba.png"));
-        herbivoreMap.put("KUDA", new Herbivore("KUDA",14, new Product("DAGING_KUDA"), "/images/kuda.png"));
+        herbivoreMap.put("SAPI", new Herbivore("Sapi",10, new Product("SUSU"), "/images/sapi.png"));
+        herbivoreMap.put("DOMBA", new Herbivore("Domba",12, new Product("DAGING_DOMBA"), "/images/domba.png"));
+        herbivoreMap.put("KUDA", new Herbivore("Kuda",14, new Product("DAGING_KUDA"), "/images/kuda.png"));
     }
 
     public Herbivore(String name, int weight_to_ready, Product product, String imageUrlPath){

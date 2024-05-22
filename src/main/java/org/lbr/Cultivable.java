@@ -67,6 +67,4 @@ public abstract class Cultivable extends GameObject {
 
     public abstract void trap();
 
-
-
 }
