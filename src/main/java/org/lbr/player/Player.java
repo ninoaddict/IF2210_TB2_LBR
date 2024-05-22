@@ -28,11 +28,6 @@ public class Player {
         }
 
         this.hand_deck = new ArrayList<>();
-        for (int k = 0 ; k < 6 ; k ++){
-            GameObject dummy = new Carnivore("HIU_DARAT");
-            this.hand_deck.add(dummy);
-        }
-
         this.deck_remaining = 40 ;
     }
 

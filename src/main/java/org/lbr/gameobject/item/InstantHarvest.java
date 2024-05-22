@@ -9,7 +9,7 @@ public class InstantHarvest extends Item {
 
     @Override
     public void runEffect(Cultivable c) {
-
+        System.out.println("STILL NOT IMPLEMENTED");
     }
 
 }

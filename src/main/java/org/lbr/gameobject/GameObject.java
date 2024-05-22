@@ -1,5 +1,6 @@
 package org.lbr.gameobject;
 
+import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gui.card.Card;
 
 public abstract class GameObject {
@@ -47,5 +48,4 @@ public abstract class GameObject {
     public void setName(String newName) {
         name = newName;
     }
-
 }
