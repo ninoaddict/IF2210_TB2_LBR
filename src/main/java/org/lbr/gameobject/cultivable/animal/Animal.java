@@ -1,4 +1,8 @@
-package org.lbr;
+package org.lbr.gameobject.cultivable.animal;
+
+import org.lbr.gameobject.item.Item;
+import org.lbr.gameobject.product.Product;
+import org.lbr.gameobject.cultivable.Cultivable;
 
 import java.util.ArrayList;
 

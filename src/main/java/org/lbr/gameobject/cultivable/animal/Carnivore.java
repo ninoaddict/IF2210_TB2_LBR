@@ -1,10 +1,13 @@
-package org.lbr;
+package org.lbr.gameobject.cultivable.animal;
+
+import org.lbr.gameobject.item.Item;
+import org.lbr.gameobject.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Carnivore extends Animal{
+public class Carnivore extends Animal {
     private static Map<String, Carnivore> carnivoreMap = new HashMap<String, Carnivore>();
 
     static {

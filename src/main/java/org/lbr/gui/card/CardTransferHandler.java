@@ -1,10 +1,12 @@
-package org.lbr;
+package org.lbr.gui.card;
+
+import org.lbr.gameobject.GameObject;
 
 import javax.swing.*;
 import java.awt.datatransfer.*;
 import java.io.IOException;
 
-class CardTransferHandler extends TransferHandler {
+public class CardTransferHandler extends TransferHandler {
     @Override
     public int getSourceActions(JComponent c) {
         return MOVE;

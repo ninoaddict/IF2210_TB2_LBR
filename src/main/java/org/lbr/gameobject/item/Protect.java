@@ -1,4 +1,6 @@
-package org.lbr;
+package org.lbr.gameobject.item;
+
+import org.lbr.gameobject.cultivable.Cultivable;
 
 public class Protect extends Item {
     public Protect() {

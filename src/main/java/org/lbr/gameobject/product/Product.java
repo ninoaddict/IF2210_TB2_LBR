@@ -1,6 +1,7 @@
-package org.lbr;
+package org.lbr.gameobject.product;
 
-import javax.print.DocFlavor;
+import org.lbr.gameobject.GameObject;
+
 import java.util.HashMap;
 import java.util.Map;
 

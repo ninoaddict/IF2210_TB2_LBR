@@ -1,4 +1,7 @@
-package org.lbr;
+package org.lbr.gui.card;
+
+import org.lbr.gameobject.GameObject;
+import org.lbr.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
