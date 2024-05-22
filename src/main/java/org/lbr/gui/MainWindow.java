@@ -378,12 +378,13 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel();
-
-        panel_bawah.add(new Card(null, null, 4, 0, Card.DECK, true), gridBagConstraints);
+        
+        Card whereittrulyliesCard = new Card(new Herbivore("DOMBA"), gameEngine.getCurrPlayer(), 0, 0, Card.DECK, true);
+        panel_bawah.add(whereittrulyliesCard, gridBagConstraints);
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         for(int i = 1; i < 6; i++) {
         	gridBagConstraints.gridx = i;
-            Card card = new Card(null, gameEngine.getCurrPlayer(), 4, i, Card.DECK, true);
+            Card card = new Card(null, gameEngine.getCurrPlayer(), 0, i, Card.DECK, true);
             panel_bawah.add(card, gridBagConstraints);
         }
 
@@ -550,7 +551,12 @@ public class MainWindow extends JPanel {
         JPanel emptJPanel = new JPanel();
         emptJPanel.setOpaque(false);
         panel_atas.add(emptJPanel, gridBagConstraints);
-
+        try {
+        gameEngine.getCurrPlayer().setHandIdx(whereittrulyliesCard.getGameObject(), 0);
+        
+        } catch (Exception e) {
+			// TODO: handle exception
+		}
         //panel_atas.setLayout(new GridBagLayout());
         this.setVisible(true);
     }
@@ -566,13 +572,34 @@ public class MainWindow extends JPanel {
         return dimg;
     }
 
-    public void buyProduct(Product product) throws Exception {
-    	gameEngine.getCurrPlayer().buy(product, gameEngine.getShop());
+    public void buyProduct(Product product, int idx) throws Exception {
+    	gameEngine.getCurrPlayer().buy(product, gameEngine.getShop(), idx);
     	if(gameEngine.getCurrTurn() == 1) {
     		this.howMuchMyMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
     	}else {
     		this.howMuchHisMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
     	}
+    }
+    
+    public void sellProduct(Product product, int idx) throws Exception {
+    	gameEngine.getCurrPlayer().sell(idx, gameEngine.getShop());
+    	if(gameEngine.getCurrTurn() == 1) {
+    		this.howMuchMyMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+    	}else {
+    		this.howMuchHisMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+    	}
+    }
+    
+    public void swapDeck(int from, int col) throws Exception {
+    	gameEngine.getCurrPlayer().swap_deck(from, col);
+    }
+    
+    public void from_deck_to_field(int fromCol, int toRow, int toCol) throws Exception {
+    	gameEngine.getCurrPlayer().from_deck_to_field(fromCol, toRow, toCol);
+    }
+    
+    public void swapField(int rowFrom, int colFrom, int rowTo, int colTo) {
+    	gameEngine.getCurrPlayer().swap_field(rowFrom, colFrom, rowTo, colTo);
     }
 
     @Override

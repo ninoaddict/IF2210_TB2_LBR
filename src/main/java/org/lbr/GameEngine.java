@@ -69,6 +69,7 @@ public class GameEngine {
         	f1.add(null);
         	f2.add(null);
         }
+        //System.out.println("F1 SIZE!!!!!!" + Integer.toString(f1.size()));
         currPlayer[0] = new Player(f1);
         currPlayer[1] = new Player(f2);
         timerService = Executors.newScheduledThreadPool(1);

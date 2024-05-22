@@ -6,6 +6,7 @@ import org.lbr.gameobject.product.Product;
 import org.lbr.shop.Shop;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
     private int gulden;
@@ -18,6 +19,9 @@ public class Player {
         this.field = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Cultivable> row = new ArrayList<>(5);
+            for(int j = 0; j < 5; j++) {
+            	row.add(null);
+            }
             this.field.add(row);
         }
 
@@ -96,7 +100,7 @@ public class Player {
     }
 
     public void removeHandDeck(int idx) {
-        this.hand_deck.remove(idx);
+        this.hand_deck.set(idx, null);
     }
 
     public void setDeck_remaining(int deck_remaining) {
@@ -105,6 +109,17 @@ public class Player {
 
     public void setHand_deck(ArrayList<GameObject> hand_deck) {
         this.hand_deck = hand_deck;
+    }
+    
+    public void swap_deck(int idx_from, int idx_to) {
+    	Collections.swap(hand_deck, idx_from, idx_to);
+    }
+    
+    public void swap_field(int row_from, int col_from, int row_to, int col_to) {
+    	Cultivable tempCultivable = field.get(row_from).get(col_from);
+    	field.get(row_from).set(col_from, field.get(row_to).get(col_to));
+    	field.get(row_to).set(col_from, tempCultivable);
+    	System.out.println("GOODFORYOU");
     }
 
     // method
@@ -155,8 +170,15 @@ public class Player {
         }
         return added;
     }
+    
+    public void from_deck_to_field(int fromCol, int toRow, int toCol) throws Exception {
+    	System.out.println("DECK TO FIELD");
+    	Cultivable tempCultivable = field.get(toRow).get(toCol);
+    	field.get(toRow).set(toCol, (Cultivable) hand_deck.get(fromCol));
+    	setHandIdx(tempCultivable, fromCol);
+    }
 
-    public void harvest(int row, int col) throws Exception {
+    public void harvest(int row, int col, int idx) throws Exception {
         if (isFieldCellEmpty(row, col)) {
             throw new Exception("Can't harvest empty cell");
         }
@@ -164,11 +186,11 @@ public class Player {
             throw new Exception("Hand deck is full :(");
         }
 
-        addToHandDeck(getCoorProduct(row, col));
+        setHandIdx(getCoorProduct(row, col), idx);
         setNullField(row, col);
     }
 
-    public void buy(Product product, Shop shop) throws Exception {
+    public void buy(Product product, Shop shop, int idx) throws Exception {
     	System.out.println("DUMMY CARD");
         if (isHandDeckFull()){
             throw new Exception("Hand deck is full ");
@@ -179,15 +201,18 @@ public class Player {
         if (this.gulden < product.getPrice()){
             throw  new Exception("Gulden insufficient!");
         }
+        shop.reduceProduct(product);
         System.out.println("Z");
-        addToHandDeck(product);
+        System.out.println(idx);
+        setHandIdx(product, idx);
+        System.out.println("A");
         reduceGulden(product.getPrice());
         System.out.println("DIKALI");
-        shop.reduceProduct(product);
         System.out.println("GROKK@");
     }
 
     public void sell(int idx, Shop shop) throws Exception {
+    	System.out.println("Selling idx: " + Integer.toString(idx));
         GameObject gameObject = getHandIdx(idx);
         if (!(gameObject instanceof Product product)){
             throw new Exception("Can only sell product");
