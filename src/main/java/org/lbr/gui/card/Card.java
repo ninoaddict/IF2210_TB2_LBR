@@ -1,6 +1,7 @@
 package org.lbr.gui.card;
 
 import org.lbr.gameobject.GameObject;
+import org.lbr.gui.ShuffleDialog;
 import org.lbr.player.Player;
 
 import javax.swing.*;
@@ -12,6 +13,8 @@ import java.awt.event.MouseMotionAdapter;
 public class Card extends JPanel {
     public static int DECK = 0;
     public static int FIELD = 1;
+    public static int SHOP = 2;
+    public static int SHUFFLE = 3;
     private GameObject gameObject;
     private final JLabel label;
     private final JLabel nameLabel;
@@ -19,14 +22,15 @@ public class Card extends JPanel {
     private int row;
     private int col;
     private int currentPosition;
+    private boolean isDraggable;
 
-    public Card(GameObject gameObject, Player owner, int row, int col, int currentPosition) {
-    	System.out.println("INSTANSIASI!!!!!!!");
+    public Card(GameObject gameObject, Player owner, int row, int col, int currentPosition, boolean isDraggable) {
         this.gameObject = gameObject;
         this.owner = owner;
         this.currentPosition = currentPosition;
         this.row = row;
         this.col = col;
+        this.isDraggable = isDraggable;
 
         if (this.gameObject != null) {
             this.gameObject.setParent(this);
@@ -34,7 +38,7 @@ public class Card extends JPanel {
 
         this.label = new JLabel();
         this.setOpaque(false);
-        this.setBackground(new Color(192, 255, 228));
+        this.setBackground(new Color(224, 247, 250));
         this.setPreferredSize(new Dimension(90, 120));
         this.setLayout(new GridBagLayout());
 
@@ -69,8 +73,10 @@ public class Card extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 Card comp = (Card) e.getSource();
-                TransferHandler handler = comp.getTransferHandler();
-                handler.exportAsDrag(comp, e, TransferHandler.MOVE);
+                if (getDraggable()) {
+                    TransferHandler handler = comp.getTransferHandler();
+                    handler.exportAsDrag(comp, e, TransferHandler.MOVE);
+                }
             }
         });
 
@@ -82,10 +88,15 @@ public class Card extends JPanel {
                     JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
                             "Pop up", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    System.out.println("NULL");
+                    ShuffleDialog sd = new ShuffleDialog(owner, comp);
+                    sd.setVisible(true);
                 }
             }
         });
+    }
+
+    public boolean getDraggable() {
+        return isDraggable;
     }
 
     @Override
@@ -99,8 +110,8 @@ public class Card extends JPanel {
         graphics.setColor(getBackground());
         graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); // paint background
         graphics.setColor(getForeground());
-        //graphics.setStroke(new BasicStroke((float)1.5));
-        //graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); // border
+        graphics.setStroke(new BasicStroke((float) 1.5));
+        graphics.drawRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); // border
     }
 
     public void updateCardDisplay() {
@@ -111,8 +122,6 @@ public class Card extends JPanel {
             label.setHorizontalAlignment(JLabel.CENTER);
             nameLabel.setText("<html><body style='text-align:center'>" + this.gameObject.getName() + "</body></html>");
         } else {
-        	System.out.println("HERE");
-        	System.out.println(gameObject == null);
             label.setIcon(null);
             nameLabel.setText("");
             this.revalidate();
@@ -128,14 +137,7 @@ public class Card extends JPanel {
         this.gameObject = gameObject;
         if (this.gameObject != null) {
             this.gameObject.setParent(this);
-        }else {
-        	System.out.println("Now this null");
-        	System.out.println(this.getRow());
-        	System.out.println(this.getCol());
         }
-
-        System.out.println("Card at (" + row + "," + col + ") set to " + (gameObject == null ? "null" : gameObject.getName()));
-
         updateCardDisplay();
     }
 
