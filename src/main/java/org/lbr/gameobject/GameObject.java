@@ -44,7 +44,7 @@ public abstract class GameObject {
     }
 
     // setter
-    void setName(String newName) {
+    public void setName(String newName) {
         name = newName;
     }
 

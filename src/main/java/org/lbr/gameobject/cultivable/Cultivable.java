@@ -10,6 +10,7 @@ public abstract class Cultivable extends GameObject {
     protected boolean is_protected;
     protected boolean is_trap;
     protected ArrayList<Item> activeItems;
+    protected boolean is_active;
     protected Product product;
 
     public Cultivable(String name, String imageUrlPath){
@@ -17,13 +18,16 @@ public abstract class Cultivable extends GameObject {
         is_protected = false;
         is_trap = false;
         activeItems = new ArrayList<Item>();
+        is_active = true;
     }
 
-    public Cultivable(String name, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath){
+    public Cultivable(String name, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath, boolean is_active, Product product ){
         super(name, imageUrlPath);
         this.is_protected = is_protected;
         this.is_trap = is_trap;
         this.activeItems = activeItems;
+        this.is_active = is_active;
+        this.product = product ;
     }
 
     // getter
@@ -35,6 +39,9 @@ public abstract class Cultivable extends GameObject {
         return is_trap;
     }
 
+    public boolean getIsActive() {
+        return is_active;
+    }
 
     public Product getProduct() {
         return product;
@@ -51,6 +58,10 @@ public abstract class Cultivable extends GameObject {
 
     public void enableTrap() {
         this.is_protected = true;
+    }
+
+    public void setIs_active(boolean is_active) {
+        this.is_active = is_active;
     }
 
     @Override

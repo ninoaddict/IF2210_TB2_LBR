@@ -2,6 +2,7 @@ package org.lbr.player;
 
 import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
+import org.lbr.gameobject.cultivable.animal.Carnivore;
 import org.lbr.gameobject.product.Product;
 import org.lbr.shop.Shop;
 
@@ -13,16 +14,26 @@ public class Player {
     private int deck_remaining;
     private ArrayList<GameObject> hand_deck;
 
-    public Player(ArrayList<GameObject> hand_deck) {
+    public Player() {
         this.gulden = 0;
         this.field = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Cultivable> row = new ArrayList<>(5);
+            for (int j = 0; j < 5; j++) {
+                Cultivable dummy =  new Carnivore("HIU_DARAT");
+                dummy.setIs_active(false);
+                row.add(dummy);
+            }
             this.field.add(row);
         }
 
+        this.hand_deck = new ArrayList<>();
+        for (int k = 0 ; k < 6 ; k ++){
+            GameObject dummy = new Carnivore("HIU_DARAT");
+            this.hand_deck.add(dummy);
+        }
+
         this.deck_remaining = 40 ;
-        this.hand_deck = hand_deck;
     }
 
     public Player(int gulden, ArrayList<ArrayList<Cultivable>> field, int deck_remaining, ArrayList<GameObject> hand_deck){
