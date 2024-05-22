@@ -40,6 +40,7 @@ public class Product extends GameObject {
     public Product(String name) {
         this(productMap.get(name));
     }
+   
 
     // getter
     public String getProductType() {

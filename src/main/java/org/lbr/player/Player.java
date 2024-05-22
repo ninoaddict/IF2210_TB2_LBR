@@ -14,7 +14,7 @@ public class Player {
     private ArrayList<GameObject> hand_deck;
 
     public Player(ArrayList<GameObject> hand_deck) {
-        this.gulden = 0;
+        this.gulden = 1000;
         this.field = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Cultivable> row = new ArrayList<>(5);
@@ -169,17 +169,22 @@ public class Player {
     }
 
     public void buy(Product product, Shop shop) throws Exception {
+    	System.out.println("DUMMY CARD");
         if (isHandDeckFull()){
             throw new Exception("Hand deck is full ");
         }
+        
+        System.out.println("GROKKKK");
 
         if (this.gulden < product.getPrice()){
             throw  new Exception("Gulden insufficient!");
         }
-
+        System.out.println("Z");
         addToHandDeck(product);
-        addGulden(product.getPrice());
+        reduceGulden(product.getPrice());
+        System.out.println("DIKALI");
         shop.reduceProduct(product);
+        System.out.println("GROKK@");
     }
 
     public void sell(int idx, Shop shop) throws Exception {
@@ -190,6 +195,6 @@ public class Player {
 
         removeHandDeck(idx);
         shop.addProduct(product);
-        reduceGulden(product.getPrice());
+        addGulden(product.getPrice());
     }
 }

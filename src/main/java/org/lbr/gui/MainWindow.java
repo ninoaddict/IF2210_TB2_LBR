@@ -1,13 +1,18 @@
 package org.lbr.gui;
 
 import org.lbr.gui.card.Card;
+import org.lbr.GameEngine;
 import org.lbr.gameobject.cultivable.animal.Herbivore;
 import org.lbr.gameobject.product.Product;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -247,12 +252,18 @@ class panel_with_image extends JPanel {
 public class MainWindow extends JPanel {
 //    public panel_with_image mainPanel;
     BufferedImage curBufferedImage;
+    private GameEngine gameEngine;
     private JPanel panel_atas;
     private JPanel panel_tengah;
     private JPanel panel_bawah;
     private ArrayList<Card> card_list;
-    MainWindow(){
+    private String cardString = "CARD";
+    private String fieldString = "FIELD";
+    JLabel howMuchHisMoneyJLabel;
+    JLabel howMuchMyMoneyJLabel;
+    MainWindow(GameEngine ge){
         try {
+        	gameEngine = ge;
             curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
         } catch (Exception e) {
             // TODO: handle exception
@@ -309,6 +320,11 @@ public class MainWindow extends JPanel {
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.25;
         gridBagConstraints.weighty = 1.0;
+        
+        CardLayout cardLayout = new CardLayout();
+        
+        card_grid_panel.setLayout(cardLayout);
+        
 
         panel_tengah.add(card_grid_panel, gridBagConstraints);
 
@@ -320,8 +336,36 @@ public class MainWindow extends JPanel {
         button_grid_panel.setOpaque(false);
 
         panel_tengah.add(button_grid_panel, gridBagConstraints);
+        
+        JPanel real_card_gridJPanel = new JPanel();
+        real_card_gridJPanel.setBackground(new Color(0,108,103));
+        real_card_gridJPanel.setOpaque(false);
 
-        card_grid_panel.setLayout(new GridBagLayout());
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.25;
+        gridBagConstraints.weighty = 1.0;
+        
+        
+        JPanel shop_card_gridJPanel = new JPanel();
+        shop_card_gridJPanel.setBackground(Color.CYAN);
+        shop_card_gridJPanel.setOpaque(false);
+        
+        shop_card_gridJPanel.setLayout(new GridBagLayout());
+        
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.25;
+        gridBagConstraints.weighty = 1.0;
+        
+        
+        
+
+        real_card_gridJPanel.setLayout(new GridBagLayout());
 
         gridBagConstraints = new GridBagConstraints();
 
@@ -342,13 +386,47 @@ public class MainWindow extends JPanel {
 
         //inside_card_grid_panel.add(new DummyCard(), gridBagConstraints);
 
+        
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 5; j++){
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
-                card_grid_panel.add(new Card(null, null, i, j, Card.FIELD), gridBagConstraints);
+                real_card_gridJPanel.add(new Card(null, gameEngine.getCurrPlayer(), i, j, Card.FIELD), gridBagConstraints);
             }
         }
+        
+        card_grid_panel.add(fieldString, real_card_gridJPanel);
+        
+        card_grid_panel.add(cardString, shop_card_gridJPanel);
+        
+        cardLayout.show(card_grid_panel, fieldString);
+        
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.insets = new Insets(7, 7, 7, 7);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        
+        ArrayList<String> productNameStrings = new ArrayList<String>();
+        
+        Map<Product, Integer> hMap = gameEngine.getShop().getProducts();
+        
+        for(Product name_product: hMap.keySet()) {
+        	productNameStrings.add(name_product.getName().toUpperCase().replace(' ', '_'));
+        }
+        
+        System.out.println(productNameStrings.size());
+        
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                gridBagConstraints.gridx = j;
+                gridBagConstraints.gridy = i;
+                System.out.println(productNameStrings.get(3 * i + j));
+                shop_card_gridJPanel.add(new Card(new Product(productNameStrings.get(i * 3 + j)), null, i, j, Card.SHOP, 1), gridBagConstraints);
+            }
+        }
+        
+        
+
 
         panel_bawah.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.WHITE));
         panel_bawah.setLayout(new GridBagLayout());
@@ -359,11 +437,11 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel();
 
-        panel_bawah.add(new Card(new Herbivore("DOMBA"), null, 4, 0, Card.DECK), gridBagConstraints);
+        panel_bawah.add(new Card(null, null, 4, 0, Card.DECK), gridBagConstraints);
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         for(int i = 1; i < 6; i++) {
         	gridBagConstraints.gridx = i;
-            Card card = new Card(new Product("SUSU"), null, 4, i, Card.DECK);
+            Card card = new Card(null, gameEngine.getCurrPlayer(), 4, i, Card.DECK);
             panel_bawah.add(card, gridBagConstraints);
         }
 
@@ -390,12 +468,42 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.weightx = 1;
         
+        RoundButton[] roundButtons = new RoundButton[6];
+        
         for(int i = 0; i < 6; i++) {
         	gridBagConstraints.gridy = i;
         	RoundButton jtempButton = new RoundButton(button_name_array[i]);
         	jtempButton.setForeground(Color.black);
         	button_grid_panel.add(jtempButton, gridBagConstraints);
+        	roundButtons[i] = jtempButton;
         }
+        
+        roundButtons[0].addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(card_grid_panel, fieldString);
+				
+			}
+		});
+        
+        roundButtons[1].addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(card_grid_panel, fieldString);
+				
+			}
+		});
+        
+       roundButtons[2].addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(card_grid_panel, cardString);
+				
+			}
+		});
         
         panel_atas.setLayout(new GridBagLayout());
         RoundedPanel uwuPanel = new RoundedPanel(15);
@@ -467,7 +575,7 @@ public class MainWindow extends JPanel {
 
         moniesJPanel.add(hisMoniesJPanel, newGridBagConstraints);
         
-        JLabel howMuchMyMoneyJLabel = new JLabel("20");
+        howMuchMyMoneyJLabel = new JLabel(Integer.toString(gameEngine.getPlayerAtIndex(0).getGulden()));
         howMuchMyMoneyJLabel.setBackground(Color.cyan);
         howMuchMyMoneyJLabel.setOpaque(false);
         howMuchMyMoneyJLabel.setIcon(imageIcon);
@@ -480,7 +588,8 @@ public class MainWindow extends JPanel {
 
         moniesJPanel.add(howMuchMyMoneyJLabel, newGridBagConstraints);
         
-        JLabel howMuchHisMoneyJLabel = new JLabel("20");
+        howMuchHisMoneyJLabel = new JLabel(Integer.toString(gameEngine.getPlayerAtIndex(1).getGulden()));
+        
         howMuchHisMoneyJLabel.setBackground(Color.orange);
         howMuchHisMoneyJLabel.setOpaque(false);
         howMuchHisMoneyJLabel.setIcon(imageIcon);
@@ -513,6 +622,15 @@ public class MainWindow extends JPanel {
         g2d.dispose();
 
         return dimg;
+    }
+    
+    public void buyProduct(Product product) throws Exception {
+    	gameEngine.getCurrPlayer().buy(product, gameEngine.getShop());
+    	if(gameEngine.getCurrTurn() == 1) {
+    		this.howMuchMyMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+    	}else {
+    		this.howMuchHisMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+    	}
     }
 
     @Override

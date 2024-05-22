@@ -1,13 +1,16 @@
 package org.lbr.gui;
 
 import javax.swing.*;
+
+import org.lbr.GameEngine;
+
 import java.awt.*;
 
 public class MainFrame extends JFrame{
     private MainWindow mainWindow;
 
-    public MainFrame() {
-        mainWindow = new MainWindow();
+    public MainFrame(GameEngine ge) {
+        mainWindow = new MainWindow(ge);
         initComponent();
     }
 

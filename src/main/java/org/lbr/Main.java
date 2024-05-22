@@ -7,7 +7,9 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            MainFrame frame = new MainFrame();
+        	GameEngine gameEngine = new GameEngine();
+        	MainFrame frame = new MainFrame(gameEngine);
+            
         });
     }
 }
