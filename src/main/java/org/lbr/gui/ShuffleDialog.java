@@ -19,7 +19,7 @@ public class ShuffleDialog extends JFrame {
 //        this.setBackground(Color.WHITE);
         this.setSize(new Dimension(300, 400));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setLocationRelativeTo(frame.getParent().getParent());
+        this.setLocationRelativeTo(frame.getParent().getParent().getParent());
         this.setOpacity((float)0.9);
 
         roundedPanel = new CustomPanel();

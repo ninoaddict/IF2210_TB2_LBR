@@ -1,6 +1,8 @@
 package org.lbr;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
@@ -12,6 +14,7 @@ import org.lbr.gameobject.product.*;
 import org.lbr.gameobject.cultivable.animal.*;
 import org.lbr.gameobject.cultivable.plant.*;
 import org.lbr.player.*;
+import org.lbr.shop.Shop;
 
 public class GameEngine {
     private Player[] currPlayer;
@@ -19,6 +22,7 @@ public class GameEngine {
     private ArrayList<String> cardKeys;
     private String winner;
     private ScheduledExecutorService timerService;
+    private Shop mainShop;
 
     private static final ArrayList<String> CARD_KEYS = new ArrayList<>();
 
@@ -59,9 +63,28 @@ public class GameEngine {
     public GameEngine() {
         currPlayer = new Player[2];
         currTurn = 1;
-        currPlayer[0] = new Player(new ArrayList<>());
-        currPlayer[1] = new Player(new ArrayList<>());
+        ArrayList<GameObject> f1 = new ArrayList<GameObject>(6);
+        ArrayList<GameObject> f2 = new ArrayList<GameObject>(6);
+        for(int i = 0; i < 6; i++) {
+        	f1.add(null);
+        	f2.add(null);
+        }
+        currPlayer[0] = new Player(f1);
+        currPlayer[1] = new Player(f2);
         timerService = Executors.newScheduledThreadPool(1);
+        Map<Product, Integer> productArrayList = new HashMap<>();
+        for(int i = 15; i < 24; i++) {
+        	productArrayList.put(new Product(CARD_KEYS.get(i)), 1);
+        }
+        mainShop = new Shop(productArrayList);
+    }
+    
+    public Shop getShop() {
+    	return mainShop;
+    }
+    
+    public Player getPlayerAtIndex(int index) {
+    	return currPlayer[index];
     }
 
     // getter
@@ -77,8 +100,8 @@ public class GameEngine {
         run();
     }
 
-    public int getCurrPlayer() {
-        return (currTurn % 2) - 1;
+    public Player getCurrPlayer() {
+        return this.currPlayer[(currTurn - 1) % 2];
     }
 
     public String getCardKey(int idx) {
@@ -160,7 +183,7 @@ public class GameEngine {
             // ADD TO CURRENT PLAYER
             int bearAttackChance = (new Random()).nextInt(100) + 1;
             if (bearAttackChance <= 60) {
-                BearAttack.refresh(currPlayer[getCurrPlayer()]);
+                BearAttack.refresh(getCurrPlayer());
                 Random random = new Random();
                 WaitParalelly( random.nextInt(31) + 30);
 //                BearAttack.execute();

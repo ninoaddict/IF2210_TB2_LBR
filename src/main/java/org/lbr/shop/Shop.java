@@ -23,10 +23,27 @@ public class Shop {
 
     // method
     public void reduceProduct(Product key){
-        products.put(key, products.get(key) - 1);
-        if (products.get(key) == 0){
-            products.remove(key);
+    	System.out.println("HWHW");
+    	if(!products.containsKey(key)) {
+    		System.out.println("ARRAU");
+    	}
+    	int getSisa = -1;
+    	Product getterProduct = null;
+    	for(Product key1: products.keySet()) {
+    		if(key1.getName() == key.getName()) {
+    			products.put(key1, products.get(key1) - 1);
+    			getSisa = products.get(key1);
+    			getterProduct = key1;
+    			System.out.println("ACC EXTI");
+    			break;
+    		}
+    	}
+        System.out.println("MADRID");
+        if (getSisa == 0){
+            products.remove(getterProduct);
+            System.out.println("EKSP");
         }
+        System.out.println("HAHA");
     }
 
     public void addProduct(Product newProduct){
