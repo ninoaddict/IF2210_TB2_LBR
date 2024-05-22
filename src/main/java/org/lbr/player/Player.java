@@ -82,13 +82,16 @@ public class Player {
         setCultivable(null, row, col);
     }
 
-    public void setHandDeck(GameObject object, int idx) throws  Exception {
+    public void setHandIdx(GameObject object, int idx) throws  Exception {
 
         hand_deck.set(idx, object);
 
     }
 
-    public void addHandDeck(GameObject object) {
+    public void addToHandDeck(GameObject object) {
+        if (isHandDeckFull()){
+            System.out.println("HAND DECK IS FULL! THE CARD IS DELETED");
+        }
         this.hand_deck.add(object);
     }
 
@@ -113,7 +116,7 @@ public class Player {
         setGulden(getGulden() - reducedGulden);
     }
 
-    public boolean isHandIdxFull() {
+    public boolean isHandDeckFull() {
         for (int i = 0; i < 6; i++) {
             if (isHandIdxEmpty(i)) {
                 return false;
@@ -128,6 +131,14 @@ public class Player {
 
     public boolean isFieldCellEmpty(int row, int col){
         return getCultivable(row,col) == null;
+    }
+
+    public boolean isFieldCellProtected(int row, int col){
+        return !isFieldCellEmpty(row,col) && getCultivable(row, col).getIsProtected();
+    }
+
+    public boolean isFieldCellTrap(int row, int col){
+        return !isFieldCellEmpty(row,col) && getCultivable(row, col).getIsTrap();
     }
 
     public boolean addCultivable(Cultivable cultivable) throws Exception {
@@ -149,21 +160,16 @@ public class Player {
         if (isFieldCellEmpty(row, col)) {
             throw new Exception("Can't harvest empty cell");
         }
-        if (isHandIdxFull()){
+        if (isHandDeckFull()){
             throw new Exception("Hand deck is full :(");
         }
 
-        addHandDeck(getCoorProduct(row, col));
+        addToHandDeck(getCoorProduct(row, col));
         setNullField(row, col);
     }
 
-    public void buy(String name, Shop shop) throws Exception {
-        Product product = new Product(name);
-        if (product == null) {
-            throw new Exception("Key is not found");
-        }
-
-        if (isHandIdxFull()){
+    public void buy(Product product, Shop shop) throws Exception {
+        if (isHandDeckFull()){
             throw new Exception("Hand deck is full ");
         }
 
@@ -171,18 +177,17 @@ public class Player {
             throw  new Exception("Gulden insufficient!");
         }
 
-        addHandDeck(product);
-        reduceGulden(product.getPrice());
-        shop.reduceProduct(name);
+        addToHandDeck(product);
+        addGulden(product.getPrice());
+        shop.reduceProduct(product);
     }
 
     public void sell(int idx, Shop shop) throws Exception {
         GameObject gameObject = getHandIdx(idx);
-        if (!(gameObject instanceof Product )){
+        if (!(gameObject instanceof Product product)){
             throw new Exception("Can only sell product");
         }
 
-        Product product = (Product) gameObject;
         removeHandDeck(idx);
         shop.addProduct(product);
         reduceGulden(product.getPrice());
