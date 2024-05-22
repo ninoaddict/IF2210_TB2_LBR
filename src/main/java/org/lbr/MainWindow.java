@@ -41,48 +41,6 @@ class DummyCard extends JPanel {
     }
 }
 
-class RealButton extends JButton {
-	private String text;
-	public RealButton(String text) {
-		super();
-		this.text = text;
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setBackground(Color.white);
-        this.setText(text);
-        //this.setForeground(Color.black);
-        this.setBorder(new RoundEdgedBorder(text));
-        this.setOpaque(true);
-		// TODO Auto-generated constructor stub
-	}
-	protected void paintComponent(Graphics g) {
-        if (getBorder() instanceof RoundEdgedBorder) {
-            Shape borderShape = (Shape) ((RoundEdgedBorder) getBorder());
-            g.setClip(borderShape);
-        }
-        super.paintComponent(g);
-    }
-	private class RoundEdgedBorder extends LineBorder{
-	    int arcWidth=20,arcHeight=20;
-	    Color fillColor= Color.green;
-	    private String textString;
-	
-	    public RoundEdgedBorder(String t) {
-	    	super(Color.red);
-	    	textString = t;
-	    }
-	
-	
-	
-	    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height){
-	    	((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-	    	g.setColor(fillColor);
-	    	g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
-	    	g.dispose();
-
-	    }
-    }
-}
-
 class RoundedPanel extends JPanel
 {
     private Color backgroundColor;
@@ -241,7 +199,7 @@ class panel_with_image extends JPanel {
 }
 
 
-public class MainWindow extends JPanel {
+ public class MainWindow extends JPanel {
     public panel_with_image mainPanel;
     private JPanel panel_atas;
     private JPanel panel_tengah;
