@@ -1,4 +1,7 @@
-package org.lbr;
+package org.lbr.gameobject.cultivable.animal;
+
+import org.lbr.gameobject.item.Item;
+import org.lbr.gameobject.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;

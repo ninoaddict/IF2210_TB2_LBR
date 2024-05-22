@@ -1,4 +1,6 @@
-package org.lbr;
+package org.lbr.shop;
+
+import org.lbr.gameobject.product.Product;
 
 import java.util.Map;
 

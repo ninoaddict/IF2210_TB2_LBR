@@ -1,13 +1,16 @@
-package org.lbr;
+package org.lbr.gui;
+
+import org.lbr.gui.card.Card;
+import org.lbr.gameobject.cultivable.animal.Herbivore;
+import org.lbr.gameobject.product.Product;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 class DummyCard extends JPanel {
@@ -242,18 +245,25 @@ class panel_with_image extends JPanel {
 
 
 public class MainWindow extends JPanel {
-    public panel_with_image mainPanel;
+//    public panel_with_image mainPanel;
+    BufferedImage curBufferedImage;
     private JPanel panel_atas;
     private JPanel panel_tengah;
     private JPanel panel_bawah;
+    private ArrayList<Card> card_list;
     MainWindow(){
-
+        try {
+            curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        initComponent();
     }
+
     public void initComponent() {
-        mainPanel = new panel_with_image();
-        mainPanel.setBackground(new Color(170,193,237));
-        mainPanel.setPreferredSize(new Dimension(800, 600));
-        mainPanel.setLayout(new GridBagLayout());
+        this.setBackground(new Color(170,193,237));
+        this.setPreferredSize(new Dimension(800, 600));
+        this.setLayout(new GridBagLayout());
         panel_atas  = new JPanel();
         panel_tengah = new JPanel();
         panel_bawah = new JPanel();
@@ -269,7 +279,7 @@ public class MainWindow extends JPanel {
         panel_atas.setPreferredSize(new Dimension(500, 20));
         panel_atas.setBackground(Color.blue);
         panel_atas.setOpaque(false);
-        mainPanel.add(panel_atas, gridBagConstraints);
+        this.add(panel_atas, gridBagConstraints);
         gridBagConstraints.weighty = 4.0;
 
         gridBagConstraints.gridheight = 1;
@@ -277,7 +287,7 @@ public class MainWindow extends JPanel {
         panel_tengah.setBackground(Color.yellow);
         panel_tengah.setPreferredSize(new Dimension(100, 420));
         panel_tengah.setOpaque(false);
-        mainPanel.add(panel_tengah, gridBagConstraints);
+        this.add(panel_tengah, gridBagConstraints);
         gridBagConstraints.weighty = 0.1;
 
         gridBagConstraints.gridheight = 1;
@@ -285,7 +295,7 @@ public class MainWindow extends JPanel {
         panel_bawah.setBackground(Color.red);
         panel_bawah.setPreferredSize(new Dimension(100, 140));
         panel_bawah.setOpaque(false);
-        mainPanel.add(panel_bawah, gridBagConstraints);
+        this.add(panel_bawah, gridBagConstraints);
 
         panel_tengah.setLayout(new GridBagLayout());
 
@@ -310,10 +320,6 @@ public class MainWindow extends JPanel {
         button_grid_panel.setOpaque(false);
 
         panel_tengah.add(button_grid_panel, gridBagConstraints);
-
-        //JPanel inside_card_grid_panel = new JPanel();
-        //inside_card_grid_panel.setBackground(Color.gray);
-        //inside_card_grid_panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         card_grid_panel.setLayout(new GridBagLayout());
 
@@ -494,8 +500,23 @@ public class MainWindow extends JPanel {
         emptJPanel.setOpaque(false);
         panel_atas.add(emptJPanel, gridBagConstraints);
 
-        
         //panel_atas.setLayout(new GridBagLayout());
-        mainPanel.setVisible(true);
+        this.setVisible(true);
+    }
+
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+
+        return dimg;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        g.drawImage(curBufferedImage, 0, 0, null);
     }
 }

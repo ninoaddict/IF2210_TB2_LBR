@@ -1,4 +1,6 @@
-package org.lbr;
+package org.lbr.gameobject;
+
+import org.lbr.gui.card.Card;
 
 public abstract class GameObject {
     private String name;
