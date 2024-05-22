@@ -2,6 +2,7 @@ package org.lbr.gui.card;
 
 import org.lbr.gameobject.GameObject;
 import org.lbr.gui.MainWindow;
+import org.lbr.gui.ShuffleDialog;
 import org.lbr.player.Player;
 import org.lbr.shop.Shop;
 import org.lbr.gameobject.product.*;
@@ -16,6 +17,7 @@ public class Card extends JPanel {
     public static int DECK = 0;
     public static int FIELD = 1;
     public static int SHOP = 2;
+    public static int SHUFFLE = 3;
     private GameObject gameObject;
     private final JLabel label;
     private final JLabel nameLabel;
@@ -27,14 +29,15 @@ public class Card extends JPanel {
     private int currentPosition;
     private int stock = 0;
     private int price = 0;
+    private boolean isDraggable;
 
-    public Card(GameObject gameObject, Player owner, int row, int col, int currentPosition) {
-    	System.out.println("INSTANSIASI!!!!!!!");
+    public Card(GameObject gameObject, Player owner, int row, int col, int currentPosition, boolean isDraggable) {
         this.gameObject = gameObject;
         this.owner = owner;
         this.currentPosition = currentPosition;
         this.row = row;
         this.col = col;
+        this.isDraggable = isDraggable;
 
         if (this.gameObject != null) {
             this.gameObject.setParent(this);
@@ -42,12 +45,13 @@ public class Card extends JPanel {
 
         this.label = new JLabel();
         this.setOpaque(false);
-        this.setBackground(new Color(192, 255, 228));
         if(currentPosition == SHOP) {
         	this.setPreferredSize(new Dimension(150, 150));
         }else {
         	this.setPreferredSize(new Dimension(90, 120));
         }
+        this.setBackground(new Color(224, 247, 250));
+        this.setPreferredSize(new Dimension(90, 120));
         this.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -81,8 +85,10 @@ public class Card extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 Card comp = (Card) e.getSource();
-                TransferHandler handler = comp.getTransferHandler();
-                handler.exportAsDrag(comp, e, TransferHandler.MOVE);
+                if (getDraggable()) {
+                    TransferHandler handler = comp.getTransferHandler();
+                    handler.exportAsDrag(comp, e, TransferHandler.MOVE);
+                }
             }
         });
 
@@ -94,16 +100,16 @@ public class Card extends JPanel {
                     JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
                             "Pop up", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    System.out.println("NULL");
+                    ShuffleDialog sd = new ShuffleDialog(owner, comp);
+                    sd.setVisible(true);
                 }
             }
         });
         stockJLabel = new JLabel();
         priceJLabel = new JLabel();
     }
-    
+
     public Card(GameObject gameObject, Player owner, int row, int col, int currentPosition, int changer) {
-    	System.out.println("INSTANSIASI!!!!!!!");
         this.gameObject = gameObject;
         this.owner = owner;
         this.currentPosition = currentPosition;
@@ -116,7 +122,7 @@ public class Card extends JPanel {
 
         this.label = new JLabel();
         this.setOpaque(false);
-        this.setBackground(new Color(192, 255, 228));
+        this.setBackground(new Color(224, 247, 250));
         if(currentPosition == SHOP) {
         	this.setPreferredSize(new Dimension(160, 160));
         }else {
@@ -148,22 +154,22 @@ public class Card extends JPanel {
         nameLabel.setFont(new Font("Linux Libertine", 1, 14));
         nameLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         add(nameLabel, gbc);
-        
+
         gbc.gridy = 2;
-        
+
         this.stock = 1;
-        
+
         stockJLabel = new JLabel("Stock: " + Integer.toString(stock));
-       
+
         add(stockJLabel, gbc);
-       
-        
+
+
         this.price = ((Product)this.gameObject).getPrice();
-        
+
         priceJLabel = new JLabel("Price: " + Integer.toString(price));
-        
+
         gbc.gridy = 3;
-        
+
         add(priceJLabel, gbc);
 
         setTransferHandler(new CardTransferHandler());
@@ -185,10 +191,15 @@ public class Card extends JPanel {
                     JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
                             "Pop up", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    System.out.println("NULL");
+//                    ShuffleDialog sd = new ShuffleDialog(owner, comp);
+//                    sd.setVisible(true);
                 }
             }
         });
+    }
+
+    public boolean getDraggable() {
+        return isDraggable;
     }
 
     @Override
@@ -202,8 +213,8 @@ public class Card extends JPanel {
         graphics.setColor(getBackground());
         graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); // paint background
         graphics.setColor(getForeground());
-        //graphics.setStroke(new BasicStroke((float)1.5));
-        //graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); // border
+        graphics.setStroke(new BasicStroke((float) 1.5));
+        graphics.drawRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); // border
     }
 
     public void updateCardDisplay() {
@@ -214,8 +225,6 @@ public class Card extends JPanel {
             label.setHorizontalAlignment(JLabel.CENTER);
             nameLabel.setText("<html><body style='text-align:center'>" + this.gameObject.getName() + "</body></html>");
         } else {
-        	System.out.println("HERE");
-        	System.out.println(gameObject == null);
             label.setIcon(null);
             nameLabel.setText("");
             this.revalidate();
@@ -231,14 +240,7 @@ public class Card extends JPanel {
         this.gameObject = gameObject;
         if (this.gameObject != null) {
             this.gameObject.setParent(this);
-        }else {
-        	System.out.println("Now this null");
-        	System.out.println(this.getRow());
-        	System.out.println(this.getCol());
         }
-
-        System.out.println("Card at (" + row + "," + col + ") set to " + (gameObject == null ? "null" : gameObject.getName()));
-
         updateCardDisplay();
     }
 
@@ -277,7 +279,7 @@ public class Card extends JPanel {
     public void setOwner(Player owner) {
         this.owner = owner;
     }
-    
+
     public void buyHappened(int c) throws Exception {
     	if(this.stock + c == -1) {
     		throw new Exception("BUY CANNOT BE DONE!");
