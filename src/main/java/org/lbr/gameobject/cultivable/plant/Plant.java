@@ -85,35 +85,22 @@ public class Plant extends Cultivable {
         setAge(this.getAge() - reducedAge);
     }
 
-    public void accelerate() {
-        try {
-            this.addAge(2);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+    @Override
+    public void accelerate() throws Exception {
+        this.addAge(2);
     }
 
-    public void delay() {
-        try {
+    @Override
+    public void delay() throws  Exception  {
+        if (!getIsProtected()) {
             this.reduceAge(Math.min(2, getAge()));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } else {
+            throw new Exception("This Plant is Protected");
         }
     }
 
-    public void protect() {
-        try {
-            this.enableProtect();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void trap() {
-        try {
-            this.enableTrap();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    @Override
+    public void instantHarvest() throws Exception{
+        setAge(getAgeToReady());
     }
 }

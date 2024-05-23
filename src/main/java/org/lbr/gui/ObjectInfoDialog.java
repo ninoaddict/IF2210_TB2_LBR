@@ -109,7 +109,7 @@ public class ObjectInfoDialog extends JFrame {
             gbc.gridy = 0;
             gbc.insets = new Insets(0, 0, 0, 10);
 
-            RoundedButton button = new RoundedButton("Panen");
+            RoundedButton button = new RoundedButton("Panen", new Insets(3, 5, 3, 5), 12, 15);
             button.addActionListener(e -> {
                 try {
                     parent.getOwner().harvest(parent.getRow(), parent.getCol());
@@ -141,7 +141,7 @@ public class ObjectInfoDialog extends JFrame {
             bottom.add(button, gbc);
             gbc.gridx = 1;
             gbc.insets = new Insets(0, 0, 0, 0);
-            RoundedButton buttonClose = new RoundedButton("Close");
+            RoundedButton buttonClose = new RoundedButton("Close", new Insets(3, 5, 3, 5), 12, 15);
             buttonClose.addActionListener(e -> {
                 dispose();
             });
@@ -171,29 +171,31 @@ public class ObjectInfoDialog extends JFrame {
     }
 }
 
-class RoundedButton extends JButton {
-    public RoundedButton(String label) {
-        super(label);
-        this.setMargin(new Insets(3, 5, 3, 5));
-        this.setBackground(Color.LIGHT_GRAY);
-        this.setForeground(Color.BLACK);
-        this.setText(label);
-        this.setFocusPainted(false);
-        this.setBorderPainted(false);
-        this.setOpaque(false);
-        this.setContentAreaFilled(false);
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        Dimension arcs = new Dimension(15, 15);
-        int width = getWidth();
-        int height = getHeight();
-        Graphics2D graphics = (Graphics2D) g;
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setColor(getBackground());
-        graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); // paint background
-        graphics.setColor(getForeground());
-        super.paintComponent(g);
-    }
-}
+//class RoundedButton extends JButton {
+//    public RoundedButton(String label) {
+//        super(label);
+//        this.setMargin(new Insets(3, 5, 3, 5));
+//        this.setBackground(Color.LIGHT_GRAY);
+//        this.setForeground(Color.BLACK);
+//        this.setText(label);
+//        this.setFocusPainted(false);
+//        this.setBorderPainted(false);
+//        this.setOpaque(false);
+//        this.setContentAreaFilled(false);
+//    }
+//
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        Dimension arcs = new Dimension(15, 15);
+//        int width = getWidth();
+//        int height = getHeight();
+//        Graphics2D graphics = (Graphics2D) g;
+//        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        graphics.setColor(getBackground());
+//        graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); // paint background
+//        graphics.setColor(getForeground());
+//        graphics.setStroke(new BasicStroke((float) 1.5));
+//        graphics.drawRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
+//        super.paintComponent(g);
+//    }
+//}

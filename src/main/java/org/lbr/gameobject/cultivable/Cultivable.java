@@ -76,12 +76,23 @@ public abstract class Cultivable extends GameObject {
     // effects
     public abstract boolean isReady();
 
-    public abstract void accelerate();
+    public abstract void accelerate() throws Exception;
 
-    public abstract void delay();
+    public abstract void delay() throws Exception;
 
-    public abstract void protect();
+    public abstract void instantHarvest() throws Exception;
 
-    public abstract void trap();
+    public void protect() throws Exception{
+        enableProtect();
+    }
 
+    public void trap() throws Exception{
+        enableTrap();
+    }
+
+    public void destroy() throws Exception{
+        if (getIsProtected()){
+            throw new Exception("This object is protected!");
+        }
+    }
 }

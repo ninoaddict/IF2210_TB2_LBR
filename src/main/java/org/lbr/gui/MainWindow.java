@@ -1,5 +1,6 @@
 package org.lbr.gui;
 
+import org.lbr.gameobject.item.*;
 import org.lbr.gui.card.Card;
 import org.lbr.player.Player;
 import org.lbr.GameEngine;
@@ -7,11 +8,6 @@ import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Animal;
 import org.lbr.gameobject.cultivable.animal.Carnivore;
 import org.lbr.gameobject.cultivable.animal.Herbivore;
-import org.lbr.gameobject.item.Accelerate;
-import org.lbr.gameobject.item.Delay;
-import org.lbr.gameobject.item.Destroy;
-import org.lbr.gameobject.item.Item;
-import org.lbr.gameobject.item.Protect;
 import org.lbr.gameobject.product.Product;
 
 import java.awt.*;
@@ -215,12 +211,13 @@ public class MainWindow extends JPanel {
     private String fieldTwoString = "FIELD2";
     private String deckOneString = "DECK1";
     private String deckTwoString = "DECK2";
+    private MainFrame mainFrame;
     JLabel howMuchHisMoneyJLabel;
     JLabel howMuchMyMoneyJLabel;
 
-    MainWindow(GameEngine ge){
+    MainWindow(GameEngine ge) {
         try {
-        	gameEngine = ge;
+            gameEngine = ge;
             curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
             handPlayer1 = new ArrayList<>();
             handPlayer2 = new ArrayList<>();
@@ -297,7 +294,6 @@ public class MainWindow extends JPanel {
 
         card_grid_panel.setLayout(cardLayout);
 
-
         panel_tengah.add(card_grid_panel, gridBagConstraints);
 
         gridBagConstraints.gridx = 1;
@@ -310,7 +306,7 @@ public class MainWindow extends JPanel {
         panel_tengah.add(button_grid_panel, gridBagConstraints);
 
         JPanel real_card_gridJPanel = new JPanel();
-        real_card_gridJPanel.setBackground(new Color(0,108,103));
+        real_card_gridJPanel.setBackground(new Color(0, 108, 103));
         real_card_gridJPanel.setOpaque(false);
 
         gridBagConstraints = new GridBagConstraints();
@@ -358,8 +354,8 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
 
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 5; j++){
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
                 Card card = new Card(null, gameEngine.getCurrPlayer(), i, j, Card.FIELD, true);
@@ -374,8 +370,8 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 0;
 
 
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 5; j++){
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
                 Card card = new Card(null, gameEngine.getPlayerAtIndex(1), i, j, Card.FIELD, true);
@@ -401,12 +397,12 @@ public class MainWindow extends JPanel {
 
         Map<Product, Integer> hMap = gameEngine.getShop().getProducts();
 
-        for(Product name_product: hMap.keySet()) {
-        	productNameStrings.add(name_product.getName().toUpperCase().replace(' ', '_'));
+        for (Product name_product : hMap.keySet()) {
+            productNameStrings.add(name_product.getName().toUpperCase().replace(' ', '_'));
         }
 
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
                 System.out.println(productNameStrings.get(3 * i + j));
@@ -440,8 +436,8 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel();
 
-        for(int i = 0; i < 6; i++) {
-        	gridBagConstraints.gridx = i;
+        for (int i = 0; i < 6; i++) {
+            gridBagConstraints.gridx = i;
             Card card = new Card(null, gameEngine.getCurrPlayer(), 0, i, Card.DECK, true);
             first_deck_playerJPanel.add(card, gridBagConstraints);
             handPlayer1.add(card);
@@ -463,7 +459,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 0;
         JLabel temp2 = new JLabel();
         for (int i = 0; i < 6; i++) {
-        	gridBagConstraints.gridx = i;
+            gridBagConstraints.gridx = i;
             Card card = new Card(null, gameEngine.getPlayerAtIndex(1), 0, i, Card.DECK, true);
             second_deck_playerJPanel.add(card, gridBagConstraints);
             handPlayer2.add(card);
@@ -480,7 +476,6 @@ public class MainWindow extends JPanel {
         panel_bawah.add(deckTwoString, second_deck_playerJPanel);
 
         deckCardLayout.show(panel_bawah, deckOneString);
-
 
         button_grid_panel.setLayout(new GridBagLayout());
 
@@ -500,59 +495,80 @@ public class MainWindow extends JPanel {
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.weightx = 1;
-        
+
         RoundButton[] roundButtons = new RoundButton[6];
 
-        for(int i = 0; i < 6; i++) {
-        	gridBagConstraints.gridy = i;
-        	RoundButton jtempButton = new RoundButton(button_name_array[i]);
-        	jtempButton.setForeground(Color.black);
-        	button_grid_panel.add(jtempButton, gridBagConstraints);
-        	roundButtons[i] = jtempButton;
+        for (int i = 0; i < 6; i++) {
+            gridBagConstraints.gridy = i;
+            RoundButton jtempButton = new RoundButton(button_name_array[i]);
+            jtempButton.setForeground(Color.black);
+            button_grid_panel.add(jtempButton, gridBagConstraints);
+            roundButtons[i] = jtempButton;
         }
 
         roundButtons[0].addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int k = (gameEngine.getCurrTurn() - 1) % 2;
-				if (k== 0) {
-					cardLayout.show(card_grid_panel, fieldOneString);
-				} else {
-					cardLayout.show(card_grid_panel, fieldTwoString);
-				}
-				roundButtons[0].setBackground(Color.green);
-				roundButtons[1].setBackground(Color.white);
-				roundButtons[2].setBackground(Color.white);
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int k = (gameEngine.getCurrTurn() - 1) % 2;
+                if (k == 0) {
+                    cardLayout.show(card_grid_panel, fieldOneString);
+                } else {
+                    cardLayout.show(card_grid_panel, fieldTwoString);
+                }
+                roundButtons[0].setBackground(Color.green);
+                roundButtons[1].setBackground(Color.white);
+                roundButtons[2].setBackground(Color.white);
+            }
+        });
 
         roundButtons[1].addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int k = (gameEngine.getCurrTurn() - 1) % 2;
-				if (k== 0) {
-					cardLayout.show(card_grid_panel, fieldTwoString);
-				} else {
-					cardLayout.show(card_grid_panel, fieldOneString);
-				}
-				roundButtons[0].setBackground(Color.white);
-				roundButtons[1].setBackground(Color.red);
-				roundButtons[2].setBackground(Color.white);
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int k = (gameEngine.getCurrTurn() - 1) % 2;
+                if (k == 0) {
+                    cardLayout.show(card_grid_panel, fieldTwoString);
+                } else {
+                    cardLayout.show(card_grid_panel, fieldOneString);
+                }
+                roundButtons[0].setBackground(Color.white);
+                roundButtons[1].setBackground(Color.red);
+                roundButtons[2].setBackground(Color.white);
+            }
+        });
 
-       roundButtons[2].addActionListener(new ActionListener() {
+        roundButtons[2].addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(card_grid_panel, shopString);
-				roundButtons[0].setBackground(Color.white);
-				roundButtons[1].setBackground(Color.white);
-				roundButtons[2].setBackground(Color.green);
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(card_grid_panel, shopString);
+                roundButtons[0].setBackground(Color.white);
+                roundButtons[1].setBackground(Color.white);
+                roundButtons[2].setBackground(Color.green);
+            }
+        });
+
+        roundButtons[3].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSaveDialog();
+            }
+        });
+
+        roundButtons[4].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showLoadDialog();
+            }
+        });
+
+        roundButtons[5].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showPluginDialog();
+            }
+        });
 
         panel_atas.setLayout(new GridBagLayout());
         RoundedPanel uwuPanel = new RoundedPanel(15);
@@ -582,33 +598,32 @@ public class MainWindow extends JPanel {
         gridBagConstraints.weightx = 0.0;
         gridBagConstraints.insets = new Insets(3, 10, 3, 10);
 
-
         uwuPanel.add(roundButton, gridBagConstraints);
 
         roundButton.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int k = (gameEngine.getCurrTurn() - 1) % 2;
-				if(k == 0) {
-					cardLayout.show(card_grid_panel, fieldTwoString);
-					deckCardLayout.show(panel_bawah, deckTwoString);
-				} else {
-					cardLayout.show(card_grid_panel, fieldOneString);
-					deckCardLayout.show(panel_bawah, deckOneString);
-				}
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int k = (gameEngine.getCurrTurn() - 1) % 2;
+                if (k == 0) {
+                    cardLayout.show(card_grid_panel, fieldTwoString);
+                    deckCardLayout.show(panel_bawah, deckTwoString);
+                } else {
+                    cardLayout.show(card_grid_panel, fieldOneString);
+                    deckCardLayout.show(panel_bawah, deckOneString);
+                }
 
-				gameEngine.nextTurn();
+                gameEngine.nextTurn();
 
-				labelNext.setText("Number of Turn: " + Integer.toString(gameEngine.getCurrTurn()));
+                labelNext.setText("Number of Turn: " + Integer.toString(gameEngine.getCurrTurn()));
 
-				roundButtons[0].setBackground(Color.green);
-				roundButtons[1].setBackground(Color.white);
-				roundButtons[2].setBackground(Color.white);
+                roundButtons[0].setBackground(Color.green);
+                roundButtons[1].setBackground(Color.white);
+                roundButtons[2].setBackground(Color.white);
                 start();
                 updatePlayerFieldDisplay();
-			}
-		});
+            }
+        });
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.anchor = GridBagConstraints.WEST;
@@ -648,7 +663,7 @@ public class MainWindow extends JPanel {
         newGridBagConstraints.gridy = 1;
 
         moniesJPanel.add(hisMoniesJPanel, newGridBagConstraints);
-        
+
         howMuchMyMoneyJLabel = new JLabel(Integer.toString(gameEngine.getPlayerAtIndex(0).getGulden()));
         howMuchMyMoneyJLabel.setBackground(Color.cyan);
         howMuchMyMoneyJLabel.setOpaque(false);
@@ -661,7 +676,7 @@ public class MainWindow extends JPanel {
         newGridBagConstraints.weightx = 1.0;
 
         moniesJPanel.add(howMuchMyMoneyJLabel, newGridBagConstraints);
-        
+
         howMuchHisMoneyJLabel = new JLabel(Integer.toString(gameEngine.getPlayerAtIndex(1).getGulden()));
 
         howMuchHisMoneyJLabel.setBackground(Color.orange);
@@ -682,7 +697,7 @@ public class MainWindow extends JPanel {
         JPanel emptJPanel = new JPanel();
         emptJPanel.setOpaque(false);
         panel_atas.add(emptJPanel, gridBagConstraints);
-		roundButtons[0].setBackground(Color.green);
+        roundButtons[0].setBackground(Color.green);
         this.setVisible(true);
     }
 
@@ -697,40 +712,63 @@ public class MainWindow extends JPanel {
         return dimg;
     }
 
+    public void setMainFrame(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
+    }
+
     public void buyProduct(Product product, int idx) throws Exception {
-    	gameEngine.getCurrPlayer().buy(product, gameEngine.getShop(), idx);
-    	int k = (gameEngine.getCurrTurn() - 1) % 2;
-    	if(k == 0) {
-    		this.howMuchMyMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
-    	}else {
-    		this.howMuchHisMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
-    	}
+        gameEngine.getCurrPlayer().buy(product, gameEngine.getShop(), idx);
+        int k = (gameEngine.getCurrTurn() - 1) % 2;
+        if (k == 0) {
+            this.howMuchMyMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+        } else {
+            this.howMuchHisMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+        }
     }
-    
+
     public void sellProduct(Product product, int idx) throws Exception {
-    	gameEngine.getCurrPlayer().sell(idx, gameEngine.getShop());
-    	int k = (gameEngine.getCurrTurn() - 1) % 2;
-    	if(k == 0) {
-    		this.howMuchMyMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
-    	}else {
-    		this.howMuchHisMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
-    	}
+        gameEngine.getCurrPlayer().sell(idx, gameEngine.getShop());
+        int k = (gameEngine.getCurrTurn() - 1) % 2;
+        if (k == 0) {
+            this.howMuchMyMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+        } else {
+            this.howMuchHisMoneyJLabel.setText(Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+        }
     }
-    
+
     public void swapDeck(int from, int col) throws Exception {
-    	gameEngine.getCurrPlayer().swap_deck(from, col);
+        gameEngine.getCurrPlayer().swap_deck(from, col);
     }
-    
+
     public void from_deck_to_field(int fromCol, int toRow, int toCol) throws Exception {
-    	gameEngine.getCurrPlayer().from_deck_to_field(fromCol, toRow, toCol);
+        gameEngine.getCurrPlayer().from_deck_to_field(fromCol, toRow, toCol);
     }
-    
+
     public void swapField(int rowFrom, int colFrom, int rowTo, int colTo) {
-    	gameEngine.getCurrPlayer().swap_field(rowFrom, colFrom, rowTo, colTo);
+        gameEngine.getCurrPlayer().swap_field(rowFrom, colFrom, rowTo, colTo);
+    }
+
+    public void showSaveDialog() {
+        mainFrame.setEnabled(false);
+        SaveDialog sld = new SaveDialog(gameEngine, mainFrame, this);
+        sld.setVisible(true);
+    }
+
+    public void showLoadDialog() {
+        mainFrame.setEnabled(false);
+        LoadDialog ld = new LoadDialog(gameEngine, mainFrame, this);
+        ld.setVisible(true);
+    }
+
+    public void showPluginDialog() {
+        mainFrame.setEnabled(false);
+        PluginDialog pd = new PluginDialog(gameEngine, mainFrame, this);
+        pd.setVisible(true);
     }
 
     public void start() {
-        ShuffleDialog shuffle = new ShuffleDialog(gameEngine.getCurrPlayer(), this);
+        mainFrame.setEnabled(false);
+        ShuffleDialog shuffle = new ShuffleDialog(gameEngine.getCurrPlayer(), this, mainFrame);
         shuffle.setVisible(true);
     }
 
@@ -756,53 +794,63 @@ public class MainWindow extends JPanel {
     }
 
     public boolean productDrop(Player cardOwner, Product dropProduct, Animal animal, int colDeck) {
-    	if (!cardOwner.equals(gameEngine.getCurrPlayer())) {
-    		return false;
-    	}
-    	try {
-    		animal.eat(dropProduct);
-    		gameEngine.getCurrPlayer().setHandIdx(null, colDeck);
+        if (!cardOwner.equals(gameEngine.getCurrPlayer())) {
+            return false;
+        }
+        try {
+            animal.eat(dropProduct);
+            gameEngine.getCurrPlayer().setHandIdx(null, colDeck);
 
-    	}catch (Exception e) {
-			return false;
-		}
-    	return true;
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
-    public boolean itemDrop(Player cardOwner, Item dropItem, Cultivable cultivableObj, int colIdx) {
-    	if (dropItem instanceof Delay || dropItem instanceof Destroy) {
-    		if (cardOwner.equals(gameEngine.getCurrPlayer())) {
-    			System.out.println("CURRPLAYER GOLD: " + Integer.toString(gameEngine.getCurrPlayer().getGulden()));
-    			System.out.println("GRGRiNI");
-    			return false;
-    		}
-    		if (dropItem instanceof Delay) {
-    		try {
-    		System.out.println("ITEM HERE");
-    		dropItem.runEffect(cultivableObj);
-    		gameEngine.getCurrPlayer().setHandIdx(null, colIdx);
-    		System.out.println("CHARGER");
-    		return true;
+    public boolean itemDrop(Player cardOwner, Item dropItem, Cultivable cultivableObj, int colIdx, int row, int col) {
+        if (dropItem instanceof Delay || dropItem instanceof Destroy) {
+            if (cardOwner.equals(gameEngine.getCurrPlayer())) {
+                System.out.println("CURRPLAYER GOLD: " + Integer.toString(gameEngine.getCurrPlayer().getGulden()));
+                System.out.println("GRGRiNI");
+                return false;
+            }
+            if (dropItem instanceof Delay) {
+                try {
+                    System.out.println("ITEM HERE");
+                    dropItem.runEffect(cultivableObj);
+                    gameEngine.getCurrPlayer().setHandIdx(null, colIdx);
+                    System.out.println("CHARGER");
+                    return true;
 
-    		} catch (Exception e) {
-				return false;
-			}
+                } catch (Exception e) {
+                    return false;
+                }
 
-    		} else {
+            } else {
+                try {
+                    dropItem.runEffect(cultivableObj);
+                    gameEngine.getCurrPlayer().setHandIdx(null, colIdx);
+                    cardOwner.setNullField(row, col);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        }
+        try {
+            dropItem.runEffect(cultivableObj);
+            gameEngine.getCurrPlayer().setHandIdx(null, colIdx);
 
-    		}
-
-    	}
-    	try {
-    		dropItem.runEffect(cultivableObj);
-    		gameEngine.getCurrPlayer().setHandIdx(null, colIdx);
-    	} catch (Exception e) {
-    		return false;
-		}
-
-    	return true;
+            // check if dropItem is instant harvest
+            if (dropItem instanceof InstantHarvest) {
+                cardOwner.harvest(row, col);
+                updatePlayerHandDisplay();
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
-
 
 
     @Override

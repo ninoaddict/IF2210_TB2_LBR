@@ -20,9 +20,7 @@ public class Delay extends Item {
 
     @Override
     public void runEffect(Cultivable cultivable) throws Exception {
-        if (!cultivable.getIsProtected()){
-            cultivable.addActiveItem(this);
-            cultivable.delay();
-        }
+        cultivable.delay();
+        cultivable.addActiveItem(this);
     }
 }

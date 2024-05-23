@@ -70,36 +70,22 @@ public abstract class Animal extends Cultivable {
         setWeight(this.getWeight() - reducedWeight);
     }
 
-    public void accelerate() {
-        try {
-            this.addWeight(8);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
+    public void accelerate() throws Exception{
+        this.addWeight(8);
+    }
+
+    public void delay()  throws  Exception{
+        if (!getIsProtected()){
+            int u = 5 ;
+            if (u > getWeight()) u = getWeight();
+            this.reduceWeight(u);
+        } else {
+            throw new Exception("Animal is protected!");
         }
     }
 
-    public void delay() {
-        try {
-            this.reduceWeight(Math.min(5, getWeight()));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    @Override
+    public void instantHarvest() throws Exception{
+        setWeight(weight_to_ready);
     }
-
-    public void protect() {
-        try {
-            this.enableProtect();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void trap() {
-        try {
-            this.enableTrap();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 }
