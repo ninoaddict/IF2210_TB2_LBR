@@ -1,7 +1,6 @@
 package org.lbr;
 
 import java.security.cert.TrustAnchor;
-import java.lang.Math;
 import java.util.Random;
 import org.lbr.gameobject.cultivable.animal.*;
 import org.lbr.player.*;
@@ -21,7 +20,8 @@ public class BearAttack {
         int distance = x2 - x1 + 1;
 
         y1 = rand.nextInt(4);
-        int getRandom = rand.nextInt(Math.floorDiv(6,distance));
+        int att = 6 / distance;
+        int getRandom = rand.nextInt(att);
 
         if (getRandom + y1 > 3) {
             y2 = y1;
@@ -40,7 +40,9 @@ public class BearAttack {
         int distance = x2 - x1 + 1;
 
         int y1 = rand.nextInt(4);
-        int getRandom = rand.nextInt(Math.floorDiv(6,distance));
+        
+        int att = 6 / distance;
+        int getRandom = rand.nextInt(att);
 
         int y2;
 

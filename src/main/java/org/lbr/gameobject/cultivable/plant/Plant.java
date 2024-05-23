@@ -33,7 +33,7 @@ public class Plant extends Cultivable {
     }
 
     public Plant(Plant other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), other.getProduct());
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), new Product(other.getProduct()));
         this.age_to_ready = other.getAgeToReady();
         this.age = other.getAge();
     }
@@ -95,7 +95,9 @@ public class Plant extends Cultivable {
 
     public void delay() {
         try {
-            this.reduceAge(Math.min(2, getAge()));
+        	int u = 2;
+        	if (getAge() < 2) u = getAge();
+            this.reduceAge(u);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

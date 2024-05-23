@@ -32,7 +32,8 @@ public class ShuffleDialog extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(10, 5, 10, 5);
         // check how many needed card
-        int neededCard = Math.min(player.getRemainingHand(), 4);
+        int neededCard = 4;
+        if (player.getRemainingHand() < 4) neededCard = player.getRemainingHand();
         this.needed = neededCard;
         ArrayList<GameObject> arr = ObjectFactory.getShuffleCards(neededCard);
 

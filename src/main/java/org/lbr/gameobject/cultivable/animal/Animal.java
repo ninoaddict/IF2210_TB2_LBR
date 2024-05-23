@@ -4,7 +4,6 @@ import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 import org.lbr.gameobject.cultivable.Cultivable;
-import java.lang.Math;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ public abstract class Animal extends Cultivable {
     }
 
     public Animal(Animal other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), other.product);
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), new Product(other.product));
         this.weight_to_ready = other.getWeightToReady();
         this.weight = other.getWeight();
     }
@@ -81,7 +80,9 @@ public abstract class Animal extends Cultivable {
 
     public void delay() {
         try {
-            this.reduceWeight(Math.min(5, getWeight()));
+        	int u = 5;
+        	if (getWeight() < 5) u = getWeight();
+            this.reduceWeight(u);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
