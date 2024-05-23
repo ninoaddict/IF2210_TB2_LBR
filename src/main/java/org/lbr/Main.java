@@ -9,7 +9,6 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
         	GameEngine gameEngine = new GameEngine();
         	MainFrame frame = new MainFrame(gameEngine);
-            
         });
     }
 }
