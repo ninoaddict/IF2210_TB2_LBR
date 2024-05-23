@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ObjectFactory {
+public class ObjectPrototypeFactory {
     private static final Map<String, GameObject> CARD_KEYS = new HashMap<>();
 
     static {
@@ -59,20 +59,20 @@ public class ObjectFactory {
     }
 
     // method
-    public ArrayList<GameObject> getShuffleCards() {
+    public ArrayList<GameObject> getShuffleCards(int needed) {
         ArrayList<GameObject> gameObjects = new ArrayList<>();
         Random random = new Random();
         String[] keyArray = CARD_KEYS.keySet().stream().toArray(String[]::new);
         String key;
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < needed; i++) {
             int randomInt;
             do {
                 randomInt = random.nextInt(CARD_KEYS.size());
                 key = keyArray[randomInt] ;
             }  while (key.equals("BERUANG"));
 
-            gameObjects.add(getGameObject(key));
+            gameObjects.add(constructObject(key));
         }
         return gameObjects;
     }

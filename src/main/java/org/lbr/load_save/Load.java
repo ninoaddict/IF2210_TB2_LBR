@@ -1,5 +1,5 @@
 package org.lbr.load_save;
-import org.lbr.ObjectFactory;
+import org.lbr.ObjectPrototypeFactory;
 
 import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Animal;
@@ -36,7 +36,7 @@ public class Load {
             for (int i = 0; i < nHand; i++) {
                 line = br.readLine();
                 String[] temp = line.split(" ");
-                player.setHandIdx(ObjectFactory.getGameObject(temp[1]), (Integer)(temp[0].charAt(0) - 'A'));
+                player.setHandIdx(ObjectPrototypeFactory.getGameObject(temp[1]), (Integer)(temp[0].charAt(0) - 'A'));
             }
             line = br.readLine();
             nField = Integer.parseInt(line);
@@ -45,10 +45,10 @@ public class Load {
                 String[] temp = line.split(" ");
                 progress.add(Integer.parseInt(temp[2]));
                 ArrayList<String> tempList = new ArrayList<>();
-                Cultivable c = (Cultivable)ObjectFactory.getGameObject(temp[1]);
+                Cultivable c = (Cultivable) ObjectPrototypeFactory.getGameObject(temp[1]);
                 for (int j = 0; j < Integer.parseInt(temp[3]); j++) {
                     tempList.add(temp[3+i]);
-                    c.addActiveItem((Item) ObjectFactory.getGameObject(temp[3+i]));
+                    c.addActiveItem((Item) ObjectPrototypeFactory.getGameObject(temp[3+i]));
                 }
                 if(c instanceof Animal){
                     ((Animal)c).setWeight(Integer.parseInt(temp[2]));
