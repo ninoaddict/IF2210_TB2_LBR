@@ -1,11 +1,16 @@
 package org.lbr.gui.card;
 
+import org.lbr.GameEngine;
 import org.lbr.gameobject.GameObject;
+import org.lbr.gameobject.cultivable.Cultivable;
+import org.lbr.gameobject.cultivable.animal.Animal;
 import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 import org.lbr.gui.MainWindow;
 
 import javax.swing.*;
+import javax.swing.text.html.HTML.Tag;
+
 import java.awt.datatransfer.*;
 import java.io.IOException;
 
@@ -62,7 +67,7 @@ public class CardTransferHandler extends TransferHandler {
 	            	System.out.println(sourceGameObject.getName().toUpperCase().replace(' ', '_'));
 	            	Product product = new Product(sourceGameObject.getName().toUpperCase().replace(' ', '_'));
 	            	System.out.println("GOING");
-	            	((MainWindow)targetCard.getParent().getParent()).buyProduct(product, targetCard.getCol());
+	            	((MainWindow)targetCard.getParent().getParent().getParent()).buyProduct(product, targetCard.getCol());
 	            	sourceCard.buyHappened(-1);
 	            	System.out.println("SAYANG");
 	            	System.out.println(product.getName());
@@ -79,7 +84,7 @@ public class CardTransferHandler extends TransferHandler {
             		return false;
             	}
             	Product product = new Product(targetCard.getGameObject().getName().toUpperCase().replace(' ', '_'));
-            	((MainWindow)sourceCard.getParent().getParent()).sellProduct(product, sourceCard.getCol());
+            	((MainWindow)sourceCard.getParent().getParent().getParent()).sellProduct(product, sourceCard.getCol());
             	targetCard.buyHappened(1);
             	sourceCard.setGameObject(null);
             	return true;
@@ -90,7 +95,7 @@ public class CardTransferHandler extends TransferHandler {
             
             if (sourceCard.getCurrentPosition() == Card.DECK && targetCard.getCurrentPosition() == Card.DECK) {
             	GameObject targetGameObject = targetCard.getGameObject();
-            	((MainWindow)sourceCard.getParent().getParent()).swapDeck(targetCard.getCol(), sourceCard.getCol());
+            	((MainWindow)sourceCard.getParent().getParent().getParent()).swapDeck(targetCard.getCol(), sourceCard.getCol());
                 targetCard.setGameObject(droppedGameObject);
                 sourceCard.setGameObject(targetGameObject);  // swapping objects
                 return true;
@@ -101,12 +106,36 @@ public class CardTransferHandler extends TransferHandler {
             		if (targetCard.getGameObject() == null) {
             			return false;
             		}
+            		System.out.println("DEBUG1");
+            		if (sourceCard.getGameObject() instanceof Product product) {
+            			if (!(targetCard.getGameObject() instanceof Animal animal)) {
+            				return false;
+            			}
+            			boolean canDrop = ((MainWindow)(sourceCard.getParent().getParent().getParent())).productDrop(targetCard.getOwner(), (Product) sourceCard.getGameObject(), (Animal) targetCard.getGameObject(), sourceCard.getCol());
+            			if (!canDrop) {
+            				return false;
+            			}
+            			sourceCard.setGameObject(null);
+            			return true;
+            		} else {
+            			boolean canDrop = ((MainWindow)(sourceCard.getParent().getParent().getParent())).itemDrop(targetCard.getOwner(), (Item) sourceCard.getGameObject(), (Cultivable) targetCard.getGameObject(), sourceCard.getCol());
+            			System.out.println("THING: " + Integer.toString(targetCard.getOwner().getGulden()));
+            			if (!canDrop) {
+            				System.out.println("CANDROPFALSE");
+            				return false;
+            			}
+            			sourceCard.setGameObject(null);
+            			return true;
+            		}
             	} else {
             		if (targetCard.getGameObject() != null ) {
             			return false;
             		}
+            		if (!targetCard.getOwner().equals(sourceCard.getOwner())) {
+            			return false;
+            		}
                 	GameObject targetGameObject = targetCard.getGameObject();
-            		((MainWindow)sourceCard.getParent().getParent()).from_deck_to_field(sourceCard.getCol(), targetCard.getRow(), targetCard.getCol());
+            		((MainWindow)sourceCard.getParent().getParent().getParent()).from_deck_to_field(sourceCard.getCol(), targetCard.getRow(), targetCard.getCol());
 
 
             		targetCard.setGameObject(droppedGameObject);

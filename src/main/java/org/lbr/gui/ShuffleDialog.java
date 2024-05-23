@@ -25,7 +25,6 @@ public class ShuffleDialog extends JFrame {
         c.insets = new Insets(10, 5, 10, 5);
         // check how many needed card
         int neededCard = player.getRemainingHand();
-        neededCard = 0;
 
         c.gridx = 0;
         c.gridy = 0;
