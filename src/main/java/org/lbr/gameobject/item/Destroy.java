@@ -19,10 +19,7 @@ public class Destroy extends Item {
 
 
     @Override
-    public void runEffect(Cultivable cultivable) {
-//        if (!cultivable.getIsProtected()){
-//            cultivable.addActiveItem(this);
-//            cultivable = null;
-//        }
+    public void runEffect(Cultivable cultivable) throws Exception {
+        cultivable.destroy();
     }
 }

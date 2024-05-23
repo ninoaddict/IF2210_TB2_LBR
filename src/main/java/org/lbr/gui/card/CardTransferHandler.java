@@ -4,6 +4,8 @@ import org.lbr.GameEngine;
 import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Animal;
+import org.lbr.gameobject.item.Destroy;
+import org.lbr.gameobject.item.InstantHarvest;
 import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 import org.lbr.gui.MainWindow;
@@ -119,13 +121,13 @@ public class CardTransferHandler extends TransferHandler {
             }
             
             if (sourceCard.getCurrentPosition() == Card.DECK && targetCard.getCurrentPosition() == Card.FIELD) {
-            	if (sourceCard.getGameObject() instanceof Product product || sourceCard.getGameObject() instanceof Item item) {
+            	if (sourceCard.getGameObject() instanceof Product || sourceCard.getGameObject() instanceof Item ) {
             		if (targetCard.getGameObject() == null) {
             			return false;
             		}
             		System.out.println("DEBUG1");
-            		if (sourceCard.getGameObject() instanceof Product product) {
-            			if (!(targetCard.getGameObject() instanceof Animal animal)) {
+            		if (sourceCard.getGameObject() instanceof Product) {
+            			if (!(targetCard.getGameObject() instanceof Animal)) {
             				return false;
             			}
             			boolean canDrop = ((MainWindow)(sourceCard.getParent().getParent().getParent())).productDrop(targetCard.getOwner(), (Product) sourceCard.getGameObject(), (Animal) targetCard.getGameObject(), sourceCard.getCol());
@@ -136,15 +138,26 @@ public class CardTransferHandler extends TransferHandler {
                         targetCard.setGameObject(targetCard.getGameObject());
             			return true;
             		} else {
-            			boolean canDrop = ((MainWindow)(sourceCard.getParent().getParent().getParent())).itemDrop(targetCard.getOwner(), (Item) sourceCard.getGameObject(), (Cultivable) targetCard.getGameObject(), sourceCard.getCol());
+                        GameObject srcGameObject = sourceCard.getGameObject();
+            			boolean canDrop = ((MainWindow)(sourceCard.getParent().getParent().getParent())).itemDrop(targetCard.getOwner(), (Item) sourceCard.getGameObject(), (Cultivable) targetCard.getGameObject(), sourceCard.getCol(), targetCard.getRow(), targetCard.getCol());
             			System.out.println("THING: " + Integer.toString(targetCard.getOwner().getGulden()));
             			if (!canDrop) {
             				System.out.println("CANDROPFALSE");
             				return false;
             			}
-            			sourceCard.setGameObject(null);
-                        targetCard.setGameObject(targetCard.getGameObject());
-            			return true;
+                        System.out.println("MASUK ITEM DROP");
+                        if (srcGameObject instanceof InstantHarvest) {
+                            System.out.println("INSTANT HARVEST");
+                            targetCard.setGameObject(null);
+                        } else if (srcGameObject instanceof Destroy) {
+                            targetCard.setGameObject(null);
+                            sourceCard.setGameObject(null);
+                        } else {
+                            sourceCard.setGameObject(null);
+                            targetCard.setGameObject(targetCard.getGameObject());
+                        }
+
+                        return true;
             		}
             	} else {
             		if (targetCard.getGameObject() != null ) {

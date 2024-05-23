@@ -18,7 +18,7 @@ public class ShuffleDialog extends JFrame {
     private final ArrayList<Card> cardList;
     private final int needed;
 
-    public ShuffleDialog(Player player, MainWindow frame) {
+    public ShuffleDialog(Player player, MainWindow frame, MainFrame mainFrame) {
         this.player = player;
         this.frame = frame;
         this.setUndecorated(true);
@@ -121,6 +121,7 @@ public class ShuffleDialog extends JFrame {
                         // TODO: handle
                     }
                 }
+                mainFrame.setEnabled(true);
                 this.dispose();
                 frame.considerBearAttack();
             });
@@ -144,6 +145,7 @@ public class ShuffleDialog extends JFrame {
             Image image = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             confirmButton.setIcon(new ImageIcon(image));
             confirmButton.addActionListener(e -> {
+                mainFrame.setEnabled(true);
                 this.dispose();
                 frame.considerBearAttack();
             });

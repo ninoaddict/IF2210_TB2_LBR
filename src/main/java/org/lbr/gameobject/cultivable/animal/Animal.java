@@ -23,7 +23,7 @@ public abstract class Animal extends Cultivable {
     }
 
     public Animal(Animal other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), new Product(other.product));
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), new Product(other.getProduct()));
         this.weight_to_ready = other.getWeightToReady();
         this.weight = other.getWeight();
     }
@@ -70,38 +70,22 @@ public abstract class Animal extends Cultivable {
         setWeight(this.getWeight() - reducedWeight);
     }
 
-    public void accelerate() {
-        try {
-            this.addWeight(8);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void accelerate() throws Exception{
+        this.addWeight(8);
     }
 
-    public void delay() {
-        try {
-        	int u = 5;
-        	if (getWeight() < 5) u = getWeight();
+    public void delay()  throws  Exception{
+        if (!getIsProtected()){
+            int u = 5 ;
+            if (u > getWeight()) u = getWeight();
             this.reduceWeight(u);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } else {
+            throw new Exception("Animal is protected!");
         }
     }
 
-    public void protect() {
-        try {
-            this.enableProtect();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    @Override
+    public void instantHarvest() throws Exception{
+        setWeight(weight_to_ready);
     }
-
-    public void trap() {
-        try {
-            this.enableTrap();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 }
