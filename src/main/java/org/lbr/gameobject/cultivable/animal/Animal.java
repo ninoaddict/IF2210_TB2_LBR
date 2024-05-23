@@ -36,6 +36,7 @@ public abstract class Animal extends Cultivable {
     public abstract void eat(Product p) throws Exception;
 
     // getter
+    @Override
     public boolean isReady() {
         return weight >= weight_to_ready;
     }
