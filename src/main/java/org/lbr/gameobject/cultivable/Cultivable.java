@@ -32,6 +32,8 @@ public abstract class Cultivable extends GameObject {
         this.product = product ;
     }
 
+    public abstract GameObject clone();
+
     // getter
     public boolean getIsProtected(){
         return is_protected;

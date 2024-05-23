@@ -1,5 +1,6 @@
 package org.lbr.gameobject.cultivable.animal;
 
+import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 
@@ -26,6 +27,11 @@ public class Herbivore extends Animal {
 
     public Herbivore (Herbivore other){
         super(other);
+    }
+
+    @Override
+    public GameObject clone(){
+        return new Herbivore(this);
     }
 
     public Herbivore(String name){

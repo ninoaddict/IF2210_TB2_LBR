@@ -1,5 +1,6 @@
 package org.lbr.gameobject.cultivable.plant;
 
+import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 import org.lbr.gameobject.cultivable.Cultivable;
@@ -35,6 +36,11 @@ public class Plant extends Cultivable {
         super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), other.getProduct());
         this.age_to_ready = other.getAgeToReady();
         this.age = other.getAge();
+    }
+
+    @Override
+    public GameObject clone(){
+        return new Plant(this);
     }
 
     public Plant(String name){
@@ -88,7 +94,7 @@ public class Plant extends Cultivable {
 
     public void delay() {
         try {
-            this.reduceAge(2);
+            this.reduceAge(Math.min(2, getAge()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

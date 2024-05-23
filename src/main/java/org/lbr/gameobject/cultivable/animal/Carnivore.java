@@ -1,5 +1,6 @@
 package org.lbr.gameobject.cultivable.animal;
 
+import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 
@@ -18,12 +19,17 @@ public class Carnivore extends Animal {
         super(name,weight_to_ready, imageUrlPath, product);
     }
 
-    public Carnivore(String name, int weight_to_ready, int weight, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath, boolean is_active) {
+    public Carnivore(String name, int weight_to_ready, int weight, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {
         super(name, weight_to_ready, weight, product, is_protected, is_trap, activeItems, imageUrlPath);
     }
 
     public Carnivore (Carnivore other){
         super(other);
+    }
+
+    @Override
+    public GameObject clone(){
+        return new Carnivore(this);
     }
 
     public Carnivore (String name){

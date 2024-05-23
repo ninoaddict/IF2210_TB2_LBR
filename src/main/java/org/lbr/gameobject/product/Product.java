@@ -40,6 +40,11 @@ public class Product extends GameObject  {
     public Product(String name) {
         this(productMap.get(name));
     }
+
+    @Override
+    public GameObject clone(){
+        return new Product(this);
+    }
    
 
     // getter

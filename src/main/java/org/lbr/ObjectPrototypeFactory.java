@@ -54,6 +54,10 @@ public class ObjectFactory {
         return CARD_KEYS.get(name);
     }
 
+    public static GameObject constructObject(String name){
+        return getGameObject(name).clone();
+    }
+
     // method
     public ArrayList<GameObject> getShuffleCards() {
         ArrayList<GameObject> gameObjects = new ArrayList<>();

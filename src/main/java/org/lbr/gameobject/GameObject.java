@@ -2,7 +2,7 @@ package org.lbr.gameobject;
 
 import org.lbr.gui.card.Card;
 
-public abstract class GameObject {
+public abstract class GameObject  implements  Prototype{
     private String name;
     private String imgUrlPath;
     private Card parent;
@@ -12,6 +12,9 @@ public abstract class GameObject {
         this.imgUrlPath = imgUrlPath;
         this.parent = null;
     }
+
+    @Override
+    public abstract GameObject clone();
 
     public String getImgUrlPath() {
         return imgUrlPath;

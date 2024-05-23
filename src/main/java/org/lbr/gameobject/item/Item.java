@@ -9,5 +9,8 @@ public abstract class Item extends GameObject implements Affecting{
     }
 
     @Override
+    public abstract GameObject clone();
+
+    @Override
     public abstract void runEffect(Cultivable cultivable) throws Exception;
 }

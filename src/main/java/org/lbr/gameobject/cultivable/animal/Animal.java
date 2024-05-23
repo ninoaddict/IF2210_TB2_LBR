@@ -1,5 +1,6 @@
 package org.lbr.gameobject.cultivable.animal;
 
+import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 import org.lbr.gameobject.cultivable.Cultivable;
@@ -26,6 +27,9 @@ public abstract class Animal extends Cultivable {
         this.weight_to_ready = other.getWeightToReady();
         this.weight = other.getWeight();
     }
+
+    @Override
+    public abstract GameObject clone();
 
     // abstract class
     public abstract void eat(Product p) throws Exception;
@@ -75,7 +79,7 @@ public abstract class Animal extends Cultivable {
 
     public void delay() {
         try {
-            this.reduceWeight(5);
+            this.reduceWeight(Math.min(5, getWeight()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
