@@ -379,7 +379,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel();
 
-        panel_bawah.add(new Card(null, null, 4, 0, Card.DECK, true), gridBagConstraints);
+        panel_bawah.add(new Card(new Herbivore("SAPI"), null, 4, 0, Card.DECK, true), gridBagConstraints);
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         for(int i = 1; i < 6; i++) {
         	gridBagConstraints.gridx = i;

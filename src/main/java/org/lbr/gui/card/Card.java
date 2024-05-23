@@ -2,6 +2,7 @@ package org.lbr.gui.card;
 
 import org.lbr.gameobject.GameObject;
 import org.lbr.gui.MainWindow;
+import org.lbr.gui.ObjectInfoDialog;
 import org.lbr.gui.ShuffleDialog;
 import org.lbr.player.Player;
 import org.lbr.shop.Shop;
@@ -97,8 +98,10 @@ public class Card extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 Card comp = (Card) e.getSource();
                 if (comp.getGameObject() != null) {
-                    JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
-                            "Pop up", JOptionPane.INFORMATION_MESSAGE);
+//                    JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
+//                            "Pop up", JOptionPane.INFORMATION_MESSAGE);
+                    ObjectInfoDialog info = new ObjectInfoDialog(comp);
+                    info.setVisible(true);
                 } else {
                     ShuffleDialog sd = new ShuffleDialog(owner, comp);
                     sd.setVisible(true);
@@ -188,8 +191,10 @@ public class Card extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 Card comp = (Card) e.getSource();
                 if (comp.getGameObject() != null) {
-                    JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
-                            "Pop up", JOptionPane.INFORMATION_MESSAGE);
+//                    JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
+//                            "Pop up", JOptionPane.INFORMATION_MESSAGE);
+                    ObjectInfoDialog info = new ObjectInfoDialog(comp);
+                    info.setVisible(true);
                 } else {
 //                    ShuffleDialog sd = new ShuffleDialog(owner, comp);
 //                    sd.setVisible(true);

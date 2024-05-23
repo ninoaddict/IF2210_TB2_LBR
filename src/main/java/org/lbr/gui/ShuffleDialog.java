@@ -7,7 +7,8 @@ import org.lbr.gui.card.Card;
 import org.lbr.player.Player;
 
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ShuffleDialog extends JFrame {
     private Player player;
@@ -18,15 +19,12 @@ public class ShuffleDialog extends JFrame {
         this.setUndecorated(true);
 //        this.setBackground(Color.WHITE);
         this.setSize(new Dimension(300, 400));
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(frame.getParent().getParent().getParent());
         this.setOpacity((float)0.9);
 
-        roundedPanel = new CustomPanel();
-        roundedPanel.setBackground(new Color(230, 230, 230));
-        roundedPanel.setLayout(new GridBagLayout());
-        roundedPanel.setPreferredSize(new Dimension(300, 400));
-        roundedPanel.setOpaque(false);
+        roundedPanel = new DialogPanel(300, 400, new Color(230, 230, 230), new GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();
 
@@ -40,7 +38,6 @@ public class ShuffleDialog extends JFrame {
                 roundedPanel.add(card, c);
             }
         }
-
         c.gridx = 0;
         c.gridy = 2;
         JButton shuffleButton = new JButton();
@@ -62,25 +59,11 @@ public class ShuffleDialog extends JFrame {
         icon = new ImageIcon(this.getClass().getResource("/images/check-mark.png"));
         image = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         confirmButton.setIcon(new ImageIcon(image));
+        confirmButton.addActionListener(e -> {
+            this.dispose();
+        });
         roundedPanel.add(confirmButton, c);
 
         this.add(roundedPanel);
-    }
-}
-
-class CustomPanel extends JPanel{
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Dimension arcs = new Dimension(16, 16);
-        int width = 300;
-        int height = 400;
-        Graphics2D graphics = (Graphics2D) g;
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setColor(new Color(230, 230, 230));
-        graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
-        graphics.setColor(getForeground());
-        graphics.setStroke(new BasicStroke(1.5f));
-        graphics.drawRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
     }
 }
