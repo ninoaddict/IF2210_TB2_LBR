@@ -94,11 +94,7 @@ public class GameEngine {
     }
 
     public void nextTurn() {
-        currTurn++;
-        if (currTurn >= 20) {
-            winner = getWinner();
-        }
-        run();
+    	currTurn++;
     }
 
     public Player getCurrPlayer() {
@@ -178,7 +174,7 @@ public class GameEngine {
     }
 
     public void run() {
-        defaultSetup();
+        //defaultSetup();
         while (currTurn < 20) {
             ArrayList<GameObject> shuffles = getShuffleCards();
             // ADD TO CURRENT PLAYER

@@ -1,9 +1,7 @@
 package org.lbr.gameobject.cultivable.animal;
-
 import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 import org.lbr.gameobject.cultivable.Cultivable;
-
 import java.util.ArrayList;
 
 public abstract class Animal extends Cultivable {
@@ -92,7 +90,9 @@ public abstract class Animal extends Cultivable {
 
     public void delay() {
         try {
-            this.reduceWeight(5);
+        	int u = 5;
+        	if (getWeight() < u) u = getWeight();
+            this.reduceWeight(u);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

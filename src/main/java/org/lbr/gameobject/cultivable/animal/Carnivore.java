@@ -33,7 +33,7 @@ public class Carnivore extends Animal {
 
     @Override
     public void eat(Product p) throws Exception{
-        if(!p.getTypeObject().equals("animal_product")){
+        if(!p.getProductType().equals("animal product")){
             throw new Exception("Hewan ini hanya bisa makan-makanan dari hewan");
         }
         this.addWeight(p.getAddWeight());

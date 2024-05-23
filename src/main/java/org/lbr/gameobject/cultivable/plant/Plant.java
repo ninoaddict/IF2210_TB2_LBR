@@ -95,7 +95,9 @@ public class Plant extends Cultivable {
 
     public void delay() {
         try {
-            this.reduceAge(2);
+        	int u = 2;
+        	if (getAge() < u) u = getAge();
+            this.reduceAge(u);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
