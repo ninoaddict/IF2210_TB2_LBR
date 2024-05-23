@@ -2,6 +2,7 @@ package org.lbr.player;
 
 import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
+import org.lbr.gameobject.cultivable.animal.Carnivore;
 import org.lbr.gameobject.product.Product;
 import org.lbr.shop.Shop;
 
@@ -14,19 +15,22 @@ public class Player {
     private int deck_remaining;
     private ArrayList<GameObject> hand_deck;
 
-    public Player(ArrayList<GameObject> hand_deck) {
+    public Player() {
         this.gulden = 1000;
         this.field = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Cultivable> row = new ArrayList<>(5);
-            for(int j = 0; j < 5; j++) {
-            	row.add(null);
+            for (int j = 0; j < 5; j++) {
+                row.add(null);
             }
             this.field.add(row);
         }
 
+        this.hand_deck = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            this.hand_deck.add(null);
+        }
         this.deck_remaining = 40 ;
-        this.hand_deck = hand_deck;
     }
 
     public Player(int gulden, ArrayList<ArrayList<Cultivable>> field, int deck_remaining, ArrayList<GameObject> hand_deck){
@@ -50,7 +54,7 @@ public class Player {
     }
 
     public GameObject getHandIdx(int idx){
-        return  hand_deck.get(idx);
+        return hand_deck.get(idx);
     }
 
     public Product getCoorProduct(int row, int col) {
@@ -76,7 +80,7 @@ public class Player {
 
     public void setCultivable(Cultivable cultivable, int row, int col) throws  Exception{
         if (row < 0 || row > 4 || col < 0 || col > 5 ){
-            throw  new Exception("Index out of range");
+            throw new Exception("Index out of range");
         } else {
             field.get(row).set(col, cultivable);
         }
@@ -89,14 +93,17 @@ public class Player {
     public void setHandIdx(GameObject object, int idx) throws  Exception {
 
         hand_deck.set(idx, object);
-
     }
 
-    public void addToHandDeck(GameObject object) {
-        if (isHandDeckFull()){
-            System.out.println("HAND DECK IS FULL! THE CARD IS DELETED");
+    public int addToHandDeck(GameObject object) throws Exception{
+        // First fit algorithm
+        for (int i = 0; i < 6; i++) {
+            if (isHandIdxEmpty(i)) {
+                setHandIdx(object, i);
+                return i;
+            }
         }
-        this.hand_deck.add(object);
+        throw new Exception("Hand deck is full");
     }
 
     public void removeHandDeck(int idx) {
@@ -110,16 +117,15 @@ public class Player {
     public void setHand_deck(ArrayList<GameObject> hand_deck) {
         this.hand_deck = hand_deck;
     }
-    
+
     public void swap_deck(int idx_from, int idx_to) {
     	Collections.swap(hand_deck, idx_from, idx_to);
     }
-    
+
     public void swap_field(int row_from, int col_from, int row_to, int col_to) {
     	Cultivable tempCultivable = field.get(row_from).get(col_from);
     	field.get(row_from).set(col_from, field.get(row_to).get(col_to));
     	field.get(row_to).set(col_from, tempCultivable);
-    	System.out.println("GOODFORYOU");
     }
 
     // method
@@ -156,7 +162,7 @@ public class Player {
         return !isFieldCellEmpty(row,col) && getCultivable(row, col).getIsTrap();
     }
 
-    public boolean addCultivable(Cultivable cultivable) throws Exception {
+    public void addCultivable(Cultivable cultivable) throws Exception {
         boolean added = false;
         int i = 0;
         while ((i < 4) && !added) {
@@ -166,19 +172,21 @@ public class Player {
                     setCultivable(cultivable, i, j);
                     added = true;
                 }
+                j++;
             }
+            i++;
         }
-        return added;
+        throw new Exception("Failed to add cultivable");
     }
-    
+
     public void from_deck_to_field(int fromCol, int toRow, int toCol) throws Exception {
-    	System.out.println("DECK TO FIELD");
+    	System.out.println("Deck to field");
     	Cultivable tempCultivable = field.get(toRow).get(toCol);
     	field.get(toRow).set(toCol, (Cultivable) hand_deck.get(fromCol));
     	setHandIdx(tempCultivable, fromCol);
     }
 
-    public void harvest(int row, int col, int idx) throws Exception {
+    public void harvest(int row, int col) throws Exception {
         if (isFieldCellEmpty(row, col)) {
             throw new Exception("Can't harvest empty cell");
         }
@@ -186,33 +194,24 @@ public class Player {
             throw new Exception("Hand deck is full :(");
         }
 
-        setHandIdx(getCoorProduct(row, col), idx);
+        addToHandDeck(getCoorProduct(row, col));
         setNullField(row, col);
     }
 
     public void buy(Product product, Shop shop, int idx) throws Exception {
-    	System.out.println("DUMMY CARD");
         if (isHandDeckFull()){
             throw new Exception("Hand deck is full ");
         }
-        
-        System.out.println("GROKKKK");
 
         if (this.gulden < product.getPrice()){
             throw  new Exception("Gulden insufficient!");
         }
         shop.reduceProduct(product);
-        System.out.println("Z");
-        System.out.println(idx);
         setHandIdx(product, idx);
-        System.out.println("A");
         reduceGulden(product.getPrice());
-        System.out.println("DIKALI");
-        System.out.println("GROKK@");
     }
 
     public void sell(int idx, Shop shop) throws Exception {
-    	System.out.println("Selling idx: " + Integer.toString(idx));
         GameObject gameObject = getHandIdx(idx);
         if (!(gameObject instanceof Product product)){
             throw new Exception("Can only sell product");

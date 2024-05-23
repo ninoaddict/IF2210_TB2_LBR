@@ -10,24 +10,21 @@ public abstract class Animal extends Cultivable {
     private final int weight_to_ready;
     private int weight;
 
-    public Animal(String name, int weight_to_ready_, Product product_, String imageUrlPath) {
-        super(name, imageUrlPath);
+    public Animal(String name, int weight_to_ready_, String imageUrlPath, Product product) {
+        super(name, imageUrlPath, product);
         this.weight_to_ready = weight_to_ready_;
         this.weight = 0;
-        this.product = product_;
     }
     public Animal(String name, int weight_to_ready_, int weight_, Product product_, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {
-        super(name,is_protected,is_trap,activeItems, imageUrlPath);
+        super(name,is_protected,is_trap,activeItems, imageUrlPath, product_);
         this.weight_to_ready = weight_to_ready_;
         this.weight = weight_;
-        this.product = product_;
     }
 
     public Animal(Animal other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath());
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), other.product);
         this.weight_to_ready = other.getWeightToReady();
         this.weight = other.getWeight();
-        this.product = other.product ;
     }
 
     // abstract class
@@ -46,16 +43,6 @@ public abstract class Animal extends Cultivable {
         return weight;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public boolean getProtectedStatus() {
-        return is_protected;
-    }
-
-    public boolean getTrapStatus() { return is_trap; }
-
     @Override
     public String toString() {
         return super.toString()+ "\nWeight: "+ getWeightToReady() + "\nWeight: " + getWeight() + "\nProduct: " + getProduct().getName() + "\nReady: " + isReady();
@@ -68,10 +55,6 @@ public abstract class Animal extends Cultivable {
         }
         weight = newWeight;
 
-    }
-
-    public void setProducts(Product newProduct) {
-        product = newProduct;
     }
 
     public void addWeight(int addedWeight) throws Exception {

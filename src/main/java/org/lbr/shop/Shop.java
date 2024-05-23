@@ -5,13 +5,28 @@ import org.lbr.gameobject.product.Product;
 import java.util.Map;
 
 public class Shop {
+    private static Shop instance ;
     private Map<Product, Integer> products;
 
-    public Shop(Map<Product, Integer> products) {
+    private Shop(Map<Product, Integer> products) {
         this.products = products;
     }
 
     // getter
+    public static Shop getInstance(Map<Product, Integer> products) {
+        if (instance == null){
+            instance = new Shop(products);
+        }
+        return  instance;
+    }
+
+    public static Shop getInstance() {
+        if (instance == null){
+            instance = new Shop(null);
+        }
+        return  instance;
+    }
+
     public Map<Product, Integer> getProducts() {
         return products;
     }

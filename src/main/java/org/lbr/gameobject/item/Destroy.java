@@ -9,7 +9,7 @@ public class Destroy extends Item {
 
     @Override
     public void runEffect(Cultivable c) {
-        c = null;
-        System.gc();
+//        c.setIs_active(false);
+        System.out.println("Destroy");
     }
 }

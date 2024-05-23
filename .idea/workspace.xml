@@ -1,16 +1,29 @@
-i<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87750fff-8301-4d7f-a5fd-d6230a6d8c90" name="Changes" comment="&quot;Feat: Cultivable, GameObject, and Product&quot;">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/DialogPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/ObjectInfoDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/lbr/ObjectFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/Affecting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/ShuffleDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/ShuffleDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/card/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/BearAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/BearAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/Cultivable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/Cultivable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/animal/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/animal/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/animal/Carnivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/animal/Carnivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/animal/Herbivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/animal/Herbivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/animal/Omnivore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/animal/Omnivore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/plant/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/plant/Plant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/Delay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/Delay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/Destroy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/Destroy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/InstantHarvest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/InstantHarvest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/item/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/shop/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/shop/Shop.java" afterDir="false" />
     </list>
     <list id="b124778a-b2e1-487c-8e83-7f51fc9a40b8" name="Changes by adril" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +75,7 @@ i<?xml version="1.0" encoding="UTF-8"?>
     "Application.Main.executor": "Run",
     "Application.MainFrame.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feat/gui",
+    "git-widget-placeholder": "Merging feat/gui",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/adril/ITB Files/Semester IV/OOP/tubes/IF2210_TB2_LBR/src/main/resources/images",
     "node.js.detected.package.eslint": "true",

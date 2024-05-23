@@ -20,24 +20,21 @@ public class Plant extends Cultivable {
     }
 
     public Plant(String name, int age_to_ready_, Product product, String imageUrlPath) {
-        super(name, imageUrlPath);
+        super(name, imageUrlPath, product);
         this.age_to_ready = age_to_ready_;
         this.age = 0 ;
-        this.product = product;
     }
 
     public Plant(String name, int age_to_ready_, int age_, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {
-        super(name, is_protected, is_trap, activeItems, imageUrlPath);
+        super(name, is_protected, is_trap, activeItems, imageUrlPath, product);
         this.age_to_ready = age_to_ready_;
-        this.product = product;
         this.age = age_ ;
     }
 
     public Plant(Plant other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath());
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), other.getProduct());
         this.age_to_ready = other.getAgeToReady();
         this.age = other.getAge();
-        this.product = other.product ;
     }
 
     public Plant(String name){
@@ -70,10 +67,6 @@ public class Plant extends Cultivable {
         }
 
         age = newAge;
-    }
-
-    public void setProducts(Product newProduct) {
-        product = newProduct;
     }
 
     //

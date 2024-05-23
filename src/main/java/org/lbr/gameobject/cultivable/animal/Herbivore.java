@@ -17,7 +17,7 @@ public class Herbivore extends Animal {
     }
 
     public Herbivore(String name, int weight_to_ready, Product product, String imageUrlPath){
-        super(name,weight_to_ready,product, imageUrlPath);
+        super(name,weight_to_ready, imageUrlPath, product);
     }
 
     public Herbivore(String name, int weight_to_ready, int weight, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {

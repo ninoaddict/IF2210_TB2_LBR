@@ -12,5 +12,4 @@ public class Delay extends Item {
         cultivable.addActiveItem(this);
         cultivable.delay();
     }
-
 }

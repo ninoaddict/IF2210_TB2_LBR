@@ -12,15 +12,6 @@ public class BearAttack {
     private int y2;
     private Player poorGuy;
 
-//    public BearAttack(int duration, int x1, int y1, int x2, int y2,  Player player) {
-//        this.duration = duration;
-//        this.x1 = x1;
-//        this.x2 = x2;
-//        this.y1 = y1;
-//        this.y2 = y2;
-//        this.poorGuy = player;
-//    }
-
     public BearAttack(Player player){
         Random rand = new Random();
         this.x1 = rand.nextInt(5);
@@ -122,7 +113,7 @@ public class BearAttack {
                 for (int l = y1; l < y2; l++) {
                     if (!poorGuy.isFieldCellProtected(k, l)) {
                         try {
-                            poorGuy.setNullField(k, l);
+//                            poorGuy.inactiveCell(k, l);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -131,7 +122,11 @@ public class BearAttack {
             }
         } else {
             Omnivore bear = new Omnivore("BERUANG");
-            poorGuy.addToHandDeck(bear);
+            try {
+                poorGuy.addToHandDeck(bear);
+            } catch (Exception e) {
+                // TODO: HANDLE EXCEPTION
+            }
         }
     }
 

@@ -15,10 +15,18 @@ public class Omnivore extends Animal {
     }
 
     public Omnivore(String name, int weight_to_ready, Product product, String imageUrlPath){
-        super(name,weight_to_ready,product, imageUrlPath);
+        super(name,weight_to_ready,imageUrlPath, product);
     }
 
-    public Omnivore(String name, int weight_to_ready, int weight, Product product, boolean is_protected, boolean is_trap, ArrayList<Item> activeItems, String imageUrlPath) {
+    public Omnivore(String name,
+                    int weight_to_ready,
+                    int weight,
+                    Product product,
+                    boolean is_protected,
+                    boolean is_trap,
+                    ArrayList<Item> activeItems,
+                    String imageUrlPath,
+                    boolean is_active) {
         super(name, weight_to_ready, weight, product, is_protected, is_trap, activeItems, imageUrlPath);
     }
 

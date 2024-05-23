@@ -5,7 +5,7 @@ import org.lbr.gameobject.GameObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Product extends GameObject {
+public class Product extends GameObject  {
     private String product_type;
     private int add_weight;
     private int price ;
@@ -73,4 +73,5 @@ public class Product extends GameObject {
     public void setPrice(int price) {
         this.price = price;
     }
+
 }
