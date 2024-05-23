@@ -19,8 +19,10 @@ public class Destroy extends Item {
 
 
     @Override
-    public void runEffect(Cultivable c) {
-//        c.setIs_active(false);
-        System.out.println("Destroy");
+    public void runEffect(Cultivable cultivable) {
+//        if (!cultivable.getIsProtected()){
+//            cultivable.addActiveItem(this);
+//            cultivable = null;
+//        }
     }
 }
