@@ -48,6 +48,7 @@ public class Plant extends Cultivable {
     }
 
     // getter
+    @Override
     public boolean isReady() {
         return age >= age_to_ready;
     }

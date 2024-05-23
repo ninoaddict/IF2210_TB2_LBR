@@ -74,6 +74,8 @@ public abstract class Cultivable extends GameObject {
     }
 
     // effects
+    public abstract boolean isReady();
+
     public abstract void accelerate();
 
     public abstract void delay();

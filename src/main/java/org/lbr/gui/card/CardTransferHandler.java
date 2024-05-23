@@ -116,6 +116,7 @@ public class CardTransferHandler extends TransferHandler {
             				return false;
             			}
             			sourceCard.setGameObject(null);
+                        targetCard.setGameObject(targetCard.getGameObject());
             			return true;
             		} else {
             			boolean canDrop = ((MainWindow)(sourceCard.getParent().getParent().getParent())).itemDrop(targetCard.getOwner(), (Item) sourceCard.getGameObject(), (Cultivable) targetCard.getGameObject(), sourceCard.getCol());

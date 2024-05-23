@@ -1,6 +1,7 @@
 package org.lbr.gui.card;
 
 import org.lbr.gameobject.GameObject;
+import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gui.MainWindow;
 import org.lbr.gui.ObjectInfoDialog;
 import org.lbr.gui.ShuffleDialog;
@@ -103,8 +104,8 @@ public class Card extends JPanel {
                         info.setVisible(true);
                     }
                 } else {
-                    ShuffleDialog sd = new ShuffleDialog(comp.getOwner(), comp);
-                    sd.setVisible(true);
+//                    ShuffleDialog sd = new ShuffleDialog(comp.getOwner(), comp);
+//                    sd.setVisible(true);
                 }
             }
         });
@@ -224,6 +225,9 @@ public class Card extends JPanel {
     public void updateCardDisplay() {
         if (gameObject != null) {
             ImageIcon icon = new ImageIcon(this.getClass().getResource(gameObject.getImgUrlPath()));
+            if (gameObject instanceof Cultivable && ((Cultivable) gameObject).isReady()) {
+                icon = new ImageIcon(this.getClass().getResource(((Cultivable) gameObject).getProduct().getImgUrlPath()));
+            }
             Image image = icon.getImage().getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
             label.setIcon(new ImageIcon(image));
             label.setHorizontalAlignment(JLabel.CENTER);

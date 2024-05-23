@@ -34,11 +34,14 @@ public class ObjectInfoDialog extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = 0;
         gbc.gridx = 0;
-        gbc.gridheight = 6;
+        gbc.gridheight = 7;
         gbc.weightx = 1;
         gbc.anchor = GridBagConstraints.CENTER;
         JLabel imageLabel = new JLabel();
         ImageIcon icon = new ImageIcon(this.getClass().getResource(gameObject.getImgUrlPath()));
+        if (gameObject instanceof Cultivable && ((Cultivable) gameObject).isReady()) {
+            icon = new ImageIcon(this.getClass().getResource(((Cultivable) gameObject).getProduct().getImgUrlPath()));
+        }
         Image image = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(image));
         roundedPanel.add(imageLabel, gbc);
@@ -110,6 +113,11 @@ public class ObjectInfoDialog extends JFrame {
             button.addActionListener(e -> {
                 dispose();
             });
+
+            if (!cultivable.isReady()) {
+                button.setEnabled(false);
+            }
+
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -124,7 +132,6 @@ public class ObjectInfoDialog extends JFrame {
                 }
             });
             bottom.add(button, gbc);
-
             gbc.gridx = 1;
             gbc.insets = new Insets(0, 0, 0, 0);
             RoundedButton buttonClose = new RoundedButton("Close");

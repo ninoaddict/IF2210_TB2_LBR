@@ -206,7 +206,8 @@ public class MainWindow extends JPanel {
     private JPanel panel_atas;
     private JPanel panel_tengah;
     private JPanel panel_bawah;
-    private ArrayList<Card> card_list;
+    private ArrayList<Card> handPlayer1;
+    private ArrayList<Card> handPlayer2;
     private String shopString = "SHOP";
     private String fieldOneString = "FIELD1";
     private String fieldTwoString = "FIELD2";
@@ -219,6 +220,8 @@ public class MainWindow extends JPanel {
         try {
         	gameEngine = ge;
             curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
+            handPlayer1 = new ArrayList<>();
+            handPlayer2 = new ArrayList<>();
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -367,8 +370,6 @@ public class MainWindow extends JPanel {
             }
         }
 
-
-
         card_grid_panel.add(fieldOneString, real_card_gridJPanel);
 
         card_grid_panel.add(fieldTwoString, player_two_fieldJPanel);
@@ -399,9 +400,6 @@ public class MainWindow extends JPanel {
             }
         }
 
-
-
-
         panel_bawah.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.WHITE));
 
         CardLayout deckCardLayout = new CardLayout();
@@ -427,21 +425,15 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel();
-        
-        Herbivore becauseOfYouHerbivore = new Herbivore("DOMBA");
-        Card whereittrulyliesCard = new Card(becauseOfYouHerbivore, gameEngine.getCurrPlayer(), 0, 0, Card.DECK, true);
-        Card whereituwuCard = new Card(new Carnivore("HIU_DARAT"), gameEngine.getCurrPlayer(), 0, 1, Card.DECK, true);
-        Card whereitReallyLiesCard = new Card(new Delay(), gameEngine.getCurrPlayer(), 0, 1, Card.DECK, true);
-        first_deck_playerJPanel.add(whereittrulyliesCard, gridBagConstraints);
-        gridBagConstraints.insets = new Insets(7, 7, 7, 7);
-        gridBagConstraints.gridx = 1;
-        first_deck_playerJPanel.add(whereituwuCard, gridBagConstraints);
-        gridBagConstraints.gridx = 2;
-        first_deck_playerJPanel.add(whereitReallyLiesCard, gridBagConstraints);
-        for(int i = 3; i < 6; i++) {
+
+        for(int i = 0; i < 6; i++) {
         	gridBagConstraints.gridx = i;
             Card card = new Card(null, gameEngine.getCurrPlayer(), 0, i, Card.DECK, true);
             first_deck_playerJPanel.add(card, gridBagConstraints);
+            handPlayer1.add(card);
+            if (i == 0) {
+                gridBagConstraints.insets = new Insets(7, 7, 7, 7);
+            }
         }
 
 
@@ -456,14 +448,14 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         JLabel temp2 = new JLabel();
-        Card cardelCard = new Card(new Delay(), gameEngine.getPlayerAtIndex(1), 0, 0, Card.DECK, true);
-        second_deck_playerJPanel.add(cardelCard, gridBagConstraints);
-        for(int i = 1; i < 6; i++) {
-        	if (i == 0) gridBagConstraints.insets = new Insets(7, 27, 7, 7);
-        	else gridBagConstraints.insets = new Insets(7, 7, 7, 7);
+        for (int i = 0; i < 6; i++) {
         	gridBagConstraints.gridx = i;
             Card card = new Card(null, gameEngine.getPlayerAtIndex(1), 0, i, Card.DECK, true);
             second_deck_playerJPanel.add(card, gridBagConstraints);
+            handPlayer2.add(card);
+            if (i == 0) {
+                gridBagConstraints.insets = new Insets(7, 7, 7, 7);
+            }
         }
 
         gridBagConstraints.gridx = 6;
@@ -518,7 +510,6 @@ public class MainWindow extends JPanel {
 				roundButtons[0].setBackground(Color.green);
 				roundButtons[1].setBackground(Color.white);
 				roundButtons[2].setBackground(Color.white);
-				System.out.println(becauseOfYouHerbivore.getWeight());
 			}
 		});
 
@@ -600,7 +591,7 @@ public class MainWindow extends JPanel {
 				roundButtons[0].setBackground(Color.green);
 				roundButtons[1].setBackground(Color.white);
 				roundButtons[2].setBackground(Color.white);
-
+                start();
 			}
 		});
 
@@ -677,16 +668,6 @@ public class MainWindow extends JPanel {
         emptJPanel.setOpaque(false);
         panel_atas.add(emptJPanel, gridBagConstraints);
 		roundButtons[0].setBackground(Color.green);
-
-        try {
-        gameEngine.getCurrPlayer().setHandIdx(whereittrulyliesCard.getGameObject(), 0);
-        gameEngine.getCurrPlayer().setHandIdx(whereituwuCard.getGameObject(), 1);
-        gameEngine.getCurrPlayer().setHandIdx(whereitReallyLiesCard.getGameObject(), 2);
-
-        } catch (Exception e) {
-			// TODO: handle exception
-		}
-        //panel_atas.setLayout(new GridBagLayout());
         this.setVisible(true);
     }
 
@@ -731,6 +712,23 @@ public class MainWindow extends JPanel {
     
     public void swapField(int rowFrom, int colFrom, int rowTo, int colTo) {
     	gameEngine.getCurrPlayer().swap_field(rowFrom, colFrom, rowTo, colTo);
+    }
+
+    public void start() {
+        ShuffleDialog shuffle = new ShuffleDialog(gameEngine.getCurrPlayer(), this);
+        shuffle.setVisible(true);
+    }
+
+    public void updatePlayerHandDisplay() {
+        Player curr = gameEngine.getCurrPlayer();
+        int currTurn = gameEngine.getCurrTurn();
+        for (int i = 0; i < 6; i++) {
+            if (currTurn % 2 == 1) {
+                handPlayer1.get(i).setGameObject(curr.getHandIdx(i));
+            } else {
+                handPlayer2.get(i).setGameObject(curr.getHandIdx(i));
+            }
+        }
     }
 
     public boolean productDrop(Player cardOwner, Product dropProduct, Animal animal, int colDeck) {
