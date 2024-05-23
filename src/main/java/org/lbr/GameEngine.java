@@ -60,6 +60,11 @@ public class GameEngine {
 
     public void nextTurn() {
         currTurn++;
+        // handle player 1
+
+
+        // handle player 2
+        
     }
 
     public Player getCurrPlayer() {

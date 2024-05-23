@@ -112,7 +112,7 @@ public class ObjectInfoDialog extends JFrame {
             RoundedButton button = new RoundedButton("Panen");
             button.addActionListener(e -> {
                 try {
-                    parent.getOwner().addToHandDeck(parent.getGameObject());
+                    parent.getOwner().addToHandDeck(cultivable.getProduct());
                     MainWindow main = (MainWindow)parent.getParent().getParent().getParent().getParent();
                     main.updatePlayerHandDisplay();
                 } catch (Exception ee) {
