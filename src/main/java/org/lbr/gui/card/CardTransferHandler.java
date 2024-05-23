@@ -1,6 +1,7 @@
 package org.lbr.gui.card;
 
 import org.lbr.gameobject.GameObject;
+import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 import org.lbr.gui.MainWindow;
 
@@ -61,7 +62,7 @@ public class CardTransferHandler extends TransferHandler {
 	            	System.out.println(sourceGameObject.getName().toUpperCase().replace(' ', '_'));
 	            	Product product = new Product(sourceGameObject.getName().toUpperCase().replace(' ', '_'));
 	            	System.out.println("GOING");
-	            	((MainWindow)targetCard.getParent().getParent()).buyProduct(product);
+	            	((MainWindow)targetCard.getParent().getParent()).buyProduct(product, targetCard.getCol());
 	            	sourceCard.buyHappened(-1);
 	            	System.out.println("SAYANG");
 	            	System.out.println(product.getName());
@@ -77,17 +78,58 @@ public class CardTransferHandler extends TransferHandler {
             	if(sourceCard.getGameObject().getName() != targetCard.getGameObject().getName()) {
             		return false;
             	}
-            	sourceCard.setGameObject(null);
+            	Product product = new Product(targetCard.getGameObject().getName().toUpperCase().replace(' ', '_'));
+            	((MainWindow)sourceCard.getParent().getParent()).sellProduct(product, sourceCard.getCol());
             	targetCard.buyHappened(1);
+            	sourceCard.setGameObject(null);
             	return true;
             }
             if (sourceCard.getCurrentPosition() == Card.SHOP && targetCard.getCurrentPosition() == Card.SHOP) {
             	return false;
             }
+            
+            if (sourceCard.getCurrentPosition() == Card.DECK && targetCard.getCurrentPosition() == Card.DECK) {
+            	GameObject targetGameObject = targetCard.getGameObject();
+            	((MainWindow)sourceCard.getParent().getParent()).swapDeck(targetCard.getCol(), sourceCard.getCol());
+                targetCard.setGameObject(droppedGameObject);
+                sourceCard.setGameObject(targetGameObject);  // swapping objects
+                return true;
+            }
+            
+            if (sourceCard.getCurrentPosition() == Card.DECK && targetCard.getCurrentPosition() == Card.FIELD) {
+            	if (sourceCard.getGameObject() instanceof Product product || sourceCard.getGameObject() instanceof Item item) {
+            		if (targetCard.getGameObject() == null) {
+            			return false;
+            		}
+            	} else {
+            		if (targetCard.getGameObject() != null ) {
+            			return false;
+            		}
+                	GameObject targetGameObject = targetCard.getGameObject();
+            		((MainWindow)sourceCard.getParent().getParent()).from_deck_to_field(sourceCard.getCol(), targetCard.getRow(), targetCard.getCol());
 
+
+            		targetCard.setGameObject(droppedGameObject);
+                    sourceCard.setGameObject(targetGameObject); 
+                    System.out.println("YA");
+                    return true;
+            	}
+            }
+            
+            if (sourceCard.getCurrentPosition() == Card.FIELD && targetCard.getCurrentPosition() == Card.FIELD) {
+            	GameObject targetGameObject = targetCard.getGameObject();
+        		((MainWindow)sourceCard.getParent().getParent().getParent().getParent()).swapField(sourceCard.getRow(), sourceCard.getCol(), targetCard.getRow(), targetCard.getCol());
+
+
+        		targetCard.setGameObject(droppedGameObject);
+                sourceCard.setGameObject(targetGameObject); 
+                System.out.println("FIELD TO FIELD");
+                return true;
+            }
+            
             GameObject targetGameObject = targetCard.getGameObject();
             targetCard.setGameObject(droppedGameObject);
-            sourceCard.setGameObject(targetGameObject);  // Explicitly set to null
+            sourceCard.setGameObject(targetGameObject);
 
             return true;
         } catch (Exception e) {
