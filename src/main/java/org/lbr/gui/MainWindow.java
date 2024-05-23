@@ -304,9 +304,6 @@ public class MainWindow extends JPanel {
         gridBagConstraints.weightx = 0.25;
         gridBagConstraints.weighty = 1.0;
 
-
-
-
         real_card_gridJPanel.setLayout(new GridBagLayout());
 
         gridBagConstraints = new GridBagConstraints();
@@ -325,9 +322,6 @@ public class MainWindow extends JPanel {
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-
-        //inside_card_grid_panel.add(new DummyCard(), gridBagConstraints);
-
 
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 5; j++){
@@ -355,8 +349,6 @@ public class MainWindow extends JPanel {
         for(Product name_product: hMap.keySet()) {
         	productNameStrings.add(name_product.getName().toUpperCase().replace(' ', '_'));
         }
-
-        System.out.println(productNameStrings.size());
 
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){

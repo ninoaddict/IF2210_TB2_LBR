@@ -4,6 +4,7 @@ import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Animal;
 import org.lbr.gameobject.cultivable.plant.Plant;
+import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.item.Trap;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,8 @@ import org.lbr.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ObjectInfoDialog extends JFrame {
     private Card parent;
@@ -62,33 +65,51 @@ public class ObjectInfoDialog extends JFrame {
             }
             roundedPanel.add(age_or_weight, gbc);
 
+            ArrayList<Item> cult = cultivable.getActiveItems();
+            HashMap<String, Integer> mp = new HashMap<>();
+
+            for (int i = 0; i < cult.size(); i++) {
+                mp.put(cult.get(i).getName(), mp.getOrDefault(cult.get(i).getName(), 0) + 1);
+            }
             gbc.gridy++;
             JLabel accelerateLabel = new JLabel();
             accelerateLabel.setFont(new Font("Linux Libertine", 1, 16));
-            accelerateLabel.setText("Accelerate: 0");
+            accelerateLabel.setText("Accelerate: " + mp.getOrDefault("Accelerate", 0));
             roundedPanel.add(accelerateLabel, gbc);
 
             gbc.gridy++;
             JLabel delay = new JLabel();
             delay.setFont(new Font("Linux Libertine", 1, 16));
-            delay.setText("Delay: 0");
+            delay.setText("Delay: " + mp.getOrDefault("Delay", 0));
             roundedPanel.add(delay, gbc);
 
             gbc.gridy++;
             JLabel protect = new JLabel();
             protect.setFont(new Font("Linux Libertine", 1, 16));
-            protect.setText("Protect: 0");
+            protect.setText("Protect: " + mp.getOrDefault("Protect", 0));
             roundedPanel.add(protect, gbc);
 
             gbc.gridy++;
             JLabel trap = new JLabel();
             trap.setFont(new Font("Linux Libertine", 1, 16));
-            trap.setText("Trap: 0");
+            trap.setText("Trap: " + mp.getOrDefault("Trap", 0));
             trap.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
             roundedPanel.add(trap, gbc);
 
             gbc.gridy++;
+            JPanel bottom = new JPanel();
+            bottom.setLayout(new GridBagLayout());
+            roundedPanel.add(bottom, gbc);
+
+            gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(0, 0, 0, 10);
+
             RoundedButton button = new RoundedButton("Panen");
+            button.addActionListener(e -> {
+                dispose();
+            });
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -102,9 +123,14 @@ public class ObjectInfoDialog extends JFrame {
                     curr.setBackground(Color.LIGHT_GRAY);
                 }
             });
-            roundedPanel.add(button, gbc);
-            gbc.gridx = 2;
+            bottom.add(button, gbc);
+
+            gbc.gridx = 1;
+            gbc.insets = new Insets(0, 0, 0, 0);
             RoundedButton buttonClose = new RoundedButton("Close");
+            buttonClose.addActionListener(e -> {
+                dispose();
+            });
             buttonClose.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -118,14 +144,23 @@ public class ObjectInfoDialog extends JFrame {
                     curr.setBackground(Color.LIGHT_GRAY);
                 }
             });
-//            roundedPanel.add(buttonClose, gbc);
+            bottom.add(buttonClose, gbc);
         }
+    }
+
+    public ObjectInfoDialog getCurrent() {
+        return this;
+    }
+
+    public void closeWindow() {
+        dispose();
     }
 }
 
 class RoundedButton extends JButton {
     public RoundedButton(String label) {
         super(label);
+        this.setMargin(new Insets(3, 5, 3, 5));
         this.setBackground(Color.LIGHT_GRAY);
         this.setForeground(Color.BLACK);
         this.setText(label);
