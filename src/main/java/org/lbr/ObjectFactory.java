@@ -64,9 +64,8 @@ public class ObjectFactory {
         Random random = new Random();
         String[] keyArray = CARD_KEYS.keySet().stream().toArray(String[]::new);
         String key;
-        int u = 4;
-        if (needed < 4) u = needed;
-        for (int i = 0; i < u; i++) {
+
+        for (int i = 0; i < needed; i++) {
             int randomInt;
             do {
                 randomInt = random.nextInt(CARD_KEYS.size());

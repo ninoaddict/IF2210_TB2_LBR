@@ -60,11 +60,8 @@ public class GameEngine {
 
     public void nextTurn() {
         currTurn++;
-        // handle player 1
-
-
-        // handle player 2
-        
+        currPlayer[0].addAllPlantAge();
+        currPlayer[1].addAllPlantAge();
     }
 
     public Player getCurrPlayer() {
@@ -104,7 +101,7 @@ public class GameEngine {
             // ADD TO CURRENT PLAYER
             int bearAttackChance = (new Random()).nextInt(100) + 1;
             if (bearAttackChance <= 60) {
-                BearAttack.refresh(getCurrPlayer());
+                BearAttack.refresh();
                 Random random = new Random();
                 WaitParalelly( random.nextInt(31) + 30);
 //                BearAttack.execute();

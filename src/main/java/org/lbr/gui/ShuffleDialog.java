@@ -122,6 +122,7 @@ public class ShuffleDialog extends JFrame {
                     }
                 }
                 this.dispose();
+                frame.considerBearAttack();
             });
             roundedPanel.add(confirmButton, c);
 
@@ -144,6 +145,7 @@ public class ShuffleDialog extends JFrame {
             confirmButton.setIcon(new ImageIcon(image));
             confirmButton.addActionListener(e -> {
                 this.dispose();
+                frame.considerBearAttack();
             });
             roundedPanel.add(confirmButton, c);
         }

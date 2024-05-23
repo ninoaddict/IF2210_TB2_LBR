@@ -28,7 +28,7 @@ public abstract class Cultivable extends GameObject {
         super(name, imageUrlPath);
         this.is_protected = is_protected;
         this.is_trap = is_trap;
-        this.activeItems = activeItems;
+        this.activeItems = new ArrayList<>(activeItems);
         this.product = product ;
     }
 
@@ -57,7 +57,7 @@ public abstract class Cultivable extends GameObject {
     }
 
     public void enableTrap() {
-        this.is_protected = true;
+        this.is_trap = true;
     }
 
     public void setProducts(Product newProduct) {
