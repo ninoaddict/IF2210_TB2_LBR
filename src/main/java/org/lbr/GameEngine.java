@@ -60,11 +60,8 @@ public class GameEngine {
 
     public void nextTurn() {
         currTurn++;
-        // handle player 1
-
-
-        // handle player 2
-        
+        currPlayer[0].addAllPlantAge();
+        currPlayer[1].addAllPlantAge();
     }
 
     public Player getCurrPlayer() {

@@ -45,7 +45,7 @@ public class Load {
                 String[] temp = line.split(" ");
                 progress.add(Integer.parseInt(temp[2]));
                 ArrayList<String> tempList = new ArrayList<>();
-                Cultivable c = (Cultivable)ObjectFactory.getGameObject(temp[1]);
+                Cultivable c = (Cultivable) ObjectFactory.getGameObject(temp[1]);
                 for (int j = 0; j < Integer.parseInt(temp[3]); j++) {
                     tempList.add(temp[3+i]);
                     c.addActiveItem((Item) ObjectFactory.getGameObject(temp[3+i]));

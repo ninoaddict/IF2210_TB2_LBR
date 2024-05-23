@@ -3,6 +3,7 @@ package org.lbr.player;
 import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Carnivore;
+import org.lbr.gameobject.cultivable.plant.Plant;
 import org.lbr.gameobject.product.Product;
 import org.lbr.shop.Shop;
 
@@ -231,5 +232,23 @@ public class Player {
         removeHandDeck(idx);
         shop.addProduct(product);
         addGulden(product.getPrice());
+    }
+
+    public void addPlantAge(int row, int col){
+        if (getCultivable(row,col) instanceof Plant plant){
+            try {
+                plant.addAge(1);
+            } catch (Exception e){
+                System.out.println( e.getMessage());
+            }
+        }
+    }
+
+    public void addAllPlantAge(){
+        for (int i = 0; i < 4 ; i ++){
+            for (int j = 0; j < 5 ; j ++){
+                addPlantAge(i, j);
+            }
+        }
     }
 }

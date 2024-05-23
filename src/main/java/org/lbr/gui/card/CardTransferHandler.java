@@ -51,7 +51,7 @@ public class CardTransferHandler extends TransferHandler {
             if (sourceCard.equals(targetCard)) {
                 return false;
             }
-            System.out.println(sourceCard.getRow() + " " + sourceCard.getCol());
+            System.out.println("SOURCE: " + sourceCard.getCol() + " TARGET: " + targetCard.getCol());
 
             if (sourceCard.getCurrentPosition() == Card.FIELD && targetCard.getCurrentPosition() == Card.DECK) {
                 return false;
@@ -87,6 +87,7 @@ public class CardTransferHandler extends TransferHandler {
             	((MainWindow)sourceCard.getParent().getParent().getParent()).sellProduct(product, sourceCard.getCol());
             	targetCard.buyHappened(1);
             	sourceCard.setGameObject(null);
+//                ((MainWindow)sourceCard.getParent().getParent().getParent()).updatePlayerHandDisplay();
             	return true;
             }
             if (sourceCard.getCurrentPosition() == Card.SHOP && targetCard.getCurrentPosition() == Card.SHOP) {
@@ -126,6 +127,7 @@ public class CardTransferHandler extends TransferHandler {
             				return false;
             			}
             			sourceCard.setGameObject(null);
+                        targetCard.setGameObject(targetCard.getGameObject());
             			return true;
             		}
             	} else {

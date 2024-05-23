@@ -33,7 +33,7 @@ public class Plant extends Cultivable {
     }
 
     public Plant(Plant other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), other.getProduct());
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), new Product(other.getProduct()));
         this.age_to_ready = other.getAgeToReady();
         this.age = other.getAge();
     }

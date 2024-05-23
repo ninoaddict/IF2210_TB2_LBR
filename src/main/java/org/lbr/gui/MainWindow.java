@@ -208,6 +208,8 @@ public class MainWindow extends JPanel {
     private JPanel panel_bawah;
     private ArrayList<Card> handPlayer1;
     private ArrayList<Card> handPlayer2;
+    private ArrayList<ArrayList<Card>> fieldPlayer1;
+    private ArrayList<ArrayList<Card>> fieldPlayer2;
     private String shopString = "SHOP";
     private String fieldOneString = "FIELD1";
     private String fieldTwoString = "FIELD2";
@@ -222,6 +224,19 @@ public class MainWindow extends JPanel {
             curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
             handPlayer1 = new ArrayList<>();
             handPlayer2 = new ArrayList<>();
+            fieldPlayer1 = new ArrayList<>(4);
+            fieldPlayer2 = new ArrayList<>(4);
+
+            for (int i = 0; i < 4; i++) {
+                ArrayList<Card> temp1 = new ArrayList<>(5);
+                ArrayList<Card> temp2 = new ArrayList<>(5);
+                for (int j = 0; j < 5; j++) {
+                    temp1.add(null);
+                    temp2.add(null);
+                }
+                fieldPlayer1.add(temp1);
+                fieldPlayer2.add(temp2);
+            }
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -338,21 +353,18 @@ public class MainWindow extends JPanel {
         gridBagConstraints.anchor = GridBagConstraints.CENTER;
         gridBagConstraints.insets = new Insets(10, 10, 10, 10);
 
-        //inside_card_grid_panel.setPreferredSize(new Dimension(50, 50));
-
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(7, 7, 7, 7);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
 
-        //inside_card_grid_panel.add(new DummyCard(), gridBagConstraints);
-
-
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 5; j++){
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
-                real_card_gridJPanel.add(new Card(null, gameEngine.getCurrPlayer(), i, j, Card.FIELD, true), gridBagConstraints);
+                Card card = new Card(null, gameEngine.getCurrPlayer(), i, j, Card.FIELD, true);
+                real_card_gridJPanel.add(card, gridBagConstraints);
+                fieldPlayer1.get(i).set(j, card);
             }
         }
 
@@ -366,7 +378,9 @@ public class MainWindow extends JPanel {
             for(int j = 0; j < 5; j++){
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
-                player_two_fieldJPanel.add(new Card(null, gameEngine.getPlayerAtIndex(1), i, j, Card.FIELD, true), gridBagConstraints);
+                Card card = new Card(null, gameEngine.getPlayerAtIndex(1), i, j, Card.FIELD, true);
+                player_two_fieldJPanel.add(card, gridBagConstraints);
+                fieldPlayer2.get(i).set(j, card);
             }
         }
 
@@ -592,6 +606,7 @@ public class MainWindow extends JPanel {
 				roundButtons[1].setBackground(Color.white);
 				roundButtons[2].setBackground(Color.white);
                 start();
+                updatePlayerFieldDisplay();
 			}
 		});
 
@@ -727,6 +742,15 @@ public class MainWindow extends JPanel {
                 handPlayer1.get(i).setGameObject(curr.getHandIdx(i));
             } else {
                 handPlayer2.get(i).setGameObject(curr.getHandIdx(i));
+            }
+        }
+    }
+
+    public void updatePlayerFieldDisplay() {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                fieldPlayer1.get(i).get(j).updateCardDisplay();
+                fieldPlayer2.get(i).get(j).updateCardDisplay();
             }
         }
     }

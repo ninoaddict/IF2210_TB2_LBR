@@ -23,7 +23,7 @@ public abstract class Animal extends Cultivable {
     }
 
     public Animal(Animal other){
-        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), other.product);
+        super(other.getName(), other.getIsProtected(), other.getIsTrap(), other.getActiveItems(), other.getImgUrlPath(), new Product(other.getProduct()));
         this.weight_to_ready = other.getWeightToReady();
         this.weight = other.getWeight();
     }
