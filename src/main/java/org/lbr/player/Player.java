@@ -110,12 +110,23 @@ public class Player {
         this.hand_deck.set(idx, null);
     }
 
+
     public void setDeck_remaining(int deck_remaining) {
         this.deck_remaining = deck_remaining;
     }
 
     public void setHand_deck(ArrayList<GameObject> hand_deck) {
         this.hand_deck = hand_deck;
+    }
+
+    public int getRemainingHand() {
+        int res = 0;
+        for (int i = 0; i < 6; i++) {
+            if (isHandIdxEmpty(i)) {
+                res++;
+            }
+        }
+        return res;
     }
 
     public void swap_deck(int idx_from, int idx_to) {

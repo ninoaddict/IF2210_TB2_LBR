@@ -98,12 +98,12 @@ public class Card extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 Card comp = (Card) e.getSource();
                 if (comp.getGameObject() != null) {
-//                    JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
-//                            "Pop up", JOptionPane.INFORMATION_MESSAGE);
-                    ObjectInfoDialog info = new ObjectInfoDialog(comp);
-                    info.setVisible(true);
+                    if (comp.getCurrentPosition() == Card.FIELD) {
+                        ObjectInfoDialog info = new ObjectInfoDialog(comp);
+                        info.setVisible(true);
+                    }
                 } else {
-                    ShuffleDialog sd = new ShuffleDialog(owner, comp);
+                    ShuffleDialog sd = new ShuffleDialog(comp.getOwner(), comp);
                     sd.setVisible(true);
                 }
             }
@@ -191,13 +191,12 @@ public class Card extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 Card comp = (Card) e.getSource();
                 if (comp.getGameObject() != null) {
-//                    JOptionPane.showMessageDialog(comp.getParent().getParent(), "GameObject: " + comp.getGameObject().getName(),
-//                            "Pop up", JOptionPane.INFORMATION_MESSAGE);
-                    ObjectInfoDialog info = new ObjectInfoDialog(comp);
-                    info.setVisible(true);
+                    if (comp.getCurrentPosition() == Card.FIELD) {
+                        ObjectInfoDialog info = new ObjectInfoDialog(comp);
+                        info.setVisible(true);
+                    }
                 } else {
-//                    ShuffleDialog sd = new ShuffleDialog(owner, comp);
-//                    sd.setVisible(true);
+                    // TODO: handle
                 }
             }
         });
