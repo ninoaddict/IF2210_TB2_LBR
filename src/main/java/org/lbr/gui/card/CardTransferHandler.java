@@ -24,9 +24,25 @@ public class CardTransferHandler extends TransferHandler {
 
     @Override
     protected Transferable createTransferable(JComponent c) {
-        Card card = (Card) c;
-        GameObject gameObject = card.getGameObject();
-        return new GameObjectTransferable(gameObject);
+        try {
+            //return null;
+
+            Card card = (Card) c;
+            boolean canTransf = ((MainWindow) card.getParent().getParent().getParent()).canTransfer();
+            if (!canTransf) {
+                return null;
+            }
+            GameObject gameObject = card.getGameObject();
+            return new GameObjectTransferable(gameObject);
+        } catch (Exception e) {
+            Card card = (Card) c;
+            boolean canTransf = ((MainWindow) card.getParent().getParent().getParent().getParent()).canTransfer();
+            if (!canTransf) {
+                return null;
+            }
+            GameObject gameObject = card.getGameObject();
+            return new GameObjectTransferable(gameObject);
+        }
     }
 
     @Override

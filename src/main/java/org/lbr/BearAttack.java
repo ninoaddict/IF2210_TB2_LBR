@@ -6,42 +6,45 @@ import org.lbr.gameobject.cultivable.animal.*;
 import org.lbr.player.*;
 
 public class BearAttack {
-    private int x1;
-    private int y1;
-    private int x2;
-    private int y2;
-    private Player poorGuy;
+    public static int x1 = 1;
+    public static int y1 = 3;
+    public static int x2 = 3;
+    public static int y2 = 4;
+    public static Player poorGuy;
+    public static int duration = 5;
 
     public BearAttack(Player player){
         Random rand = new Random();
-        this.x1 = rand.nextInt(5);
-        this.x2 = rand.nextInt(5-this.x1) + this.x1;
-
-        int distance = this.x2 - this.x1 + 1;
-
-        this.y1 = rand.nextInt(4);
-        int getRandom = rand.nextInt(Math.floorDiv(6,distance));
-
-        if (getRandom + this.y1 > 3) {
-            this.y2 = this.y1;
-        } else {
-            this.y2 = getRandom + this.y1;
-        }
-        this.y2 = this.y1 + rand.nextInt();
-        this.poorGuy = player;
-    }
-
-    public static void refresh(Player player){
-        Random rand = new Random();
-        int x1 = rand.nextInt(5);
-        int x2 = rand.nextInt(5-x1) + x1;
+        x1 = rand.nextInt(5);
+        x2 = rand.nextInt(5-x1) + x1;
 
         int distance = x2 - x1 + 1;
 
-        int y1 = rand.nextInt(4);
-        int getRandom = rand.nextInt(Math.floorDiv(6,distance));
+        y1 = rand.nextInt(4);
+        int att = 6 / distance;
+        int getRandom = rand.nextInt(att);
 
-        int y2;
+        if (getRandom + y1 > 3) {
+            y2 = y1;
+        } else {
+            y2 = getRandom + y1;
+        }
+        y2 = y1 + rand.nextInt();
+        poorGuy = player;
+    }
+
+    public static void refresh(){
+        Random rand = new Random();
+        x1 = rand.nextInt(5);
+        x2 = rand.nextInt(5-x1) + x1;
+
+        int distance = x2 - x1 + 1;
+
+        y1 = rand.nextInt(4);
+        
+        int att = 6 / distance;
+        int getRandom = rand.nextInt(att);
+
 
         if (getRandom + y1 > 3) {
             y2 = y1;
@@ -49,7 +52,7 @@ public class BearAttack {
             y2 = getRandom + y1;
         }
 
-        int duration = rand.nextInt(31) + 30 ;
+        duration = rand.nextInt(31) + 30 ;
     }
 
 
@@ -94,40 +97,27 @@ public class BearAttack {
     }
 
     // method
-    public static void execute(Player poorGuy, int x1, int x2, int y1, int y2, int duration){
+    public static boolean execute(Player poorGuy, int x1, int x2, int y1, int y2, int duration){
         boolean noTrap = true;
-        int i = x1;
-        while (noTrap && i < x2 ){
-            int j = y1;
-            while (noTrap && j < y2){
+        int i = y1;
+        while (noTrap && i <= y2 ){
+            int j = x1;
+            while (noTrap && j <= x2){
                 if ( poorGuy.isFieldCellTrap(i, j)){
                     noTrap = false;
+                }
+                if (!poorGuy.isFieldCellEmpty(i, j)) {
+                    System.out.println(poorGuy.getCultivable(i, j).getName());
+                    System.out.println(i + " " + j);
+                } else {
+                    System.out.println(i + " Empty " + j);
                 }
                 j++;
             }
             i++;
         }
 
-        if (noTrap){
-            for (int k = x1; k < x2; k++){
-                for (int l = y1; l < y2; l++) {
-                    if (!poorGuy.isFieldCellProtected(k, l)) {
-                        try {
-//                            poorGuy.inactiveCell(k, l);
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                }
-            }
-        } else {
-            Omnivore bear = new Omnivore("BERUANG");
-            try {
-                poorGuy.addToHandDeck(bear);
-            } catch (Exception e) {
-                // TODO: HANDLE EXCEPTION
-            }
-        }
+        return noTrap;
     }
 
 }

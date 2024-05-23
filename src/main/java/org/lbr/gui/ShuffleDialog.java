@@ -32,7 +32,8 @@ public class ShuffleDialog extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(10, 5, 10, 5);
         // check how many needed card
-        int neededCard = Math.min(player.getRemainingHand(), 4);
+        int neededCard = 4;
+        if (player.getRemainingHand() < 4) neededCard = player.getRemainingHand();
         this.needed = neededCard;
         ArrayList<GameObject> arr = ObjectFactory.getShuffleCards(neededCard);
 
@@ -122,6 +123,7 @@ public class ShuffleDialog extends JFrame {
                 }
                 mainFrame.setEnabled(true);
                 this.dispose();
+                frame.considerBearAttack();
             });
             roundedPanel.add(confirmButton, c);
 
@@ -143,7 +145,9 @@ public class ShuffleDialog extends JFrame {
             Image image = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             confirmButton.setIcon(new ImageIcon(image));
             confirmButton.addActionListener(e -> {
+                mainFrame.setEnabled(true);
                 this.dispose();
+                frame.considerBearAttack();
             });
             roundedPanel.add(confirmButton, c);
         }

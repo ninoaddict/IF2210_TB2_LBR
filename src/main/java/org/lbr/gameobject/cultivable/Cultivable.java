@@ -57,7 +57,7 @@ public abstract class Cultivable extends GameObject {
     }
 
     public void enableTrap() {
-        this.is_protected = true;
+        this.is_trap = true;
     }
 
     public void setProducts(Product newProduct) {

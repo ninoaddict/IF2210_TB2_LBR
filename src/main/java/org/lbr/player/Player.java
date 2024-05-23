@@ -91,6 +91,14 @@ public class Player {
         setCultivable(null, row, col);
     }
 
+    public void decreaseDeckRemaining(int shuffleTaken) {
+        deck_remaining -= shuffleTaken;
+    }
+
+    public int getDeckRemaining() {
+        return deck_remaining;
+    }
+
     public void setHandIdx(GameObject object, int idx) throws  Exception {
 
         hand_deck.set(idx, object);
@@ -137,7 +145,7 @@ public class Player {
     public void swap_field(int row_from, int col_from, int row_to, int col_to) {
     	Cultivable tempCultivable = field.get(row_from).get(col_from);
     	field.get(row_from).set(col_from, field.get(row_to).get(col_to));
-    	field.get(row_to).set(col_from, tempCultivable);
+    	field.get(row_to).set(col_to, tempCultivable);
     }
 
     // method

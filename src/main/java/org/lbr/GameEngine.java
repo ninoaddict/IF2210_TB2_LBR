@@ -101,7 +101,7 @@ public class GameEngine {
             // ADD TO CURRENT PLAYER
             int bearAttackChance = (new Random()).nextInt(100) + 1;
             if (bearAttackChance <= 60) {
-                BearAttack.refresh(getCurrPlayer());
+                BearAttack.refresh();
                 Random random = new Random();
                 WaitParalelly( random.nextInt(31) + 30);
 //                BearAttack.execute();

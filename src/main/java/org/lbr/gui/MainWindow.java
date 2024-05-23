@@ -1,5 +1,7 @@
 package org.lbr.gui;
 
+import org.lbr.BearAttack;
+import org.lbr.gameobject.cultivable.animal.Omnivore;
 import org.lbr.gameobject.item.*;
 import org.lbr.gui.card.Card;
 import org.lbr.player.Player;
@@ -8,6 +10,9 @@ import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Animal;
 import org.lbr.gameobject.cultivable.animal.Carnivore;
 import org.lbr.gameobject.cultivable.animal.Herbivore;
+import org.lbr.gameobject.item.Delay;
+import org.lbr.gameobject.item.Destroy;
+import org.lbr.gameobject.item.Item;
 import org.lbr.gameobject.product.Product;
 
 import java.awt.*;
@@ -16,8 +21,11 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -214,6 +222,14 @@ public class MainWindow extends JPanel {
     private MainFrame mainFrame;
     JLabel howMuchHisMoneyJLabel;
     JLabel howMuchMyMoneyJLabel;
+    private int secondRemaining = 50;
+    private boolean timerVisited = false;
+    ScheduledExecutorService executor;
+    Runnable bearAttack;
+    private boolean executorUsed = false;
+    private boolean canTransferNow = true;
+    private RoundButton[] roundButtons = new RoundButton[6];
+    private RoundButton roundButton;
 
     MainWindow(GameEngine ge) {
         try {
@@ -496,14 +512,181 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.weightx = 1;
 
-        RoundButton[] roundButtons = new RoundButton[6];
+        JLabel timeJLabel = new JLabel("Time remaining: 5");
+        timeJLabel.setBackground(new Color(170, 193, 237));
+        timeJLabel.setOpaque(true);
+        timeJLabel.setPreferredSize(new Dimension(30, 30));
+        timeJLabel.setVisible(false);
 
-        for (int i = 0; i < 6; i++) {
-            gridBagConstraints.gridy = i;
-            RoundButton jtempButton = new RoundButton(button_name_array[i]);
-            jtempButton.setForeground(Color.black);
-            button_grid_panel.add(jtempButton, gridBagConstraints);
-            roundButtons[i] = jtempButton;
+        timeJLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        gridBagConstraints.gridy = 0;
+
+        button_grid_panel.add(timeJLabel, gridBagConstraints);
+
+        executor = Executors.newScheduledThreadPool(1);
+
+        bearAttack = new Runnable() {
+            public void run() {
+                if (!timerVisited) {
+                    secondRemaining = BearAttack.duration * 10;
+                    timerVisited = true;
+                    timeJLabel.setVisible(true);
+                    executorUsed = true;
+                    int x1 = BearAttack.x1;
+                    int y1 = BearAttack.y1;
+                    int x2 = BearAttack.x2;
+                    int y2 = BearAttack.y2;
+                    for(int i = y1; i <= y2; i++){
+                        for(int j = x1; j <= x2; j++) {
+                            int finalI = i;
+                            int finalJ = j;
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int k = (gameEngine.getCurrTurn() - 1) % 2;
+                                    if (k == 0) {
+                                        fieldPlayer1.get(finalI).get(finalJ).setBackground(Color.red);
+                                    } else {
+                                        fieldPlayer2.get(finalI).get(finalJ).setBackground(Color.red);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+                secondRemaining--;
+                int fi = secondRemaining / 10;
+                int se = secondRemaining % 10;
+                timeJLabel.setText("Time remaining: " + Integer.toString(fi) + "," + Integer.toString(se));
+                System.out.println(secondRemaining);
+                if (secondRemaining == 0) {
+                    canTransferNow = false;
+                    timeJLabel.setVisible(false);
+                    timerVisited = false;
+                    int x1 = BearAttack.x1;
+                    int y1 = BearAttack.y1;
+                    int x2 = BearAttack.x2;
+                    int y2 = BearAttack.y2;
+                    System.out.println("HERE");
+                    System.out.println("BERUANG " + x1 + " " + x2 + " " + y1 + " " + y2);
+                    //System.out.println(gameEngine.getCurrPlayer().getCultivable())
+                    if (!BearAttack.execute(gameEngine.getCurrPlayer(), x1, x2, y1, y2, 50) ) {
+                        for(int i = y1; i <= y2; i++){
+                            for(int j = x1; j <= x2; j++) {
+                                int finalI = i;
+                                int finalJ = j;
+                                SwingUtilities.invokeLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int k = (gameEngine.getCurrTurn() - 1) % 2;
+                                        if (k == 0) {
+                                            fieldPlayer1.get(finalI).get(finalJ).setBackground(new Color(224, 247, 250));
+                                            fieldPlayer1.get(finalI).get(finalJ).setGameObject(fieldPlayer1.get(finalI).get(finalJ).getGameObject());
+                                        } else {
+                                            fieldPlayer2.get(finalI).get(finalJ).setBackground(new Color(224, 247, 250));
+                                            fieldPlayer2.get(finalI).get(finalJ).setGameObject(fieldPlayer2.get(finalI).get(finalJ).getGameObject());
+
+                                        }
+                                    }
+                                });
+                                System.out.println(i + " " + j);
+                            }
+                        }
+                        Omnivore bear = new Omnivore("BERUANG");
+                        try {
+                            gameEngine.getCurrPlayer().addToHandDeck(bear);
+                        } catch (Exception ignored) {
+                            System.out.println(ignored.getMessage());
+                        }
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                updatePlayerHandDisplay();
+                            }
+                        });
+                        canTransferNow = true;
+                        executor.shutdown();
+                        for(int i = 0; i < 5; i++){
+                            roundButtons[i].setEnabled(true);
+                        }
+                        roundButton.setEnabled(true);
+                        return;
+                    }
+                    System.out.println("MAHAGURU");
+                    for(int i = y1; i <= y2; i++){
+                        for(int j = x1; j <= x2; j++) {
+                            int finalI = i;
+                            int finalJ = j;
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    System.out.println(Integer.toString(finalI) + " " + Integer.toString(finalJ));
+                                    int k = (gameEngine.getCurrTurn() - 1) % 2;
+                                    if (k == 0) {
+                                        fieldPlayer1.get(finalI).get(finalJ).setBackground(new Color(224, 247, 250));
+                                        if (fieldPlayer1.get(finalI).get(finalJ).getGameObject() != null && ((Cultivable)fieldPlayer1.get(finalI).get(finalJ).getGameObject()).getIsProtected()) {
+                                            fieldPlayer1.get(finalI).get(finalJ).setGameObject(fieldPlayer1.get(finalI).get(finalJ).getGameObject());
+
+                                        } else {
+                                            fieldPlayer1.get(finalI).get(finalJ).setGameObject(null);
+                                            try {
+                                                fieldPlayer1.get(finalI).get(finalJ).getOwner().setNullField(finalI, finalJ);
+                                            } catch (Exception ignored) {
+                                                System.out.println("IGNORED");
+                                            }
+                                        }
+
+
+                                    } else {
+                                        fieldPlayer2.get(finalI).get(finalJ).setBackground(new Color(224, 247, 250));
+                                        if (fieldPlayer2.get(finalI).get(finalJ).getGameObject() != null && ((Cultivable)fieldPlayer2.get(finalI).get(finalJ).getGameObject()).getIsProtected()) {
+                                            fieldPlayer2.get(finalI).get(finalJ).setGameObject(fieldPlayer2.get(finalI).get(finalJ).getGameObject());
+                                        } else {
+                                            fieldPlayer2.get(finalI).get(finalJ).setGameObject(null);
+                                            try {
+                                                fieldPlayer2.get(finalI).get(finalJ).getOwner().setNullField(finalI, finalJ);
+                                            } catch (Exception ignored) {
+                                                System.out.println("IGNORED");
+                                            }
+                                        }
+
+
+                                    }
+                                    System.out.println(Integer.toString(finalI) + " " + Integer.toString(finalJ));
+                                }
+                            });
+
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                System.out.println("Interrupted!");
+                            }
+                        }
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            System.out.println("Interrupted!");
+                        }
+                    }
+                    canTransferNow = true;
+                    executor.shutdown();
+                    for(int i = 0; i < 5; i++){
+                        roundButtons[i].setEnabled(true);
+                    }
+                    roundButton.setEnabled(true);
+                }
+            }
+        };
+
+
+
+        for(int i = 1; i < 7; i++) {
+        	gridBagConstraints.gridy = i;
+        	RoundButton jtempButton = new RoundButton(button_name_array[i - 1]);
+        	jtempButton.setForeground(Color.black);
+        	button_grid_panel.add(jtempButton, gridBagConstraints);
+        	roundButtons[i - 1] = jtempButton;
         }
 
         roundButtons[0].addActionListener(new ActionListener() {
@@ -591,7 +774,7 @@ public class MainWindow extends JPanel {
 
         uwuPanel.add(labelNext, gridBagConstraints);
 
-        RoundButton roundButton = new RoundButton("Next Turn");
+        roundButton = new RoundButton("Next Turn");
         roundButton.setBackground(Color.black);
         gridBagConstraints.gridx = 1;
         gridBagConstraints.weighty = 0.0;
@@ -772,6 +955,25 @@ public class MainWindow extends JPanel {
         shuffle.setVisible(true);
     }
 
+    public void considerBearAttack() {
+        System.out.println("YA");
+        Random rand = new Random();
+        int bear_attack_pos = rand.nextInt(11);
+        System.out.println(bear_attack_pos);
+        if (bear_attack_pos >= 3) return;
+        for(int i = 0; i < 5; i++){
+            roundButtons[i].setEnabled(false);
+        }
+        roundButton.setEnabled(false);
+        BearAttack.refresh();
+        System.out.println(BearAttack.x1);
+        System.out.println(BearAttack.y1);
+        System.out.println(BearAttack.x2);
+        System.out.println(BearAttack.y2);
+        if (executorUsed) executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(bearAttack, 100, 100, TimeUnit.MILLISECONDS);
+    }
+
     public void updatePlayerHandDisplay() {
         Player curr = gameEngine.getCurrPlayer();
         int currTurn = gameEngine.getCurrTurn();
@@ -856,5 +1058,9 @@ public class MainWindow extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         g.drawImage(curBufferedImage, 0, 0, null);
+    }
+
+    public synchronized boolean canTransfer() {
+        return canTransferNow;
     }
 }
