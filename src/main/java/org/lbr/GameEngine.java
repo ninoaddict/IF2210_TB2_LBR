@@ -60,6 +60,8 @@ public class GameEngine {
 
     public void nextTurn() {
         currTurn++;
+        currPlayer[0].addAllPlantAge();
+        currPlayer[1].addAllPlantAge();
     }
 
     public Player getCurrPlayer() {

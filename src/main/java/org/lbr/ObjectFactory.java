@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ObjectPrototypeFactory {
+public class ObjectFactory {
     private static final Map<String, GameObject> CARD_KEYS = new HashMap<>();
 
     static {
