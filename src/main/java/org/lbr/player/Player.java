@@ -90,6 +90,14 @@ public class Player {
         setCultivable(null, row, col);
     }
 
+    public void decreaseDeckRemaining(int shuffleTaken) {
+        deck_remaining -= shuffleTaken;
+    }
+
+    public int getDeckRemaining() {
+        return deck_remaining;
+    }
+
     public void setHandIdx(GameObject object, int idx) throws  Exception {
 
         hand_deck.set(idx, object);

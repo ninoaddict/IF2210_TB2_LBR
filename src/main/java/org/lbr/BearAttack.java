@@ -1,34 +1,35 @@
 package org.lbr;
 
 import java.security.cert.TrustAnchor;
+import java.lang.Math;
 import java.util.Random;
 import org.lbr.gameobject.cultivable.animal.*;
 import org.lbr.player.*;
 
 public class BearAttack {
-    private int x1;
-    private int y1;
-    private int x2;
-    private int y2;
-    private Player poorGuy;
+    public static int x1;
+    public static int y1;
+    public static int x2;
+    public static int y2;
+    public static Player poorGuy;
 
     public BearAttack(Player player){
         Random rand = new Random();
-        this.x1 = rand.nextInt(5);
-        this.x2 = rand.nextInt(5-this.x1) + this.x1;
+        x1 = rand.nextInt(5);
+        x2 = rand.nextInt(5-x1) + x1;
 
-        int distance = this.x2 - this.x1 + 1;
+        int distance = x2 - x1 + 1;
 
-        this.y1 = rand.nextInt(4);
+        y1 = rand.nextInt(4);
         int getRandom = rand.nextInt(Math.floorDiv(6,distance));
 
-        if (getRandom + this.y1 > 3) {
-            this.y2 = this.y1;
+        if (getRandom + y1 > 3) {
+            y2 = y1;
         } else {
-            this.y2 = getRandom + this.y1;
+            y2 = getRandom + y1;
         }
-        this.y2 = this.y1 + rand.nextInt();
-        this.poorGuy = player;
+        y2 = y1 + rand.nextInt();
+        poorGuy = player;
     }
 
     public static void refresh(Player player){

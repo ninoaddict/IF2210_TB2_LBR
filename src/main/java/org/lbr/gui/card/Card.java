@@ -138,6 +138,7 @@ public class Card extends JPanel {
         gbc.gridy = 0;
 
         if (gameObject != null) {
+            System.out.println(gameObject.getImgUrlPath());
             ImageIcon icon = new ImageIcon(this.getClass().getResource(gameObject.getImgUrlPath()));
             Image image = icon.getImage().getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
             label.setIcon(new ImageIcon(image));
