@@ -1,0 +1,5 @@
+shop_items:
+- {name: NAMA, num_item: 2}
+- {name: NAMA_MAKANAN, num_item: 1}
+num_of_shop_item: 2
+current_turn: 2

@@ -73,6 +73,10 @@ public abstract class Cultivable extends GameObject {
         activeItems.add(item);
     }
 
+    public void setActiveItems(ArrayList<Item> activeItems) {
+        this.activeItems = activeItems;
+    }
+
     // effects
     public abstract boolean isReady();
 

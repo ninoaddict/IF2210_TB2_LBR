@@ -3,7 +3,7 @@ num_of_deck: 39
 num_of_active_deck: 2
 active_deck:
   - location: 'A01'
-    name: PLAYER1
+    name: PLAYER2
   - location: 'A02'
     name: BIJI_JAGUNG
 num_of_card_in_field: 1

@@ -87,7 +87,21 @@ public class Player {
         }
     }
 
-    public void setNullField(int row, int col) throws  Exception {
+    public void clearField() throws Exception {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                setNullField(i, j);
+            }
+        }
+    }
+
+    public void clearDeck() throws Exception {
+        for (int i = 0; i < 6; i++) {
+            setHandIdx(null, i);
+        }
+    }
+
+    public void setNullField(int row, int col) throws Exception {
         setCultivable(null, row, col);
     }
 

@@ -214,6 +214,7 @@ public class MainWindow extends JPanel {
     private ArrayList<Card> handPlayer2;
     private ArrayList<ArrayList<Card>> fieldPlayer1;
     private ArrayList<ArrayList<Card>> fieldPlayer2;
+    private ArrayList<Card> shopCard;
     private String shopString = "SHOP";
     private String fieldOneString = "FIELD1";
     private String fieldTwoString = "FIELD2";
@@ -230,6 +231,10 @@ public class MainWindow extends JPanel {
     private boolean canTransferNow = true;
     private RoundButton[] roundButtons = new RoundButton[6];
     private RoundButton roundButton;
+    private JLabel labelNext;
+    private CardLayout deckCardLayout;
+    private CardLayout cardLayout;
+    private JPanel card_grid_panel;
 
     MainWindow(GameEngine ge) {
         try {
@@ -237,6 +242,7 @@ public class MainWindow extends JPanel {
             curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
             handPlayer1 = new ArrayList<>();
             handPlayer2 = new ArrayList<>();
+            shopCard = new ArrayList<>();
             fieldPlayer1 = new ArrayList<>(4);
             fieldPlayer2 = new ArrayList<>(4);
 
@@ -295,7 +301,7 @@ public class MainWindow extends JPanel {
 
         panel_tengah.setLayout(new GridBagLayout());
 
-        JPanel card_grid_panel = new JPanel();
+        card_grid_panel = new JPanel();
         card_grid_panel.setBackground(new Color(0, 108, 103));
         card_grid_panel.setOpaque(false);
 
@@ -306,7 +312,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.weightx = 0.25;
         gridBagConstraints.weighty = 1.0;
 
-        CardLayout cardLayout = new CardLayout();
+        cardLayout = new CardLayout();
 
         card_grid_panel.setLayout(cardLayout);
 
@@ -422,13 +428,15 @@ public class MainWindow extends JPanel {
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
                 System.out.println(productNameStrings.get(3 * i + j));
-                shop_card_gridJPanel.add(new Card(new Product(productNameStrings.get(i * 3 + j)), null, i, j, Card.SHOP, 1), gridBagConstraints);
+                Card card = new Card(new Product(productNameStrings.get(i * 3 + j)), null, i, j, Card.SHOP, 1);
+                shopCard.add(card);
+                shop_card_gridJPanel.add(card, gridBagConstraints);
             }
         }
 
         panel_bawah.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.WHITE));
 
-        CardLayout deckCardLayout = new CardLayout();
+        deckCardLayout = new CardLayout();
         panel_bawah.setLayout(deckCardLayout);
 
         JPanel first_deck_playerJPanel = new JPanel();
@@ -679,8 +687,6 @@ public class MainWindow extends JPanel {
             }
         };
 
-
-
         for(int i = 1; i < 7; i++) {
         	gridBagConstraints.gridy = i;
         	RoundButton jtempButton = new RoundButton(button_name_array[i - 1]);
@@ -768,7 +774,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new Insets(10, 10, 10, 10);
 
-        JLabel labelNext = new JLabel("Number of Turn: 1");
+        labelNext = new JLabel("Number of Turn: 1");
         labelNext.setBackground(Color.red);
         labelNext.setOpaque(false);
 
@@ -997,6 +1003,35 @@ public class MainWindow extends JPanel {
         }
     }
 
+    public void updateGameDisplay() {
+        howMuchMyMoneyJLabel.setText(Integer.toString(gameEngine.getPlayerAtIndex(0).getGulden()));
+        howMuchHisMoneyJLabel.setText(Integer.toString(gameEngine.getPlayerAtIndex(1).getGulden()));
+        labelNext.setText("Number of Turn: " + Integer.toString(gameEngine.getCurrTurn()));
+
+        // update hand
+        for (int i = 0; i < 6; i++) {
+            handPlayer1.get(i).setGameObject(gameEngine.getPlayerAtIndex(0).getHandIdx(i));
+            handPlayer2.get(i).setGameObject(gameEngine.getPlayerAtIndex(1).getHandIdx(i));
+        }
+
+        // update field
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                fieldPlayer1.get(i).get(j).setGameObject(gameEngine.getPlayerAtIndex(0).getCultivable(i, j));
+                fieldPlayer2.get(i).get(j).setGameObject(gameEngine.getPlayerAtIndex(1).getCultivable(i, j));
+            }
+        }
+
+        int u = (gameEngine.getCurrTurn() - 1) % 2;
+        if (u == 0) {
+            cardLayout.show(card_grid_panel, fieldOneString);
+            deckCardLayout.show(panel_bawah, deckOneString);
+        } else {
+            cardLayout.show(card_grid_panel, fieldTwoString);
+            deckCardLayout.show(panel_bawah, deckTwoString);
+        }
+    }
+
     public boolean productDrop(Player cardOwner, Product dropProduct, Animal animal, int colDeck) {
         if (!cardOwner.equals(gameEngine.getCurrPlayer())) {
             return false;
@@ -1059,7 +1094,6 @@ public class MainWindow extends JPanel {
         }
         return true;
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {
