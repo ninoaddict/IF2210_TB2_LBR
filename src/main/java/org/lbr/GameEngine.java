@@ -15,6 +15,7 @@ import org.lbr.gameobject.product.*;
 import org.lbr.gameobject.cultivable.animal.*;
 import org.lbr.gameobject.cultivable.plant.*;
 import org.lbr.load_save.SaveLoad;
+import org.lbr.load_save.SaveLoadJSON;
 import org.lbr.load_save.SaveLoadTXT;
 import org.lbr.player.*;
 import org.lbr.shop.Shop;
@@ -36,6 +37,7 @@ public class GameEngine {
         timerService = Executors.newScheduledThreadPool(1);
         saveLoadServices = new ArrayList<>();
         saveLoadServices.add(new SaveLoadTXT());
+        saveLoadServices.add(new SaveLoadJSON());
 
         Map<Product, Integer> productArrayList = new HashMap<>();
 
@@ -306,7 +308,6 @@ public class GameEngine {
                 BearAttack.refresh();
                 Random random = new Random();
                 WaitParalelly( random.nextInt(31) + 30);
-//                BearAttack.execute();
             }
             nextTurn();
         }

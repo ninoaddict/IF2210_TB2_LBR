@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -1029,6 +1030,15 @@ public class MainWindow extends JPanel {
         } else {
             cardLayout.show(card_grid_panel, fieldTwoString);
             deckCardLayout.show(panel_bawah, deckTwoString);
+        }
+
+        // update shop
+        Map<Product, Integer> mp = gameEngine.getShop().getProducts();
+        int idx = 0;
+        for (Map.Entry<Product, Integer> entry : mp.entrySet()) {
+            shopCard.get(idx).setGameObject(new Product(entry.getKey()));
+            shopCard.get(idx).updateStock(entry.getValue());
+            idx++;
         }
     }
 

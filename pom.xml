@@ -21,4 +21,15 @@
         </resources>
     </build>
 
+    <dependencies>
+        <!-- JSON library -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+
+        <!-- Other dependencies can be added here -->
+    </dependencies>
+
 </project>

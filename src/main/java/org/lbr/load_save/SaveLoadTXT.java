@@ -194,7 +194,7 @@ public class SaveLoadTXT implements SaveLoad {
         }
         player2.gulden = gulden2;
         player2.deck = numOfDeck2;
-        player2.activeDeck = activeDeck1;
+        player2.activeDeck = activeDeck2;
         player2.field = field2;
 
         // close scanner

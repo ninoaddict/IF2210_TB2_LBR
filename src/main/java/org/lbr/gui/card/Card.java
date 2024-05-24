@@ -113,7 +113,7 @@ public class Card extends JPanel {
         priceJLabel = new JLabel();
     }
 
-    public Card(GameObject gameObject, Player owner, int row, int col, int currentPosition, int changer) {
+    public Card(GameObject gameObject, Player owner, int row, int col, int currentPosition, int stock_) {
         this.gameObject = gameObject;
         this.owner = owner;
         this.currentPosition = currentPosition;
@@ -162,9 +162,10 @@ public class Card extends JPanel {
 
         gbc.gridy = 2;
 
-        this.stock = 1;
+        this.stock = stock_;
 
         stockJLabel = new JLabel("Stock: " + Integer.toString(stock));
+        stockJLabel.setFont(new Font("Linux Libertine", 1, 14));
 
         add(stockJLabel, gbc);
 
@@ -172,6 +173,7 @@ public class Card extends JPanel {
         this.price = ((Product)this.gameObject).getPrice();
 
         priceJLabel = new JLabel("Price: " + Integer.toString(price));
+        priceJLabel.setFont(new Font("Linux Libertine", 1, 14));
 
         gbc.gridy = 3;
 
@@ -291,9 +293,14 @@ public class Card extends JPanel {
 
     public void buyHappened(int c) throws Exception {
     	if(this.stock + c == -1) {
-    		throw new Exception("BUY CANNOT BE DONE!");
+    		throw new Exception("Buy can't be done!");
     	}
     	this.stock += c;
     	this.stockJLabel.setText("Stock: " + Integer.toString(this.stock));
+    }
+
+    public void updateStock(int newStock) {
+        this.stock = newStock;
+        this.stockJLabel.setText("Stock: " + Integer.toString(this.stock));
     }
 }

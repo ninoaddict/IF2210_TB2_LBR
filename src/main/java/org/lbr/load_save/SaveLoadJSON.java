@@ -1,12 +1,8 @@
 package org.lbr.load_save;
 
-import com.sun.source.doctree.EscapeTree;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +19,7 @@ public class SaveLoadJSON implements SaveLoad {
 
         JSONArray activeCard = new JSONArray();
         for (int i = 0; i < player1.activeDeck.size(); i++) {
-            String formattedCoor = Character.toString(((char) player1.activeDeck.get(i).coordinate.x + 'A'-1))+"0"+((char) player1.activeDeck.get(i).coordinate.y);
+            String formattedCoor = player1.activeDeck.get(i).coordinate.toString();
             JSONObject tempObject = new JSONObject();
             tempObject.put("activeLoc",formattedCoor);
             tempObject.put("activeName",player1.activeDeck.get(i).name);
@@ -34,24 +30,26 @@ public class SaveLoadJSON implements SaveLoad {
 
         JSONArray fieldCard = new JSONArray();
         for (int i = 0; i < player1.field.size(); i++) {
-            String formattedCoor = Character.toString(((char) player1.field.get(i).coordinate.x + 'A'-1))+"0"+((char) player1.field.get(i).coordinate.y);
+            String formattedCoor = player1.field.get(i).coordinate.toString();
             JSONObject tempObject = new JSONObject();
-            tempObject.put("fieldLoc",formattedCoor);
-            tempObject.put("fieldName",player1.field.get(i).name);
-            tempObject.put("required",player1.field.get(i).weight_or_age);
-            tempObject.put("effectNum",player1.field.get(i).item.size());
+            tempObject.put("fieldLoc", formattedCoor);
+            tempObject.put("fieldName", player1.field.get(i).name);
+            tempObject.put("required", player1.field.get(i).weight_or_age);
+            tempObject.put("effectNum", player1.field.get(i).item.size());
             JSONArray effects = new JSONArray();
-            for (int j = 0; j < player1.field.get(i).item.size(); i++) {
+            for (int j = 0; j < player1.field.get(i).item.size(); j++) {
                 JSONObject tempTempObject = new JSONObject();
                 tempTempObject.put("effect_"+(j+1), player1.field.get(i).item.get(j));
                 effects.put(tempTempObject);
             }
             tempObject.put("effects",effects);
+            fieldCard.put(tempObject);
         }
         mainObject.put("fieldCards",fieldCard);
 
-        FileWriter file = new FileWriter("player1.json");
-        file.write(mainObject.toString(4)); // Indent with 4 spaces for readability
+        FileWriter file = new FileWriter(directory + "/player1.json");
+        file.write(mainObject.toString(4));// Indent with 4 spaces for readability
+        file.close();
 
         // SAVING PLAYER 2 DATA
         mainObject = new JSONObject();
@@ -61,35 +59,37 @@ public class SaveLoadJSON implements SaveLoad {
 
         activeCard = new JSONArray();
         for (int i = 0; i < player2.activeDeck.size(); i++) {
-            String formattedCoor = Character.toString(((char) player2.activeDeck.get(i).coordinate.x + 'A'-1))+"0"+((char) player2.activeDeck.get(i).coordinate.y);
+            String formattedCoor = player2.activeDeck.get(i).coordinate.toString();
             JSONObject tempObject = new JSONObject();
             tempObject.put("activeLoc",formattedCoor);
             tempObject.put("activeName",player2.activeDeck.get(i).name);
             activeCard.put(tempObject);
         }
         mainObject.put("activeCards",activeCard);
-        mainObject.put("fieldAmount",player2.field.size());
+        mainObject.put("fieldAmount", player2.field.size());
 
         fieldCard = new JSONArray();
         for (int i = 0; i < player2.field.size(); i++) {
-            String formattedCoor = Character.toString(((char) player2.field.get(i).coordinate.x + 'A'-1))+"0"+((char) player2.field.get(i).coordinate.y);
+            String formattedCoor = player2.field.get(i).coordinate.toString();
             JSONObject tempObject = new JSONObject();
             tempObject.put("fieldLoc",formattedCoor);
             tempObject.put("fieldName",player2.field.get(i).name);
             tempObject.put("required",player2.field.get(i).weight_or_age);
             tempObject.put("effectNum",player2.field.get(i).item.size());
             JSONArray effects = new JSONArray();
-            for (int j = 0; j < player2.field.get(i).item.size(); i++) {
+            for (int j = 0; j < player2.field.get(i).item.size(); j++) {
                 JSONObject tempTempObject = new JSONObject();
                 tempTempObject.put("effect_"+(j+1), player2.field.get(i).item.get(j));
                 effects.put(tempTempObject);
             }
             tempObject.put("effects",effects);
+            fieldCard.put(tempObject);
         }
         mainObject.put("fieldCards",fieldCard);
 
-        file = new FileWriter("player2.json");
-        file.write(mainObject.toString(4)); // Indent with 4 spaces for readability
+        FileWriter player2Writer = new FileWriter(directory + "/player2.json");
+        player2Writer.write(mainObject.toString(4)); // Indent with 4 spaces for readability
+        player2Writer.close();
 
         // SAVE GAME STATE
         mainObject = new JSONObject();
@@ -106,8 +106,9 @@ public class SaveLoadJSON implements SaveLoad {
 
         mainObject.put("shopItems",shopList);
 
-        file = new FileWriter("gamestate.json");
-        file.write(mainObject.toString(4)); // Indent with 4 spaces for readability
+        FileWriter gameDataWriter = new FileWriter(directory + "/gamestate.json");
+        gameDataWriter.write(mainObject.toString(4)); // Indent with 4 spaces for readability
+        gameDataWriter.close();
     }
 
     @Override
@@ -132,7 +133,7 @@ public class SaveLoadJSON implements SaveLoad {
         JSONArray activesArray = obj.getJSONArray("activeCards");
         for (int i = 0; i < activeDeckAmount1; i++) {
             JSONObject actev = activesArray.getJSONObject(i);
-            activeDeck1.add(new HandData(new Coordinate(actev.getString("activeLoc").charAt(0)-'A'+1,(int) actev.getString("activeLoc").charAt(2)), actev.getString("activeName")));
+            activeDeck1.add(new HandData(Coordinate.translate(actev.getString("activeLoc")), actev.getString("activeName")));
         }
         JSONArray fieldsArray = obj.getJSONArray("fieldCards");
         for (int i = 0; i < fieldAmount1; i++) {
@@ -140,12 +141,17 @@ public class SaveLoadJSON implements SaveLoad {
             JSONArray effecte = fielde.getJSONArray("effects");
             int lenes = fielde.getInt("effectNum");
             ArrayList<String> effects = new ArrayList<>();
-            JSONObject effect = effecte.getJSONObject(0);
-            for (int j = 0; j < lenes; j++) {
-                effects.add(effect.getString("effect_"+(j+1)));
+            if (lenes > 0) {
+                JSONObject effect = effecte.getJSONObject(0);
+                for (int j = 0; j < lenes; j++) {
+                    effects.add(effect.getString("effect_"+(j+1)));
+                }
             }
-            activeFields1.add(new FieldData(new Coordinate(fielde.getString("activeLoc").charAt(0)-'A'+1,((int) fielde.getString("activeLoc").charAt(2))), (String) fielde.get("fieldName"), (int) fielde.get("required"), effects));
+            activeFields1.add(new FieldData(Coordinate.translate(fielde.getString("fieldLoc")), (String) fielde.get("fieldName"), (int) fielde.get("required"), effects));
         }
+        System.out.println("PLAYER 1");
+        is.close();
+        tokener.close();
 
         // THIS STUFF IS TO LOAD PLAYER 2 STATS
         chosenPlayer = directory + "/" + "player2.json";
@@ -159,7 +165,7 @@ public class SaveLoadJSON implements SaveLoad {
         activesArray = obj.getJSONArray("activeCards");
         for (int i = 0; i < activeDeckAmount2; i++) {
             JSONObject actev = activesArray.getJSONObject(i);
-            activeDeck2.add(new HandData(new Coordinate(actev.getString("activeLoc").charAt(0)-'A'+1,((int) actev.getString("activeLoc").charAt(2))), actev.getString("activeName")));
+            activeDeck2.add(new HandData(Coordinate.translate(actev.getString("activeLoc")), actev.getString("activeName")));
         }
         fieldsArray = obj.getJSONArray("fieldCards");
         for (int i = 0; i < fieldAmount2; i++) {
@@ -167,12 +173,17 @@ public class SaveLoadJSON implements SaveLoad {
             JSONArray effecte = fielde.getJSONArray("effects");
             int lenes = fielde.getInt("effectNum");
             ArrayList<String> effects = new ArrayList<>();
-            JSONObject effect = effecte.getJSONObject(0);
-            for (int j = 0; j < lenes; j++) {
-                effects.add(effect.getString("effect_"+(j+1)));
+            if (lenes > 0) {
+                JSONObject effect = effecte.getJSONObject(0);
+                for (int j = 0; j < lenes; j++) {
+                    effects.add(effect.getString("effect_"+(j+1)));
+                }
             }
-            activeFields2.add(new FieldData(new Coordinate(fielde.getString("activeLoc").charAt(0)-'A'+1,((int) fielde.getString("activeLoc").charAt(2))), (String) fielde.get("fieldName"), (int) fielde.get("required"), effects));
+            activeFields2.add(new FieldData(Coordinate.translate(fielde.getString("fieldLoc")), (String) fielde.get("fieldName"), (int) fielde.get("required"), effects));
         }
+        is.close();
+        tokener.close();
+        System.out.println("PLAYER 2");
 
         // THIS STUFF IS TO LOAD GAME STATE
         chosenPlayer = directory + "/" + "gamestate.json";
@@ -188,11 +199,23 @@ public class SaveLoadJSON implements SaveLoad {
             int temp_amount = items.getInt("amount");
             mapShop.put(temp_string,temp_amount);
         }
+        is.close();
+        tokener.close();
+        System.out.println("GAME STATE");
 
         // PUT IT ALL TOGETHEUR
-        player1 = new PlayerData(gulden1,deckAmount1,activeDeck1,activeFields1);
-        player2 = new PlayerData(gulden2,deckAmount2,activeDeck2,activeFields2);
-        gameData = new GameData(currTurn,mapShop);
+        player1.gulden = gulden1;
+        player1.activeDeck = activeDeck1;
+        player1.field = activeFields1;
+        player1.deck = deckAmount1;
+
+        player2.gulden = gulden2;
+        player2.activeDeck = activeDeck2;
+        player2.field = activeFields2;
+        player2.deck = deckAmount2;
+
+        gameData.currentTurn = currTurn;
+        gameData.shop = mapShop;
     }
 
     @Override
