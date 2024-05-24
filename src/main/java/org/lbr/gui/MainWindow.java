@@ -450,7 +450,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        JLabel temp = new JLabel();
+        JLabel temp = new JLabel("DECK: 40/40");
 
         for (int i = 0; i < 6; i++) {
             gridBagConstraints.gridx = i;
@@ -473,7 +473,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        JLabel temp2 = new JLabel();
+        JLabel temp2 = new JLabel("DECK: 40/40");
         for (int i = 0; i < 6; i++) {
             gridBagConstraints.gridx = i;
             Card card = new Card(null, gameEngine.getPlayerAtIndex(1), 0, i, Card.DECK, true);
@@ -607,7 +607,7 @@ public class MainWindow extends JPanel {
                         });
                         canTransferNow = true;
                         executor.shutdown();
-                        for(int i = 0; i < 5; i++){
+                        for(int i = 0; i < 6; i++){
                             roundButtons[i].setEnabled(true);
                         }
                         roundButton.setEnabled(true);
@@ -671,7 +671,7 @@ public class MainWindow extends JPanel {
                     }
                     canTransferNow = true;
                     executor.shutdown();
-                    for(int i = 0; i < 5; i++){
+                    for(int i = 0; i < 6; i++){
                         roundButtons[i].setEnabled(true);
                     }
                     roundButton.setEnabled(true);
@@ -791,9 +791,11 @@ public class MainWindow extends JPanel {
                 if (k == 0) {
                     cardLayout.show(card_grid_panel, fieldTwoString);
                     deckCardLayout.show(panel_bawah, deckTwoString);
+                    temp2.setText("DECK: " + gameEngine.getPlayerAtIndex(1).getDeckRemaining() + "/40");
                 } else {
                     cardLayout.show(card_grid_panel, fieldOneString);
                     deckCardLayout.show(panel_bawah, deckOneString);
+                    temp.setText("DECK: " + gameEngine.getPlayerAtIndex(0).getDeckRemaining() + "/40");
                 }
 
                 gameEngine.nextTurn();
@@ -961,7 +963,7 @@ public class MainWindow extends JPanel {
         int bear_attack_pos = rand.nextInt(11);
         System.out.println(bear_attack_pos);
         if (bear_attack_pos >= 3) return;
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 6; i++){
             roundButtons[i].setEnabled(false);
         }
         roundButton.setEnabled(false);
@@ -1037,6 +1039,10 @@ public class MainWindow extends JPanel {
                 } catch (Exception e) {
                     return false;
                 }
+            }
+        } else {
+            if (!cardOwner.equals(gameEngine.getCurrPlayer())) {
+                return false;
             }
         }
         try {
