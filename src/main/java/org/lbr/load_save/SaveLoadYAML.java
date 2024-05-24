@@ -104,7 +104,7 @@ public class SaveLoadYAML implements SaveLoad {
         ArrayList<HashMap<String, Object>> card_in_fieldP2 = (ArrayList<HashMap<String, Object>>) player2Data.get("active_field");
         ArrayList<FieldData> field2 = new ArrayList<>();
         for(int i = 0; i < num_of_card_in_field2; i++) {
-            HashMap<String, Object> cur_card = card_in_fieldP1.get(i);
+            HashMap<String, Object> cur_card = card_in_fieldP2.get(i);
             String location = (String) cur_card.get("location");
             String name = (String) cur_card.get("name");
             int age = (Integer) cur_card.get("age");

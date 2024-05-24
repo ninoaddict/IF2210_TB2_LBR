@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/Cultivable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gameobject/cultivable/Cultivable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/LoadDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/LoadDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/MainWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/SaveDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/SaveDialog.java" afterDir="false" />
@@ -18,6 +17,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/load_save/SaveLoadYAML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/load_save/SaveLoadYAML.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/load_save/main_test_yaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/load_save/main_test_yaml.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/yaml/player1.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/yaml/player1.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/yaml/something.yaml" beforeDir="false" />
     </list>
     <list id="b124778a-b2e1-487c-8e83-7f51fc9a40b8" name="Changes by adril" comment="" />
@@ -73,7 +73,7 @@
     "Application.MainFrame.executor": "Run",
     "Application.main_test_yaml.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging feat/gui",
+    "git-widget-placeholder": "feat/gui",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/adril/ITB Files/Semester IV/OOP/tubes/IF2210_TB2_LBR/src/main/resources/images",
     "node.js.detected.package.eslint": "true",
