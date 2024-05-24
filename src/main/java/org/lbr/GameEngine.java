@@ -13,6 +13,8 @@ import org.lbr.gameobject.item.*;
 import org.lbr.gameobject.product.*;
 import org.lbr.gameobject.cultivable.animal.*;
 import org.lbr.gameobject.cultivable.plant.*;
+import org.lbr.load_save.SaveLoad;
+import org.lbr.load_save.SaveLoadTXT;
 import org.lbr.player.*;
 import org.lbr.shop.Shop;
 
@@ -23,6 +25,7 @@ public class GameEngine {
     private String winner;
     private ScheduledExecutorService timerService;
     private final Shop mainShop;
+    private ArrayList<SaveLoad> saveLoadServices;
 
     public GameEngine() {
         currPlayer = new Player[2];
@@ -30,6 +33,9 @@ public class GameEngine {
         currPlayer[0] = new Player();
         currPlayer[1] = new Player();
         timerService = Executors.newScheduledThreadPool(1);
+        saveLoadServices = new ArrayList<>();
+        saveLoadServices.add(new SaveLoadTXT());
+
         Map<Product, Integer> productArrayList = new HashMap<>();
 
         productArrayList.put(new Product("SIRIP_HIU"), 1);
@@ -47,6 +53,22 @@ public class GameEngine {
 
     public Shop getShop() {
     	return mainShop;
+    }
+
+    public ArrayList<String> getSupportedExtension() {
+        ArrayList<String> res = new ArrayList<>();
+        for (int i = 0; i < saveLoadServices.size(); i++) {
+            res.add(saveLoadServices.get(i).extensionType());
+        }
+        return res;
+    }
+
+    public void save(String path) {
+        // TODO: call save
+    }
+
+    public void load(String path) {
+        // TODO: call load
     }
 
     public Player getPlayerAtIndex(int index) {

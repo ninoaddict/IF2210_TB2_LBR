@@ -5,6 +5,7 @@ import org.lbr.GameEngine;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -78,7 +79,10 @@ public class SaveDialog extends JFrame {
         c.insets = new Insets(0, 0, 0, 0);
         selectExtension = new JComboBox<>();
         selectExtension.setBackground(Color.LIGHT_GRAY);
-        selectExtension.setModel(new DefaultComboBoxModel<>(new String[] {"TXT"}));
+        ArrayList<String> supportedExtensions = gameEngine.getSupportedExtension();
+        String[] exts = new String[supportedExtensions.size()];
+        exts = supportedExtensions.toArray(exts);
+        selectExtension.setModel(new DefaultComboBoxModel<>(exts));
         selectExtension.setForeground(Color.BLACK);
         selectExtension.setFont(new Font("Linux Libertine", 1, 18));
         selectExtension.setPreferredSize(new Dimension(230, 30));
