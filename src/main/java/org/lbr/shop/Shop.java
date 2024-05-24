@@ -17,7 +17,7 @@ public class Shop {
         if (instance == null){
             instance = new Shop(products);
         }
-        return  instance;
+        return instance;
     }
 
     public static Shop getInstance() {
