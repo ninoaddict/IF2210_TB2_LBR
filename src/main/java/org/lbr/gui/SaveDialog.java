@@ -107,14 +107,12 @@ public class SaveDialog extends JFrame {
             try {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             } catch (Exception eee) {
-                System.out.println("GAGALLL");
+                System.out.println("GAGAL");
             }
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 chooseFileButton.setText(jfk.getSelectedFile().getName());
-                System.out.println("BERHASIL");
             } else {
                 chooseFileButton.setText("Choose File");
-                System.out.println("GAJADI");
             }
         });
         chooseFileButton.addMouseListener(new MouseAdapter() {
@@ -139,6 +137,33 @@ public class SaveDialog extends JFrame {
         c.insets = new Insets(0, 0, 0, 0);
         RoundedButton submit = new RoundedButton("Save", new Insets(12, 1, 16, 1), 16, 8);
         submit.setPreferredSize(new Dimension(300, 25));
+        submit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.LIGHT_GRAY);
+            }
+        });
+        submit.addActionListener(e -> {
+            if (jfk.getSelectedFile() == null) {
+                // TODO: handle error
+            } else {
+                try {
+                    gameEngine.save(jfk.getSelectedFile().getAbsolutePath(), (String) selectExtension.getSelectedItem());
+                } catch (Exception ee) {
+                    System.out.println(ee.toString());
+                }
+                mainFrame.setEnabled(true);
+                dispose();
+            }
+        });
+
         roundedPanel.add(submit, c);
     }
 }

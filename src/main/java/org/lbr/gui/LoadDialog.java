@@ -138,6 +138,32 @@ public class LoadDialog extends JFrame {
         c.insets = new Insets(0, 0, 0, 0);
         RoundedButton submit = new RoundedButton("Load", new Insets(12, 1, 16, 1), 16, 8);
         submit.setPreferredSize(new Dimension(300, 25));
+        submit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.GRAY);
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.LIGHT_GRAY);
+            }
+        });
+        submit.addActionListener(e -> {
+            if (jfk.getSelectedFile() == null) {
+                // TODO: handle error
+            } else {
+                try {
+                    gameEngine.load(jfk.getSelectedFile().getAbsolutePath(), (String) selectExtension.getSelectedItem());
+                    mainWindow.updateGameDisplay();
+                } catch (Exception ee) {
+                    System.out.println(ee.toString());
+                }
+                mainFrame.setEnabled(true);
+                dispose();
+            }
+        });
         roundedPanel.add(submit, c);
     }
 }

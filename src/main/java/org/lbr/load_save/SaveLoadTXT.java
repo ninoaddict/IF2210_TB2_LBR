@@ -15,98 +15,97 @@ public class SaveLoadTXT implements SaveLoad {
     @Override
     public void onSave(String directory, GameData gameData, PlayerData player1, PlayerData player2) throws Exception {
         // initialize file writer
-        FileWriter writer;
 
         // write gameData
         File gameStateFile = new File(directory + "/" + "gameState.txt");
+        FileWriter gameStateWriter = new FileWriter(gameStateFile);
         gameStateFile.createNewFile();
-        writer = new FileWriter(gameStateFile);
-        writer.write(gameData.currentTurn);
-        writer.write("\n");
-        writer.write(gameData.shop.size());
-        writer.write("\n");
+        gameStateWriter.write(Integer.toString(gameData.currentTurn));
+        gameStateWriter.write("\n");
+        gameStateWriter.write(Integer.toString(gameData.shop.size()));
+        gameStateWriter.write("\n");
         for (Map.Entry<String, Integer> entry : gameData.shop.entrySet()) {
             String key = entry.getKey();
             int value = entry.getValue();
-            writer.write(key);
-            writer.write(" ");
-            writer.write(value);
-            writer.write("\n");
+            gameStateWriter.write(key);
+            gameStateWriter.write(" ");
+            gameStateWriter.write(Integer.toString(value));
+            gameStateWriter.write("\n");
         }
+        gameStateWriter.close();
 
         // write player 1 data
         File player1File = new File(directory + "/" + "player1.txt");
+        FileWriter player1Writer = new FileWriter(player1File);
         player1File.createNewFile();
-        writer = new FileWriter(player1File);
-        writer.write(player1.gulden);
-        writer.write("\n");
-        writer.write(player1.deck);
-        writer.write("\n");
+        player1Writer.write(Integer.toString(player1.gulden));
+        player1Writer.write("\n");
+        player1Writer.write(Integer.toString(player1.deck));
+        player1Writer.write("\n");
 
-        writer.write(player1.activeDeck.size());
-        writer.write("\n");
+        player1Writer.write(Integer.toString(player1.activeDeck.size()));
+        player1Writer.write("\n");
         for (int i = 0; i < player1.activeDeck.size(); i++) {
-            writer.write(player1.activeDeck.get(i).coordinate.toString());
-            writer.write(" ");
-            writer.write(player1.activeDeck.get(i).name);
-            writer.write("\n");
+            player1Writer.write(player1.activeDeck.get(i).coordinate.toString());
+            player1Writer.write(" ");
+            player1Writer.write(player1.activeDeck.get(i).name);
+            player1Writer.write("\n");
         }
 
-        writer.write(player1.field.size());
-        writer.write("\n");
+        player1Writer.write(Integer.toString(player1.field.size()));
+        player1Writer.write("\n");
         for (int i = 0; i < player1.field.size(); i++) {
-            writer.write(player1.field.get(i).coordinate.toString());
-            writer.write(" ");
-            writer.write(player1.field.get(i).name);
-            writer.write(" ");
-            writer.write(player1.field.get(i).weight_or_age);
-            writer.write(" ");
-            writer.write(player1.field.get(i).item.size());
-            writer.write(" ");
+            player1Writer.write(player1.field.get(i).coordinate.toString());
+            player1Writer.write(" ");
+            player1Writer.write(player1.field.get(i).name);
+            player1Writer.write(" ");
+            player1Writer.write(Integer.toString(player1.field.get(i).weight_or_age));
+            player1Writer.write(" ");
+            player1Writer.write(Integer.toString(player1.field.get(i).item.size()));
+            player1Writer.write(" ");
             for (int j = 0; j < player1.field.get(i).item.size(); j++) {
-                writer.write(player1.field.get(i).item.get(j));
-                writer.write(" ");
+                player1Writer.write(player1.field.get(i).item.get(j));
+                player1Writer.write(" ");
             }
-            writer.write("\n");
+            player1Writer.write("\n");
         }
+        player1Writer.close();
 
         // write player 2 data
         File player2File = new File(directory + "/" + "player2.txt");
         player2File.createNewFile();
-        writer = new FileWriter(player2File);
-        writer.write(player2.gulden);
-        writer.write("\n");
-        writer.write(player2.deck);
-        writer.write("\n");
-        writer.write(player2.activeDeck.size());
-        writer.write("\n");
+        FileWriter player2Writer = new FileWriter(player2File);
+        player2Writer.write(Integer.toString(player2.gulden));
+        player2Writer.write("\n");
+        player2Writer.write(Integer.toString(player2.deck));
+        player2Writer.write("\n");
+        player2Writer.write(Integer.toString(player2.activeDeck.size()));
+        player2Writer.write("\n");
         for (int i = 0; i < player2.activeDeck.size(); i++) {
-            writer.write(player2.activeDeck.get(i).coordinate.toString());
-            writer.write(" ");
-            writer.write(player2.activeDeck.get(i).name);
-            writer.write("\n");
+            player2Writer.write(player2.activeDeck.get(i).coordinate.toString());
+            player2Writer.write(" ");
+            player2Writer.write(player2.activeDeck.get(i).name);
+            player2Writer.write("\n");
         }
 
-        writer.write(player2.field.size());
-        writer.write("\n");
+        player2Writer.write(Integer.toString(player2.field.size()));
+        player2Writer.write("\n");
         for (int i = 0; i < player2.field.size(); i++) {
-            writer.write(player2.field.get(i).coordinate.toString());
-            writer.write(" ");
-            writer.write(player2.field.get(i).name);
-            writer.write(" ");
-            writer.write(player2.field.get(i).weight_or_age);
-            writer.write(" ");
-            writer.write(player2.field.get(i).item.size());
-            writer.write(" ");
+            player2Writer.write(player2.field.get(i).coordinate.toString());
+            player2Writer.write(" ");
+            player2Writer.write(player2.field.get(i).name);
+            player2Writer.write(" ");
+            player2Writer.write(Integer.toString(player2.field.get(i).weight_or_age));
+            player2Writer.write(" ");
+            player2Writer.write(Integer.toString(player2.field.get(i).item.size()));
+            player2Writer.write(" ");
             for (int j = 0; j < player2.field.get(i).item.size(); j++) {
-                writer.write(player2.field.get(i).item.get(j));
-                writer.write(" ");
+                player2Writer.write(player2.field.get(i).item.get(j));
+                player2Writer.write(" ");
             }
-            writer.write("\n");
+            player2Writer.write("\n");
         }
-
-        // close filewriter
-        writer.close();
+        player2Writer.close();
     }
 
     @Override
@@ -127,7 +126,8 @@ public class SaveLoadTXT implements SaveLoad {
             shop.put(itemName, quantity);
         }
 
-        gameData = new GameData(currentTurn, shop);
+        gameData.currentTurn = currentTurn;
+        gameData.shop = shop;
 
         // read player 1 data
         File player1File = new File(directory + "/" + "player1.txt");
@@ -158,7 +158,10 @@ public class SaveLoadTXT implements SaveLoad {
             }
             field1.add(new FieldData(Coordinate.translate(coor), name, ageOrWeight, potions));
         }
-        player1 = new PlayerData(gulden1, numOfDeck1, activeDeck1, field1);
+        player1.gulden = gulden1;
+        player1.deck = numOfDeck1;
+        player1.activeDeck = activeDeck1;
+        player1.field = field1;
 
         // read player 2 data
         File player2File = new File(directory + "/" + "player2.txt");
@@ -189,7 +192,10 @@ public class SaveLoadTXT implements SaveLoad {
             }
             field2.add(new FieldData(Coordinate.translate(coor), name, ageOrWeight, potions));
         }
-        player2 = new PlayerData(gulden2, numOfDeck2, activeDeck2, field2);
+        player2.gulden = gulden2;
+        player2.deck = numOfDeck2;
+        player2.activeDeck = activeDeck1;
+        player2.field = field2;
 
         // close scanner
         sc.close();

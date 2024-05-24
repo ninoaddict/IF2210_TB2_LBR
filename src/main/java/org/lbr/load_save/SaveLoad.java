@@ -28,14 +28,14 @@ public interface SaveLoad {
                 x *= 10;
                 x += coor.charAt(i) - '0';
             }
-
+            x--;
             return new Coordinate(x, y);
         }
 
         @Override
         public String toString () {
             String col = Character.toString((char) (y + 'A'));
-            String row = Integer.toString(x);
+            String row = Integer.toString(x + 1);
             return col + row;
         }
     }
