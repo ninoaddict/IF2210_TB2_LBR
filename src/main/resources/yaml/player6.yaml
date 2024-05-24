@@ -1,0 +1,6 @@
+num_of_active_deck: 1
+num_of_card_in_field: 1
+gulden: 5
+num_of_deck: 4
+active_deck:
+- {name: I FEEL IT COMING, location: B2}

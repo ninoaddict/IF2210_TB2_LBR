@@ -17,6 +17,7 @@ import org.lbr.gameobject.cultivable.plant.*;
 import org.lbr.load_save.SaveLoad;
 import org.lbr.load_save.SaveLoadJSON;
 import org.lbr.load_save.SaveLoadTXT;
+import org.lbr.load_save.SaveLoadYAML;
 import org.lbr.player.*;
 import org.lbr.shop.Shop;
 
@@ -38,6 +39,7 @@ public class GameEngine {
         saveLoadServices = new ArrayList<>();
         saveLoadServices.add(new SaveLoadTXT());
         saveLoadServices.add(new SaveLoadJSON());
+        saveLoadServices.add(new SaveLoadYAML());
 
         Map<Product, Integer> productArrayList = new HashMap<>();
 
