@@ -98,9 +98,7 @@ public class SaveDialog extends JFrame {
                 System.out.println("GAGAL");
             }
             jfk = new JFileChooser("C:");
-            System.out.println(selectExtension.getSelectedItem());
-            String fileExt = (String) selectExtension.getSelectedItem();
-            jfk.setFileFilter(new FileNameExtensionFilter(fileExt.toLowerCase(), fileExt.toLowerCase()));
+            jfk.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int returnVal = jfk.showOpenDialog(this);
             try {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -108,7 +106,11 @@ public class SaveDialog extends JFrame {
                 System.out.println("GAGALLL");
             }
             if (returnVal == JFileChooser.APPROVE_OPTION) {
+                chooseFileButton.setText(jfk.getSelectedFile().getName());
                 System.out.println("BERHASIL");
+            } else {
+                chooseFileButton.setText("Choose File");
+                System.out.println("GAJADI");
             }
         });
         chooseFileButton.addMouseListener(new MouseAdapter() {
