@@ -113,6 +113,7 @@ public class ObjectInfoDialog extends JFrame {
                     main.updatePlayerHandDisplay();
                     parent.setGameObject(null);
                 } catch (Exception ee) {
+                    JOptionPane.showMessageDialog(this, ee.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 dispose();
             });

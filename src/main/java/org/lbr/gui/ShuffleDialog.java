@@ -20,7 +20,7 @@ public class ShuffleDialog extends JFrame {
         this.setSize(new Dimension(300, 400));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(frame);
-        this.setOpacity((float)0.9);
+        this.setOpacity((float)0.95);
         cardList = new ArrayList<>();
 
         roundedPanel = new DialogPanel(300, 400, new Color(230, 230, 230), new GridBagLayout());

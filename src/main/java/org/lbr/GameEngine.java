@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
-import java.util.concurrent.Executors;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -25,8 +24,9 @@ public class GameEngine {
     private int currTurn;
     private final Shop mainShop;
     private HashMap<String, SaveLoad> saveLoadMap;
+    private static GameEngine gameEngine;
 
-    public GameEngine() {
+    private GameEngine() {
         currPlayer = new Player[2];
         currTurn = 1;
         currPlayer[0] = new Player();
@@ -47,6 +47,13 @@ public class GameEngine {
         productArrayList.put(new Product("STROBERI"), 0);
 
         mainShop = Shop.getInstance(productArrayList);
+    }
+
+    public static GameEngine getInstance() {
+        if (gameEngine == null) {
+            gameEngine = new GameEngine();
+        }
+        return gameEngine;
     }
 
     public Shop getShop() {
