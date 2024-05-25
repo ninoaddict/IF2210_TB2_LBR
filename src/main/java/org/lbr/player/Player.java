@@ -246,6 +246,7 @@ public class Player {
     public void sell(int idx, Shop shop) throws Exception {
         GameObject gameObject = getHandIdx(idx);
         if (!(gameObject instanceof Product product)){
+            System.out.println(gameObject.getName());
             throw new Exception("Can only sell product");
         }
 
