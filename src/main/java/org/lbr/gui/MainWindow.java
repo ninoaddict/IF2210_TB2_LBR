@@ -843,6 +843,10 @@ public class MainWindow extends JPanel {
         this.mainFrame = mainFrame;
     }
 
+    public MainFrame getMainFrame() {
+        return mainFrame;
+    }
+
     public void buyProduct(Product product, int idx) throws Exception {
         gameEngine.getCurrPlayer().buy(product, gameEngine.getShop(), idx);
         int k = (gameEngine.getCurrTurn() - 1) % 2;

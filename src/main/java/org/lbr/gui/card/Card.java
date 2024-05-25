@@ -2,6 +2,7 @@ package org.lbr.gui.card;
 
 import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
+import org.lbr.gui.MainWindow;
 import org.lbr.gui.ObjectInfoDialog;
 import org.lbr.player.Player;
 import org.lbr.gameobject.product.*;
@@ -98,6 +99,8 @@ public class Card extends JPanel {
                 Card comp = (Card) e.getSource();
                 if (comp.getGameObject() != null) {
                     if (comp.getCurrentPosition() == Card.FIELD) {
+                        MainWindow main = (MainWindow) comp.getParent().getParent().getParent().getParent();
+                        main.getMainFrame().setEnabled(false);
                         ObjectInfoDialog info = new ObjectInfoDialog(comp);
                         info.setVisible(true);
                     }

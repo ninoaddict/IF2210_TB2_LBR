@@ -19,7 +19,8 @@ public class ObjectInfoDialog extends JFrame {
         this.setUndecorated(true);
         this.setSize(new Dimension(300, 200));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(parent.getParent().getParent().getParent());
+        MainWindow meow = (MainWindow)parent.getParent().getParent().getParent().getParent();
+        this.setLocationRelativeTo(meow.getMainFrame());
         this.setOpacity((float) 0.96);
 
         GameObject gameObject = parent.getGameObject();
@@ -107,14 +108,15 @@ public class ObjectInfoDialog extends JFrame {
 
             RoundedButton button = new RoundedButton("Panen", new Insets(3, 5, 3, 5), 12, 15);
             button.addActionListener(e -> {
+                MainWindow main = (MainWindow)parent.getParent().getParent().getParent().getParent();
                 try {
                     parent.getOwner().harvest(parent.getRow(), parent.getCol());
-                    MainWindow main = (MainWindow)parent.getParent().getParent().getParent().getParent();
                     main.updatePlayerHandDisplay();
                     parent.setGameObject(null);
                 } catch (Exception ee) {
-                    JOptionPane.showMessageDialog(this, ee.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(main.getMainFrame(), ee.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
+                main.getMainFrame().setEnabled(true);
                 dispose();
             });
 
@@ -152,6 +154,8 @@ public class ObjectInfoDialog extends JFrame {
             gbc.insets = new Insets(0, 0, 0, 0);
             RoundedButton buttonClose = new RoundedButton("Close", new Insets(3, 5, 3, 5), 12, 15);
             buttonClose.addActionListener(e -> {
+                MainWindow main = (MainWindow)parent.getParent().getParent().getParent().getParent();
+                main.getMainFrame().setEnabled(true);
                 dispose();
             });
             buttonClose.addMouseListener(new MouseAdapter() {
