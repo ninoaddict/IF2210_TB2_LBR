@@ -120,7 +120,10 @@
                     <target>21</target>
                     <excludes>
                         <exclude>
-                            org/lbr/load_save/*.java
+                            org/lbr/load_save/SaveLoadJSON.java
+                        </exclude>
+                        <exclude>
+                            org/lbr/load_save/SaveLoadYAML.java
                         </exclude>
                     </excludes>
                 </configuration>
