@@ -1,6 +1,5 @@
 package org.lbr.gui.card;
 
-import org.lbr.GameEngine;
 import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Animal;
@@ -11,7 +10,6 @@ import org.lbr.gameobject.product.Product;
 import org.lbr.gui.MainWindow;
 
 import javax.swing.*;
-import javax.swing.text.html.HTML.Tag;
 
 import java.awt.datatransfer.*;
 import java.io.IOException;
@@ -69,33 +67,25 @@ public class CardTransferHandler extends TransferHandler {
             if (sourceCard.equals(targetCard)) {
                 return false;
             }
-            System.out.println("SOURCE: " + sourceCard.getCol() + " TARGET: " + targetCard.getCol());
 
             if (sourceCard.getCurrentPosition() == Card.FIELD && targetCard.getCurrentPosition() == Card.DECK) {
                 return false;
             }
             if (sourceCard.getCurrentPosition() == Card.SHOP && targetCard.getCurrentPosition() == Card.DECK) {
-            	System.out.println("HEREAA");
             	if (targetCard.getGameObject()  != null) {
             		return false;
             	}
             	try {
-            		System.out.println("VBECTOR");
 	            	GameObject sourceGameObject = sourceCard.getGameObject();
-	            	System.out.println(sourceGameObject.getName().toUpperCase().replace(' ', '_'));
 	            	Product product = new Product(sourceGameObject.getName().toUpperCase().replace(' ', '_'));
-	            	System.out.println("GOING");
 	            	((MainWindow)targetCard.getParent().getParent().getParent()).buyProduct(product, targetCard.getCol());
 	            	sourceCard.buyHappened(-1);
-	            	System.out.println("SAYANG");
-	            	System.out.println(product.getName());
 	            	targetCard.setGameObject(product);
 	            	
 	            	return true;
             	} catch (Exception e) {
 					return false;
 				}
-            	
             }
             if (sourceCard.getCurrentPosition() == Card.DECK && targetCard.getCurrentPosition() == Card.SHOP) {
             	if(sourceCard.getGameObject().getName() != targetCard.getGameObject().getName()) {
@@ -125,7 +115,6 @@ public class CardTransferHandler extends TransferHandler {
             		if (targetCard.getGameObject() == null) {
             			return false;
             		}
-            		System.out.println("DEBUG1");
             		if (sourceCard.getGameObject() instanceof Product) {
             			if (!(targetCard.getGameObject() instanceof Animal)) {
             				return false;
@@ -140,14 +129,10 @@ public class CardTransferHandler extends TransferHandler {
             		} else {
                         GameObject srcGameObject = sourceCard.getGameObject();
             			boolean canDrop = ((MainWindow)(sourceCard.getParent().getParent().getParent())).itemDrop(targetCard.getOwner(), (Item) sourceCard.getGameObject(), (Cultivable) targetCard.getGameObject(), sourceCard.getCol(), targetCard.getRow(), targetCard.getCol());
-            			System.out.println("THING: " + Integer.toString(targetCard.getOwner().getGulden()));
             			if (!canDrop) {
-            				System.out.println("CANDROPFALSE");
             				return false;
             			}
-                        System.out.println("MASUK ITEM DROP");
                         if (srcGameObject instanceof InstantHarvest) {
-                            System.out.println("INSTANT HARVEST");
                             targetCard.setGameObject(null);
                         } else if (srcGameObject instanceof Destroy) {
                             targetCard.setGameObject(null);
@@ -172,7 +157,6 @@ public class CardTransferHandler extends TransferHandler {
 
             		targetCard.setGameObject(droppedGameObject);
                     sourceCard.setGameObject(targetGameObject); 
-                    System.out.println("YA");
                     return true;
             	}
             }
@@ -184,7 +168,6 @@ public class CardTransferHandler extends TransferHandler {
 
         		targetCard.setGameObject(droppedGameObject);
                 sourceCard.setGameObject(targetGameObject); 
-                System.out.println("FIELD TO FIELD");
                 return true;
             }
             

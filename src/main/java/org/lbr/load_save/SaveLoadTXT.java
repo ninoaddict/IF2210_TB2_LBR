@@ -1,17 +1,17 @@
 package org.lbr.load_save;
 
-import com.sun.source.doctree.EscapeTree;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class SaveLoadTXT implements SaveLoad {
+    public SaveLoadTXT() {
+
+    }
+
     @Override
     public void onSave(String directory, GameData gameData, PlayerData player1, PlayerData player2) throws Exception {
         // initialize file writer
@@ -128,6 +128,7 @@ public class SaveLoadTXT implements SaveLoad {
 
         gameData.currentTurn = currentTurn;
         gameData.shop = shop;
+        sc.close();
 
         // read player 1 data
         File player1File = new File(directory + "/" + "player1.txt");
@@ -162,6 +163,7 @@ public class SaveLoadTXT implements SaveLoad {
         player1.deck = numOfDeck1;
         player1.activeDeck = activeDeck1;
         player1.field = field1;
+        sc.close();
 
         // read player 2 data
         File player2File = new File(directory + "/" + "player2.txt");

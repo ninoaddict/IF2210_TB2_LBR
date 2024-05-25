@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import org.lbr.ObjectFactory;
 import org.lbr.gameobject.GameObject;
-import org.lbr.gameobject.product.Product;
 import org.lbr.gui.card.Card;
 import org.lbr.player.Player;
 
@@ -12,15 +11,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ShuffleDialog extends JFrame {
-    private Player player;
     private JPanel roundedPanel;
-    private MainWindow frame;
     private final ArrayList<Card> cardList;
     private final int needed;
 
     public ShuffleDialog(Player player, MainWindow frame, MainFrame mainFrame) {
-        this.player = player;
-        this.frame = frame;
         this.setUndecorated(true);
         this.setSize(new Dimension(300, 400));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -9,16 +9,10 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PluginDialog extends JFrame {
-    private GameEngine gameEngine;
     private JPanel roundedPanel;
-    private MainWindow mainWindow;
-    private MainFrame mainFrame;
     private JFileChooser jfk;
 
     public PluginDialog(GameEngine gameEngine, MainFrame mainFrame, MainWindow mainWindow) {
-        this.gameEngine = gameEngine;
-        this.mainFrame = mainFrame;
-        this.mainWindow = mainWindow;
         this.jfk = new JFileChooser();
         this.setUndecorated(true);
         this.setSize(new Dimension(400, 300));
@@ -73,7 +67,7 @@ public class PluginDialog extends JFrame {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception eee) {
-                System.out.println("GAGAL");
+                // HANDLE EXCEPTION
             }
             jfk = new JFileChooser("C:");
             jfk.setFileFilter(new FileNameExtensionFilter("jar", "jar"));
@@ -81,10 +75,12 @@ public class PluginDialog extends JFrame {
             try {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             } catch (Exception eee) {
-                System.out.println("GAGALLL");
+                // HANDLE EXCEPTION
             }
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                System.out.println("BERHASIL");
+                chooseFileButton.setText(jfk.getSelectedFile().getName());
+            } else {
+                chooseFileButton.setText("Choose File");
             }
         });
         chooseFileButton.addMouseListener(new MouseAdapter() {
@@ -110,6 +106,32 @@ public class PluginDialog extends JFrame {
         c.insets = new Insets(0, 0, 0, 0);
         RoundedButton submit = new RoundedButton("Save", new Insets(12, 1, 16, 1), 16, 8);
         submit.setPreferredSize(new Dimension(300, 25));
+        submit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.LIGHT_GRAY);
+            }
+        });
+        submit.addActionListener(e -> {
+            if (jfk.getSelectedFile() == null) {
+                JOptionPane.showMessageDialog(mainFrame, "Please select a file", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    gameEngine.addPlugin(jfk.getSelectedFile().getAbsolutePath());
+                    mainFrame.setEnabled(true);
+                    dispose();
+                } catch (Exception ee) {
+                    JOptionPane.showMessageDialog(mainFrame, ee.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         roundedPanel.add(submit, c);
     }
 }

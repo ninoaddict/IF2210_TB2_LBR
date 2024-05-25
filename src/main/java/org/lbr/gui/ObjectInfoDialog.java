@@ -5,11 +5,9 @@ import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Animal;
 import org.lbr.gameobject.cultivable.plant.Plant;
 import org.lbr.gameobject.item.Item;
-import org.lbr.gameobject.item.Trap;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import org.lbr.gui.card.Card;
-import org.lbr.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ObjectInfoDialog extends JFrame {
-    private Card parent;
     public ObjectInfoDialog(Card parent) {
-        this.parent = parent;
         this.setUndecorated(true);
         this.setSize(new Dimension(300, 200));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

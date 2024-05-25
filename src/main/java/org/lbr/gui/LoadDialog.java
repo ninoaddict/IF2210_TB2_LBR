@@ -7,20 +7,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LoadDialog extends JFrame {
-    private GameEngine gameEngine;
     private JPanel roundedPanel;
-    private MainWindow mainWindow;
-    private MainFrame mainFrame;
     private JComboBox<String> selectExtension;
     private JFileChooser jfk;
 
     public LoadDialog(GameEngine gameEngine, MainFrame mainFrame, MainWindow mainWindow) {
-        this.gameEngine = gameEngine;
-        this.mainFrame = mainFrame;
-        this.mainWindow = mainWindow;
         this.jfk = new JFileChooser();
         this.setUndecorated(true);
         this.setSize(new Dimension(400, 300));
@@ -99,7 +92,7 @@ public class LoadDialog extends JFrame {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception eee) {
-                System.out.println("GAGAL");
+
             }
             jfk = new JFileChooser("C:");
             jfk.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -107,10 +100,9 @@ public class LoadDialog extends JFrame {
             try {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             } catch (Exception eee) {
-                System.out.println("GAGALLL");
+
             }
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                System.out.println("BERHASIL");
                 chooseFileButton.setText(jfk.getSelectedFile().getName());
             } else {
                 chooseFileButton.setText("Choose File");
@@ -152,16 +144,16 @@ public class LoadDialog extends JFrame {
         });
         submit.addActionListener(e -> {
             if (jfk.getSelectedFile() == null) {
-                // TODO: handle error
+                JOptionPane.showMessageDialog(mainFrame, "Please select a file", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 try {
                     gameEngine.load(jfk.getSelectedFile().getAbsolutePath(), (String) selectExtension.getSelectedItem());
                     mainWindow.updateGameDisplay();
+                    mainFrame.setEnabled(true);
+                    dispose();
                 } catch (Exception ee) {
-                    System.out.println(ee.toString());
+                    JOptionPane.showMessageDialog(mainFrame, ee.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                mainFrame.setEnabled(true);
-                dispose();
             }
         });
         roundedPanel.add(submit, c);

@@ -2,7 +2,6 @@ package org.lbr.player;
 
 import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
-import org.lbr.gameobject.cultivable.animal.Carnivore;
 import org.lbr.gameobject.cultivable.plant.Plant;
 import org.lbr.gameobject.product.Product;
 import org.lbr.shop.Shop;
@@ -17,7 +16,7 @@ public class Player {
     private ArrayList<GameObject> hand_deck;
 
     public Player() {
-        this.gulden = 1000;
+        this.gulden = 0;
         this.field = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Cultivable> row = new ArrayList<>(5);
@@ -214,7 +213,6 @@ public class Player {
     }
 
     public void from_deck_to_field(int fromCol, int toRow, int toCol) throws Exception {
-    	System.out.println("Deck to field");
     	Cultivable tempCultivable = field.get(toRow).get(toCol);
     	field.get(toRow).set(toCol, (Cultivable) hand_deck.get(fromCol));
     	setHandIdx(tempCultivable, fromCol);
@@ -261,7 +259,7 @@ public class Player {
             try {
                 plant.addAge(1);
             } catch (Exception e){
-                System.out.println( e.getMessage());
+                //
             }
         }
     }

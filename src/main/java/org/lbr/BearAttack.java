@@ -1,8 +1,6 @@
 package org.lbr;
 
-import java.security.cert.TrustAnchor;
 import java.util.Random;
-import org.lbr.gameobject.cultivable.animal.*;
 import org.lbr.player.*;
 
 public class BearAttack {
@@ -61,7 +59,7 @@ public class BearAttack {
     }
 
     public void setX1(int x1) {
-        this.x1 = x1;
+        BearAttack.x1 = x1;
     }
 
     public int getY1() {
@@ -69,7 +67,7 @@ public class BearAttack {
     }
 
     public void setY1(int y1) {
-        this.y1 = y1;
+        BearAttack.y1 = y1;
     }
 
     public int getX2() {
@@ -77,7 +75,7 @@ public class BearAttack {
     }
 
     public void setX2(int x2) {
-        this.x2 = x2;
+        BearAttack.x2 = x2;
     }
 
     public int getY2() {
@@ -85,7 +83,7 @@ public class BearAttack {
     }
 
     public void setY2(int y2) {
-        this.y2 = y2;
+        BearAttack.y2 = y2;
     }
 
     public Player getPoorGuy() {
@@ -93,7 +91,7 @@ public class BearAttack {
     }
 
     public void setPoorGuy(Player poorGuy) {
-        this.poorGuy = poorGuy;
+        BearAttack.poorGuy = poorGuy;
     }
 
     // method
@@ -105,12 +103,6 @@ public class BearAttack {
             while (noTrap && j <= x2){
                 if ( poorGuy.isFieldCellTrap(i, j)){
                     noTrap = false;
-                }
-                if (!poorGuy.isFieldCellEmpty(i, j)) {
-                    System.out.println(poorGuy.getCultivable(i, j).getName());
-                    System.out.println(i + " " + j);
-                } else {
-                    System.out.println(i + " Empty " + j);
                 }
                 j++;
             }

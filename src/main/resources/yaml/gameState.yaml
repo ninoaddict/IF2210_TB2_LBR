@@ -1,7 +1,0 @@
-current_turn: 5
-num_of_shop_item: 2
-shop_items:
-  - name: "HIU_DARAT"
-    num_item: 20
-  - name: "WHAT"
-    num_item: 16
