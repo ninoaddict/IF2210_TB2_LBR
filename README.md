@@ -62,11 +62,7 @@ Tugas Besar 02 Pemrograman Berorientasi Objek (IF2210) berbasis _graphical user 
 ```bash
 https://github.com/scifo04/IF2210_TB2_LBR
 ```
-2. Melakukan build project menggunakan maven
-```bash
-mvn package
-```
-3. Melakukan run terhadap project dengan menjalankan command berikut
+2. Melakukan run terhadap project dengan menjalankan command berikut untuk menjalankan main file pada dist
 ```
 ./run.bat
 ```
