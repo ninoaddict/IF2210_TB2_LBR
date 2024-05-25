@@ -875,8 +875,12 @@ public class MainWindow extends JPanel {
         gameEngine.getCurrPlayer().from_deck_to_field(fromCol, toRow, toCol);
     }
 
-    public void swapField(int rowFrom, int colFrom, int rowTo, int colTo) {
+    public boolean swapField(int rowFrom, int colFrom, int rowTo, int colTo, Player owner) {
+        if (!owner.equals(gameEngine.getCurrPlayer())) {
+            return false;
+        }
         gameEngine.getCurrPlayer().swap_field(rowFrom, colFrom, rowTo, colTo);
+        return true;
     }
 
     public void showSaveDialog() {
