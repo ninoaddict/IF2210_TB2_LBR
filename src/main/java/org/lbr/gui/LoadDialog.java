@@ -47,6 +47,18 @@ public class LoadDialog extends JFrame {
                 JButton curr =(JButton) e.getSource();
                 curr.setBackground(Color.LIGHT_GRAY);
             }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.LIGHT_GRAY);
+            }
         });
         roundedPanel.add(backButton, c);
 
@@ -120,6 +132,18 @@ public class LoadDialog extends JFrame {
                 JButton curr =(JButton) e.getSource();
                 curr.setBackground(Color.LIGHT_GRAY);
             }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.LIGHT_GRAY);
+            }
         });
 
         roundedPanel.add(chooseFileButton, c);
@@ -136,8 +160,21 @@ public class LoadDialog extends JFrame {
                 JButton curr =(JButton) e.getSource();
                 curr.setBackground(Color.GRAY);
             }
+
             @Override
             public void mouseReleased(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                JButton curr =(JButton) e.getSource();
+                curr.setBackground(Color.GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
                 JButton curr =(JButton) e.getSource();
                 curr.setBackground(Color.LIGHT_GRAY);
             }

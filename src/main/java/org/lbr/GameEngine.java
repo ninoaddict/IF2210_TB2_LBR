@@ -6,8 +6,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -25,8 +23,6 @@ import org.lbr.shop.Shop;
 public class GameEngine {
     private final Player[] currPlayer;
     private int currTurn;
-    private String winner;
-    private ScheduledExecutorService timerService;
     private final Shop mainShop;
     private HashMap<String, SaveLoad> saveLoadMap;
 
@@ -35,7 +31,6 @@ public class GameEngine {
         currTurn = 1;
         currPlayer[0] = new Player();
         currPlayer[1] = new Player();
-        timerService = Executors.newScheduledThreadPool(1);
         saveLoadMap = new HashMap<>();
         saveLoadMap.put("TXT", new SaveLoadTXT());
 
@@ -55,7 +50,7 @@ public class GameEngine {
     }
 
     public Shop getShop() {
-    	return mainShop;
+        return mainShop;
     }
 
     public ArrayList<String> getSupportedExtension() {
@@ -275,7 +270,7 @@ public class GameEngine {
     }
 
     public Player getPlayerAtIndex(int index) {
-    	return currPlayer[index];
+        return currPlayer[index];
     }
 
     // getter
@@ -302,35 +297,5 @@ public class GameEngine {
         } else {
             return "Player 2";
         }
-    }
-
-    public void WaitParalelly(int seconds) {
-        timerService.scheduleAtFixedRate(new Runnable() {
-            int remainingTime = seconds;
-
-            @Override
-            public void run() {
-                if (remainingTime > 0) {
-                    remainingTime--;
-                } else {
-                    timerService.shutdown();
-                }
-            }
-        }, 0, 1, TimeUnit.SECONDS);
-    }
-
-    public void run() {
-        while (currTurn < 20) {
-//            ArrayList<GameObject> shuffles = getShuffleCards();
-            // ADD TO CURRENT PLAYER
-            int bearAttackChance = (new Random()).nextInt(100) + 1;
-            if (bearAttackChance <= 60) {
-                BearAttack.refresh();
-                Random random = new Random();
-                WaitParalelly( random.nextInt(31) + 30);
-            }
-            nextTurn();
-        }
-        timerService.shutdown();
     }
 }

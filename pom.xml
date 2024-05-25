@@ -25,6 +25,12 @@
 <!--                <configuration>-->
 <!--                    <source>21</source>-->
 <!--                    <target>21</target>-->
+<!--                    <includes>-->
+<!--                        <include>-->
+<!--                            <include>org/lbr/load_save/SaveLoadJSON.java</include>-->
+<!--                            <include>org/lbr/load_save/SaveLoad.java</include>-->
+<!--                        </include>-->
+<!--                    </includes>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
 
@@ -65,6 +71,10 @@
 <!--                <configuration>-->
 <!--                    <source>21</source>-->
 <!--                    <target>21</target>-->
+<!--                    <includes>-->
+<!--                        <include>org/lbr/load_save/SaveLoadYAML.java</include>-->
+<!--                        <include>org/lbr/load_save/SaveLoad.java</include>-->
+<!--                    </includes>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
 
@@ -138,7 +148,6 @@
             </plugin>
         </plugins>
     </build>
-
 
     <dependencies>
         <dependency>

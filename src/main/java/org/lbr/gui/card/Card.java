@@ -101,9 +101,6 @@ public class Card extends JPanel {
                         ObjectInfoDialog info = new ObjectInfoDialog(comp);
                         info.setVisible(true);
                     }
-                } else {
-//                    ShuffleDialog sd = new ShuffleDialog(comp.getOwner(), comp);
-//                    sd.setVisible(true);
                 }
             }
         });
@@ -300,5 +297,10 @@ public class Card extends JPanel {
     public void updateStock(int newStock) {
         this.stock = newStock;
         this.stockJLabel.setText("Stock: " + Integer.toString(this.stock));
+    }
+
+    public void updatePrice(int newPrice) {
+        this.price = newPrice;
+        this.priceJLabel.setText("Price: " + Integer.toString(newPrice));
     }
 }

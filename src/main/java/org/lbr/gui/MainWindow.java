@@ -311,7 +311,7 @@ public class MainWindow extends JPanel {
             for (int j = 0; j < 3; j++) {
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
-                Card card = new Card(new Product(productNameStrings.get(i * 3 + j)), null, i, j, Card.SHOP, 1);
+                Card card = new Card(new Product(productNameStrings.get(i * 3 + j)), null, i, j, Card.SHOP, 0);
                 shopCard.add(card);
                 shop_card_gridJPanel.add(card, gridBagConstraints);
             }
@@ -846,6 +846,12 @@ public class MainWindow extends JPanel {
         shuffle.setVisible(true);
     }
 
+    public void win() {
+        mainFrame.setEnabled(false);
+        WinnerDialog wd = new WinnerDialog("Player 1", mainFrame);
+        wd.setVisible(true);
+    }
+
     public void considerBearAttack() {
         Random rand = new Random();
         int bear_attack_pos = rand.nextInt(11);
@@ -914,6 +920,7 @@ public class MainWindow extends JPanel {
         for (Map.Entry<Product, Integer> entry : mp.entrySet()) {
             shopCard.get(idx).setGameObject(new Product(entry.getKey()));
             shopCard.get(idx).updateStock(entry.getValue());
+            shopCard.get(idx).updatePrice(entry.getKey().getPrice());
             idx++;
         }
     }

@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87750fff-8301-4d7f-a5fd-d6230a6d8c90" name="Changes" comment="&quot;Feat: Cultivable, GameObject, and Product&quot;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/WinnerDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/GameEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/LoadDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/LoadDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/ShuffleDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/ShuffleDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/ObjectInfoDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/ObjectInfoDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/PluginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/PluginDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/SaveDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/SaveDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lbr/gui/card/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lbr/gui/card/Card.java" afterDir="false" />
     </list>
     <list id="b124778a-b2e1-487c-8e83-7f51fc9a40b8" name="Changes by adril" comment="" />
@@ -162,7 +168,8 @@
       <workItem from="1716543686758" duration="9363000" />
       <workItem from="1716570491683" duration="9549000" />
       <workItem from="1716608621795" duration="6069000" />
-      <workItem from="1716615739403" duration="4518000" />
+      <workItem from="1716615739403" duration="8789000" />
+      <workItem from="1716626017741" duration="5599000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Feat: Cultivable, GameObject, and Product&quot;">
       <option name="closed" value="true" />
