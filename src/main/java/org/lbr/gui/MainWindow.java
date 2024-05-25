@@ -18,6 +18,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
@@ -26,6 +29,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -119,6 +125,10 @@ public class MainWindow extends JPanel {
     private CardLayout deckCardLayout;
     private CardLayout cardLayout;
     private JPanel card_grid_panel;
+    private long last_bear_attack = -1;
+    private JLabel temp;
+    private JLabel temp2;
+    private JLabel deck_remaining_label;
 
     MainWindow(GameEngine ge) {
         try {
@@ -129,6 +139,28 @@ public class MainWindow extends JPanel {
             shopCard = new ArrayList<>();
             fieldPlayer1 = new ArrayList<>(4);
             fieldPlayer2 = new ArrayList<>(4);
+
+            try {
+                AudioInputStream audioInputStream =
+                        AudioSystem.getAudioInputStream(this.getClass().getResource("/music/background_music.wav"));
+                Clip clip = AudioSystem.getClip();
+
+                Thread uwu = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            clip.open(audioInputStream);
+                            clip.loop(Clip.LOOP_CONTINUOUSLY);
+                        } catch (Exception e) {
+                            // System.out.println(e.getMessage());
+                        }
+                    }
+                });
+                uwu.start();
+            } catch (Exception e) {
+                // System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
 
             for (int i = 0; i < 4; i++) {
                 ArrayList<Card> temp1 = new ArrayList<>(5);
@@ -341,9 +373,12 @@ public class MainWindow extends JPanel {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        JLabel temp = new JLabel("DECK: 40/40");
+        temp = new JLabel();
         temp.setForeground(Color.WHITE);
         temp.setFont(new Font("Linux Libertine", Font.BOLD, 16));
+        temp.setVerticalAlignment(JLabel.TOP);
+        temp.setBackground(Color.yellow);
+        temp.setOpaque(true);
 
         for (int i = 0; i < 6; i++) {
             gridBagConstraints.gridx = i;
@@ -366,7 +401,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        JLabel temp2 = new JLabel("DECK: 40/40");
+        temp2 = new JLabel();
         for (int i = 0; i < 6; i++) {
             gridBagConstraints.gridx = i;
             Card card = new Card(null, gameEngine.getPlayerAtIndex(1), 0, i, Card.DECK, true);
@@ -417,6 +452,8 @@ public class MainWindow extends JPanel {
 
         button_grid_panel.add(timeJLabel, gridBagConstraints);
 
+
+
         executor = Executors.newScheduledThreadPool(1);
 
         bearAttack = new Runnable() {
@@ -453,6 +490,7 @@ public class MainWindow extends JPanel {
                 int se = secondRemaining % 10;
                 timeJLabel.setText("Time remaining: " + Integer.toString(fi) + "," + Integer.toString(se));
                 if (secondRemaining == 0) {
+                    last_bear_attack = System.currentTimeMillis();
                     canTransferNow = false;
                     timeJLabel.setVisible(false);
                     timerVisited = false;
@@ -572,6 +610,22 @@ public class MainWindow extends JPanel {
         	roundButtons[i - 1] = jtempButton;
         }
 
+        gridBagConstraints.gridy = 7;
+
+        deck_remaining_label = new JLabel("DECK: 40/40");
+        deck_remaining_label.setFont(new Font("Linux Libertine", Font.ITALIC | Font.BOLD, 14));
+
+        deck_remaining_label.setBackground(new Color(228, 236, 252));
+        deck_remaining_label.setOpaque(true);
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        deck_remaining_label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));//top,left,bottom,right
+
+
+        deck_remaining_label.setHorizontalAlignment(SwingConstants.CENTER);
+
+        button_grid_panel.add(deck_remaining_label, gridBagConstraints);
+
+
         roundButtons[0].addActionListener(new ActionListener() {
 
             @Override
@@ -676,22 +730,25 @@ public class MainWindow extends JPanel {
                 if (k == 0) {
                     cardLayout.show(card_grid_panel, fieldTwoString);
                     deckCardLayout.show(panel_bawah, deckTwoString);
-                    temp2.setText("DECK: " + gameEngine.getPlayerAtIndex(1).getDeckRemaining() + "/40");
                 } else {
                     cardLayout.show(card_grid_panel, fieldOneString);
                     deckCardLayout.show(panel_bawah, deckOneString);
-                    temp.setText("DECK: " + gameEngine.getPlayerAtIndex(0).getDeckRemaining() + "/40");
                 }
 
                 gameEngine.nextTurn();
 
                 labelNext.setText("Number of Turn: " + Integer.toString(gameEngine.getCurrTurn()));
+                setRemainingDeck(gameEngine.getCurrPlayer().getRemainingDeck());
 
                 roundButtons[0].setBackground(Color.green);
                 roundButtons[1].setBackground(Color.white);
                 roundButtons[2].setBackground(Color.white);
-                start();
-                updatePlayerFieldDisplay();
+                if (gameEngine.getCurrTurn() > 20) {
+                    win(gameEngine.getWinner());
+                } else {
+                    start();
+                    updatePlayerFieldDisplay();
+                }
             }
         });
 
@@ -846,9 +903,9 @@ public class MainWindow extends JPanel {
         shuffle.setVisible(true);
     }
 
-    public void win() {
+    public void win(String winner) {
         mainFrame.setEnabled(false);
-        WinnerDialog wd = new WinnerDialog("Player 1", mainFrame);
+        WinnerDialog wd = new WinnerDialog(winner, mainFrame);
         wd.setVisible(true);
     }
 
@@ -923,6 +980,7 @@ public class MainWindow extends JPanel {
             shopCard.get(idx).updatePrice(entry.getKey().getPrice());
             idx++;
         }
+        setRemainingDeck(gameEngine.getCurrPlayer().getRemainingDeck());
     }
 
     public boolean productDrop(Player cardOwner, Product dropProduct, Animal animal, int colDeck) {
@@ -989,6 +1047,10 @@ public class MainWindow extends JPanel {
         return true;
     }
 
+    public void setRemainingDeck(int remaining_deck) {
+        deck_remaining_label.setText("DECK: " + remaining_deck + "/40");
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         g.drawImage(curBufferedImage, 0, 0, null);
@@ -996,5 +1058,9 @@ public class MainWindow extends JPanel {
 
     public synchronized boolean canTransfer() {
         return canTransferNow;
+    }
+
+    public synchronized  long getLastBearAttack() {
+        return last_bear_attack;
     }
 }

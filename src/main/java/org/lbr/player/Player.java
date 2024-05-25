@@ -61,10 +61,6 @@ public class Player {
         return getCultivable(row, col).getProduct();
     }
 
-    public int getDeck_remaining() {
-        return deck_remaining;
-    }
-
     public ArrayList<GameObject> getHand_deck() {
         return hand_deck;
     }
@@ -108,7 +104,7 @@ public class Player {
         deck_remaining -= shuffleTaken;
     }
 
-    public int getDeckRemaining() {
+    public int getRemainingDeck() {
         return deck_remaining;
     }
 
@@ -117,12 +113,12 @@ public class Player {
         hand_deck.set(idx, object);
     }
 
-    public int addToHandDeck(GameObject object) throws Exception{
+    public void addToHandDeck(GameObject object) throws Exception{
         // First fit algorithm
         for (int i = 0; i < 6; i++) {
             if (isHandIdxEmpty(i)) {
                 setHandIdx(object, i);
-                return i;
+                return;
             }
         }
         throw new Exception("Hand deck is full");

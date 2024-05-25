@@ -107,7 +107,7 @@ public class GameEngine {
                     }
                 }
             }
-            SaveLoad.PlayerData player1 = new SaveLoad.PlayerData(currPlayer[0].getGulden(), currPlayer[0].getDeck_remaining(), handData1, fieldData1);
+            SaveLoad.PlayerData player1 = new SaveLoad.PlayerData(currPlayer[0].getGulden(), currPlayer[0].getRemainingDeck(), handData1, fieldData1);
 
             // player 2
             ArrayList<SaveLoad.HandData> handData2 = new ArrayList<>();
@@ -140,7 +140,7 @@ public class GameEngine {
                     }
                 }
             }
-            SaveLoad.PlayerData player2 = new SaveLoad.PlayerData(currPlayer[1].getGulden(), currPlayer[1].getDeck_remaining(), handData2, fieldData2);
+            SaveLoad.PlayerData player2 = new SaveLoad.PlayerData(currPlayer[1].getGulden(), currPlayer[1].getRemainingDeck(), handData2, fieldData2);
             saveLoad.onSave(path, gameData, player1, player2);
         } else {
             throw new Exception("Extension loader not found");
@@ -293,9 +293,9 @@ public class GameEngine {
         if (currPlayer[0].getGulden() > currPlayer[1].getGulden()) {
             return "Player 1";
         } else if (currPlayer[0].getGulden() < currPlayer[1].getGulden()) {
-            return "Draw";
-        } else {
             return "Player 2";
+        } else {
+            return "Draw";
         }
     }
 }

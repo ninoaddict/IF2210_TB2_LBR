@@ -59,7 +59,7 @@ public class Shop {
         for (Product key: products.keySet()) {
             if(key.getName().equals(newProduct.getName())) {
                 check = true;
-                products.put(key, products.get(key) + 1);
+                products.put(key, products.getOrDefault(key, 0) + 1);
                 break;
             }
         }

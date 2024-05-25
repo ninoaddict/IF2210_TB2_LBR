@@ -15,6 +15,8 @@ import java.awt.datatransfer.*;
 import java.io.IOException;
 
 public class CardTransferHandler extends TransferHandler {
+    public static long drag_start = 1;
+
     @Override
     public int getSourceActions(JComponent c) {
         return MOVE;
@@ -31,6 +33,7 @@ public class CardTransferHandler extends TransferHandler {
                 return null;
             }
             GameObject gameObject = card.getGameObject();
+            drag_start = System.currentTimeMillis();
             return new GameObjectTransferable(gameObject);
         } catch (Exception e) {
             Card card = (Card) c;
@@ -39,6 +42,7 @@ public class CardTransferHandler extends TransferHandler {
                 return null;
             }
             GameObject gameObject = card.getGameObject();
+            drag_start = System.currentTimeMillis();
             return new GameObjectTransferable(gameObject);
         }
     }
@@ -55,9 +59,14 @@ public class CardTransferHandler extends TransferHandler {
         }
 
         try {
+            long last_bear_attack = -1;
+
             Card targetCard = (Card) support.getComponent();
+
+
             GameObject droppedGameObject = (GameObject) support.getTransferable()
                     .getTransferData(GameObjectTransferable.GAME_OBJECT_FLAVOR);
+
             if (droppedGameObject == null) {
                 return false;
             }
@@ -79,7 +88,8 @@ public class CardTransferHandler extends TransferHandler {
 	            	GameObject sourceGameObject = sourceCard.getGameObject();
 	            	Product product = new Product(sourceGameObject.getName().toUpperCase().replace(' ', '_'));
 	            	((MainWindow)targetCard.getParent().getParent().getParent()).buyProduct(product, targetCard.getCol());
-	            	sourceCard.buyHappened(-1);
+
+                    sourceCard.buyHappened(-1);
 	            	targetCard.setGameObject(product);
 	            	
 	            	return true;
@@ -88,7 +98,8 @@ public class CardTransferHandler extends TransferHandler {
 				}
             }
             if (sourceCard.getCurrentPosition() == Card.DECK && targetCard.getCurrentPosition() == Card.SHOP) {
-            	if(sourceCard.getGameObject().getName() != targetCard.getGameObject().getName()) {
+
+                if(sourceCard.getGameObject().getName() != targetCard.getGameObject().getName()) {
             		return false;
             	}
             	Product product = new Product(targetCard.getGameObject().getName().toUpperCase().replace(' ', '_'));
@@ -111,7 +122,13 @@ public class CardTransferHandler extends TransferHandler {
             }
             
             if (sourceCard.getCurrentPosition() == Card.DECK && targetCard.getCurrentPosition() == Card.FIELD) {
-            	if (sourceCard.getGameObject() instanceof Product || sourceCard.getGameObject() instanceof Item ) {
+            	last_bear_attack = ((MainWindow)(sourceCard.getParent().getParent().getParent())).getLastBearAttack();
+
+                if(last_bear_attack > drag_start) {
+                    return false;
+                }
+
+                if (sourceCard.getGameObject() instanceof Product || sourceCard.getGameObject() instanceof Item ) {
             		if (targetCard.getGameObject() == null) {
             			return false;
             		}
@@ -162,7 +179,13 @@ public class CardTransferHandler extends TransferHandler {
             }
             
             if (sourceCard.getCurrentPosition() == Card.FIELD && targetCard.getCurrentPosition() == Card.FIELD) {
-            	GameObject targetGameObject = targetCard.getGameObject();
+            	last_bear_attack =   ((MainWindow)sourceCard.getParent().getParent().getParent().getParent()).getLastBearAttack();
+
+                if (last_bear_attack > drag_start) {
+                    return false;
+                }
+
+                GameObject targetGameObject = targetCard.getGameObject();
         		((MainWindow)sourceCard.getParent().getParent().getParent().getParent()).swapField(sourceCard.getRow(), sourceCard.getCol(), targetCard.getRow(), targetCard.getCol());
 
 
@@ -187,9 +210,16 @@ class GameObjectTransferable implements Transferable {
     static final DataFlavor GAME_OBJECT_FLAVOR = new DataFlavor(GameObject.class, "GameObject");
     private static final DataFlavor[] SUPPORTED_FLAVORS = { GAME_OBJECT_FLAVOR };
     private final GameObject gameObject;
+    private final long drag_start;
 
     public GameObjectTransferable(GameObject gameObject) {
         this.gameObject = gameObject;
+        this.drag_start = System.currentTimeMillis();
+    }
+
+    public GameObjectTransferable(GameObject gameObject, long drag_start) {
+        this.gameObject = gameObject;
+        this.drag_start = drag_start;
     }
 
     @Override
@@ -208,5 +238,9 @@ class GameObjectTransferable implements Transferable {
             return gameObject;
         }
         throw new UnsupportedFlavorException(flavor);
+    }
+
+    public long getDragStart() {
+        return drag_start;
     }
 }

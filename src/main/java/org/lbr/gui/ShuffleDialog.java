@@ -111,12 +111,14 @@ public class ShuffleDialog extends JFrame {
                 for (int i = 0; i < needed; i++) {
                     try {
                         player.addToHandDeck(cardList.get(i).getGameObject());
-                        frame.updatePlayerHandDisplay();
                     } catch (Exception e1) {
                         // TODO: handle
                         JOptionPane.showMessageDialog(mainFrame, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                player.decreaseDeckRemaining(needed);
+                frame.updatePlayerHandDisplay();
+                frame.setRemainingDeck(player.getRemainingDeck());
                 mainFrame.setEnabled(true);
                 this.dispose();
                 frame.considerBearAttack();

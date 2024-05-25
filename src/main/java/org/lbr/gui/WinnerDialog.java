@@ -37,6 +37,9 @@ public class WinnerDialog extends JFrame {
         c.gridy = 2;
         c.gridx = 0;
         JLabel playerName = new JLabel(title + " Wins");
+        if (title.equals("Draw")) {
+            playerName.setText("It's a Draw");
+        }
         playerName.setHorizontalAlignment(SwingConstants.CENTER);
         playerName.setFont(new Font("Linux Libertine", 1, 24));
         roundedPanel.add(playerName, c);
