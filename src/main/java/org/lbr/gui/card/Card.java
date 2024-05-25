@@ -69,12 +69,13 @@ public class Card extends JPanel {
 
         gbc.gridy = 1;
         this.nameLabel = new JLabel();
+        nameLabel.setHorizontalAlignment(JLabel.CENTER);
         if (this.gameObject != null) {
-            nameLabel.setText("<html><body style='text-align:center'>" + this.gameObject.getName() + "</body></html>");
+            nameLabel.setText("<html>" + this.gameObject.getName() + "</html>");
         } else {
             nameLabel.setText("");
         }
-        nameLabel.setFont(new Font("Linux Libertine", 1, 14));
+        nameLabel.setFont(new Font("Linux Libertine", 1, 12));
         nameLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         add(nameLabel, gbc);
 
@@ -147,12 +148,13 @@ public class Card extends JPanel {
 
         gbc.gridy = 1;
         this.nameLabel = new JLabel();
+        nameLabel.setHorizontalAlignment(JLabel.CENTER);
         if (this.gameObject != null) {
-            nameLabel.setText("<html><body style='text-align:center'>" + this.gameObject.getName() + "</body></html>");
+            nameLabel.setText("<html>" + this.gameObject.getName() + "</html>");
         } else {
             nameLabel.setText("");
         }
-        nameLabel.setFont(new Font("Linux Libertine", 1, 14));
+        nameLabel.setFont(new Font("Linux Libertine", 1, 16));
         nameLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         add(nameLabel, gbc);
 
@@ -230,7 +232,7 @@ public class Card extends JPanel {
             Image image = icon.getImage().getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
             label.setIcon(new ImageIcon(image));
             label.setHorizontalAlignment(JLabel.CENTER);
-            nameLabel.setText("<html><body style='text-align:center'>" + this.gameObject.getName() + "</body></html>");
+            nameLabel.setText("<html>" + this.gameObject.getName() + "</html>");
         } else {
             label.setIcon(null);
             nameLabel.setText("");

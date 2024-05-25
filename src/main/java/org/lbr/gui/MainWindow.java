@@ -35,83 +35,10 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-class DummyCard extends JPanel {
-    DummyCard() {
-        super();
-        this.setPreferredSize(new Dimension(80, 110));
-        this.setBackground(Color.white);
-        this.setBorder(new RoundEdgedBorder());
-        this.setOpaque(false);
-    }
-
-
-    private class RoundEdgedBorder extends LineBorder {
-        int arcWidth = 20, arcHeight = 20;
-        Color fillColor = Color.green;
-
-        public RoundEdgedBorder() {
-            super(Color.red);
-        }
-
-
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            Graphics2D graphics2d = (Graphics2D) g.create();
-            graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            graphics2d.setColor(fillColor);
-            graphics2d.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
-            graphics2d.dispose();
-
-        }
-    }
-}
-
-class RealButton extends JButton {
-    private String text;
-
-    public RealButton(String text) {
-        super();
-        this.text = text;
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setBackground(Color.white);
-        this.setText(text);
-        //this.setForeground(Color.black);
-        this.setBorder(new RoundEdgedBorder(text));
-        this.setOpaque(true);
-        // TODO Auto-generated constructor stub
-    }
-
-    protected void paintComponent(Graphics g) {
-        if (getBorder() instanceof RoundEdgedBorder) {
-            Shape borderShape = (Shape) ((RoundEdgedBorder) getBorder());
-            g.setClip(borderShape);
-        }
-        super.paintComponent(g);
-    }
-
-    private class RoundEdgedBorder extends LineBorder {
-        int arcWidth = 20, arcHeight = 20;
-        Color fillColor = Color.green;
-        private String textString;
-
-        public RoundEdgedBorder(String t) {
-            super(Color.red);
-            textString = t;
-        }
-
-
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g.setColor(fillColor);
-            g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
-            g.dispose();
-
-        }
-    }
-}
-
 class RoundButton extends JButton {
     public RoundButton(String label) {
         super(label);
+        this.setFont(new Font("Linux Libertine", 1, 16));
         this.setPreferredSize(new Dimension(50, 40));
         this.setBackground(Color.white);
         this.setForeground(Color.white);
@@ -121,17 +48,6 @@ class RoundButton extends JButton {
         //this.setForeground(Color.black);
         this.setOpaque(false);
 
-        // These statements enlarge the button so that it
-        // becomes a circle rather than an oval.
-        /*
-	    Dimension size = getPreferredSize();
-	    size.width = size.height = Math.max(size.width, 
-	      size.height);
-	    setPreferredSize(size);*/
-
-        // This call causes the JButton not to paint
-        // the background.
-        // This allows us to paint a round background.
         setContentAreaFilled(false);
     }
 
@@ -177,36 +93,6 @@ class RoundButton extends JButton {
     }
 }
 
-class panel_with_image extends JPanel {
-
-    BufferedImage curBufferedImage;
-
-    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
-        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g2d = dimg.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-
-        return dimg;
-    }
-
-    public panel_with_image() {
-        try {
-            curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        // TODO Auto-generated constructor stub
-    }
-
-    protected void paintComponent(Graphics g) {
-        g.drawImage(curBufferedImage, 0, 0, null);
-    }
-}
-
-
 public class MainWindow extends JPanel {
     //    public panel_with_image mainPanel;
     BufferedImage curBufferedImage;
@@ -239,6 +125,10 @@ public class MainWindow extends JPanel {
     private CardLayout deckCardLayout;
     private CardLayout cardLayout;
     private JPanel card_grid_panel;
+    private long last_bear_attack = -1;
+    private JLabel temp;
+    private JLabel temp2;
+    private JLabel deck_remaining_label;
 
     MainWindow(GameEngine ge) {
         try {
@@ -251,15 +141,9 @@ public class MainWindow extends JPanel {
             fieldPlayer2 = new ArrayList<>(4);
 
             try {
-                File musicFile = new File("D:\\Downloads\\happy-birthday-155461.wav");
                 AudioInputStream audioInputStream =
-                        AudioSystem.getAudioInputStream(musicFile);
+                        AudioSystem.getAudioInputStream(this.getClass().getResource("/music/background_music.wav"));
                 Clip clip = AudioSystem.getClip();
-
-                if (!musicFile.exists()) {
-                    System.out.println("BAD!!");
-                }
-
 
                 Thread uwu = new Thread(new Runnable() {
                     @Override
@@ -459,13 +343,13 @@ public class MainWindow extends JPanel {
             for (int j = 0; j < 3; j++) {
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
-                Card card = new Card(new Product(productNameStrings.get(i * 3 + j)), null, i, j, Card.SHOP, 1);
+                Card card = new Card(new Product(productNameStrings.get(i * 3 + j)), null, i, j, Card.SHOP, 0);
                 shopCard.add(card);
                 shop_card_gridJPanel.add(card, gridBagConstraints);
             }
         }
 
-        panel_bawah.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.WHITE));
+//        panel_bawah.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.WHITE));
 
         deckCardLayout = new CardLayout();
         panel_bawah.setLayout(deckCardLayout);
@@ -489,7 +373,12 @@ public class MainWindow extends JPanel {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        JLabel temp = new JLabel("DECK: 40/40");
+        temp = new JLabel();
+        temp.setForeground(Color.WHITE);
+        temp.setFont(new Font("Linux Libertine", Font.BOLD, 16));
+        temp.setVerticalAlignment(JLabel.TOP);
+        temp.setBackground(Color.yellow);
+        temp.setOpaque(true);
 
         for (int i = 0; i < 6; i++) {
             gridBagConstraints.gridx = i;
@@ -512,7 +401,7 @@ public class MainWindow extends JPanel {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        JLabel temp2 = new JLabel("DECK: 40/40");
+        temp2 = new JLabel();
         for (int i = 0; i < 6; i++) {
             gridBagConstraints.gridx = i;
             Card card = new Card(null, gameEngine.getPlayerAtIndex(1), 0, i, Card.DECK, true);
@@ -563,6 +452,8 @@ public class MainWindow extends JPanel {
 
         button_grid_panel.add(timeJLabel, gridBagConstraints);
 
+
+
         executor = Executors.newScheduledThreadPool(1);
 
         bearAttack = new Runnable() {
@@ -599,6 +490,7 @@ public class MainWindow extends JPanel {
                 int se = secondRemaining % 10;
                 timeJLabel.setText("Time remaining: " + Integer.toString(fi) + "," + Integer.toString(se));
                 if (secondRemaining == 0) {
+                    last_bear_attack = System.currentTimeMillis();
                     canTransferNow = false;
                     timeJLabel.setVisible(false);
                     timerVisited = false;
@@ -718,6 +610,22 @@ public class MainWindow extends JPanel {
         	roundButtons[i - 1] = jtempButton;
         }
 
+        gridBagConstraints.gridy = 7;
+
+        deck_remaining_label = new JLabel("DECK: 40/40");
+        deck_remaining_label.setFont(new Font("Linux Libertine", Font.ITALIC | Font.BOLD, 14));
+
+        deck_remaining_label.setBackground(new Color(228, 236, 252));
+        deck_remaining_label.setOpaque(true);
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        deck_remaining_label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));//top,left,bottom,right
+
+
+        deck_remaining_label.setHorizontalAlignment(SwingConstants.CENTER);
+
+        button_grid_panel.add(deck_remaining_label, gridBagConstraints);
+
+
         roundButtons[0].addActionListener(new ActionListener() {
 
             @Override
@@ -798,12 +706,14 @@ public class MainWindow extends JPanel {
         gridBagConstraints.insets = new Insets(10, 10, 10, 10);
 
         labelNext = new JLabel("Number of Turn: 1");
+        labelNext.setFont(new Font("Linux Libertine", 1, 14));
         labelNext.setBackground(Color.red);
         labelNext.setOpaque(false);
 
         uwuPanel.add(labelNext, gridBagConstraints);
 
         roundButton = new RoundButton("Next Turn");
+        roundButton.setFont(new Font("Linux Libertine", 1, 14));
         roundButton.setBackground(Color.black);
         gridBagConstraints.gridx = 1;
         gridBagConstraints.weighty = 0.0;
@@ -820,11 +730,9 @@ public class MainWindow extends JPanel {
                 if (k == 0) {
                     cardLayout.show(card_grid_panel, fieldTwoString);
                     deckCardLayout.show(panel_bawah, deckTwoString);
-                    temp2.setText("DECK: " + gameEngine.getPlayerAtIndex(1).getDeckRemaining() + "/40");
                 } else {
                     cardLayout.show(card_grid_panel, fieldOneString);
                     deckCardLayout.show(panel_bawah, deckOneString);
-                    temp.setText("DECK: " + gameEngine.getPlayerAtIndex(0).getDeckRemaining() + "/40");
                 }
 
                 gameEngine.nextTurn();
@@ -866,6 +774,7 @@ public class MainWindow extends JPanel {
         imageIcon = new ImageIcon(newimg);  // transform it back
 
         JLabel myselfMoniesJPanel = new JLabel("Player 1");
+        myselfMoniesJPanel.setFont(new Font("Linux Libertine", 1, 16));;
         myselfMoniesJPanel.setBackground(Color.green);
         myselfMoniesJPanel.setOpaque(false);
         newGridBagConstraints.insets = new Insets(0, 10, 0, 0);
@@ -873,12 +782,14 @@ public class MainWindow extends JPanel {
 
         JLabel hisMoniesJPanel = new JLabel("Player 2");
         hisMoniesJPanel.setBackground(Color.red);
+        hisMoniesJPanel.setFont(new Font("Linux Libertine", 1, 16));
         hisMoniesJPanel.setOpaque(false);
         newGridBagConstraints.gridy = 1;
 
         moniesJPanel.add(hisMoniesJPanel, newGridBagConstraints);
 
         howMuchMyMoneyJLabel = new JLabel(Integer.toString(gameEngine.getPlayerAtIndex(0).getGulden()));
+        howMuchMyMoneyJLabel.setFont(new Font("Linux Libertine", 1, 16));
         howMuchMyMoneyJLabel.setBackground(Color.cyan);
         howMuchMyMoneyJLabel.setOpaque(false);
         howMuchMyMoneyJLabel.setIcon(imageIcon);
@@ -894,6 +805,7 @@ public class MainWindow extends JPanel {
         howMuchHisMoneyJLabel = new JLabel(Integer.toString(gameEngine.getPlayerAtIndex(1).getGulden()));
 
         howMuchHisMoneyJLabel.setBackground(Color.orange);
+        howMuchHisMoneyJLabel.setFont(new Font("Linux Libertine", 1, 16));
         howMuchHisMoneyJLabel.setOpaque(false);
         howMuchHisMoneyJLabel.setIcon(imageIcon);
         howMuchHisMoneyJLabel.setHorizontalAlignment(JLabel.RIGHT);
@@ -1060,13 +972,14 @@ public class MainWindow extends JPanel {
 
     public boolean productDrop(Player cardOwner, Product dropProduct, Animal animal, int colDeck) {
         if (!cardOwner.equals(gameEngine.getCurrPlayer())) {
+            JOptionPane.showMessageDialog(mainFrame, "Cannot give food to enemy's field", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         try {
             animal.eat(dropProduct);
             gameEngine.getCurrPlayer().setHandIdx(null, colDeck);
-
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -1075,6 +988,7 @@ public class MainWindow extends JPanel {
     public boolean itemDrop(Player cardOwner, Item dropItem, Cultivable cultivableObj, int colIdx, int row, int col) {
         if (dropItem instanceof Delay || dropItem instanceof Destroy) {
             if (cardOwner.equals(gameEngine.getCurrPlayer())) {
+                JOptionPane.showMessageDialog(mainFrame, "Cannot put Delay and Destroy on your own field", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             if (dropItem instanceof Delay) {
@@ -1082,8 +996,8 @@ public class MainWindow extends JPanel {
                     dropItem.runEffect(cultivableObj);
                     gameEngine.getCurrPlayer().setHandIdx(null, colIdx);
                     return true;
-
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
 
@@ -1094,11 +1008,13 @@ public class MainWindow extends JPanel {
                     cardOwner.setNullField(row, col);
                     return true;
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
             }
         } else {
             if (!cardOwner.equals(gameEngine.getCurrPlayer())) {
+                JOptionPane.showMessageDialog(mainFrame, "Cannot put item on enemy's field", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
@@ -1112,9 +1028,14 @@ public class MainWindow extends JPanel {
                 updatePlayerHandDisplay();
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
+    }
+
+    public void setRemainingDeck(int remaining_deck) {
+        deck_remaining_label.setText("DECK: " + remaining_deck + "/40");
     }
 
     @Override
@@ -1124,5 +1045,9 @@ public class MainWindow extends JPanel {
 
     public synchronized boolean canTransfer() {
         return canTransferNow;
+    }
+
+    public synchronized  long getLastBearAttack() {
+        return last_bear_attack;
     }
 }
