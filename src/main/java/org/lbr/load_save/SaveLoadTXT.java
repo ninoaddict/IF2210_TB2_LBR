@@ -12,6 +12,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class SaveLoadTXT implements SaveLoad {
+    public SaveLoadTXT() {
+
+    }
+
     @Override
     public void onSave(String directory, GameData gameData, PlayerData player1, PlayerData player2) throws Exception {
         // initialize file writer

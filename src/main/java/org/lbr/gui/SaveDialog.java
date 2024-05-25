@@ -99,7 +99,7 @@ public class SaveDialog extends JFrame {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception eee) {
-                System.out.println("GAGAL");
+
             }
             jfk = new JFileChooser("C:");
             jfk.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -107,7 +107,7 @@ public class SaveDialog extends JFrame {
             try {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             } catch (Exception eee) {
-                System.out.println("GAGAL");
+
             }
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 chooseFileButton.setText(jfk.getSelectedFile().getName());

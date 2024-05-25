@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SaveLoadYAML implements SaveLoad {
+    public SaveLoadYAML() {
+
+    }
+
     @Override
     public String extensionType() {
         return "YAML";

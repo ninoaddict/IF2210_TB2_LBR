@@ -9,6 +9,10 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 public class SaveLoadJSON implements SaveLoad {
+    public SaveLoadJSON() {
+
+    }
+
     @Override
     public void onSave(String directory, GameData gameData, PlayerData player1, PlayerData player2) throws Exception {
         // SAVING PLAYER 1 DATA
