@@ -114,6 +114,7 @@ public class ShuffleDialog extends JFrame {
                         frame.updatePlayerHandDisplay();
                     } catch (Exception e1) {
                         // TODO: handle
+                        JOptionPane.showMessageDialog(mainFrame, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 mainFrame.setEnabled(true);

@@ -29,83 +29,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-class DummyCard extends JPanel {
-    DummyCard() {
-        super();
-        this.setPreferredSize(new Dimension(80, 110));
-        this.setBackground(Color.white);
-        this.setBorder(new RoundEdgedBorder());
-        this.setOpaque(false);
-    }
-
-
-    private class RoundEdgedBorder extends LineBorder {
-        int arcWidth = 20, arcHeight = 20;
-        Color fillColor = Color.green;
-
-        public RoundEdgedBorder() {
-            super(Color.red);
-        }
-
-
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            Graphics2D graphics2d = (Graphics2D) g.create();
-            graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            graphics2d.setColor(fillColor);
-            graphics2d.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
-            graphics2d.dispose();
-
-        }
-    }
-}
-
-class RealButton extends JButton {
-    private String text;
-
-    public RealButton(String text) {
-        super();
-        this.text = text;
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setBackground(Color.white);
-        this.setText(text);
-        //this.setForeground(Color.black);
-        this.setBorder(new RoundEdgedBorder(text));
-        this.setOpaque(true);
-        // TODO Auto-generated constructor stub
-    }
-
-    protected void paintComponent(Graphics g) {
-        if (getBorder() instanceof RoundEdgedBorder) {
-            Shape borderShape = (Shape) ((RoundEdgedBorder) getBorder());
-            g.setClip(borderShape);
-        }
-        super.paintComponent(g);
-    }
-
-    private class RoundEdgedBorder extends LineBorder {
-        int arcWidth = 20, arcHeight = 20;
-        Color fillColor = Color.green;
-        private String textString;
-
-        public RoundEdgedBorder(String t) {
-            super(Color.red);
-            textString = t;
-        }
-
-
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g.setColor(fillColor);
-            g.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
-            g.dispose();
-
-        }
-    }
-}
-
 class RoundButton extends JButton {
     public RoundButton(String label) {
         super(label);
+        this.setFont(new Font("Linux Libertine", 1, 16));
         this.setPreferredSize(new Dimension(50, 40));
         this.setBackground(Color.white);
         this.setForeground(Color.white);
@@ -115,17 +42,6 @@ class RoundButton extends JButton {
         //this.setForeground(Color.black);
         this.setOpaque(false);
 
-        // These statements enlarge the button so that it
-        // becomes a circle rather than an oval.
-        /*
-	    Dimension size = getPreferredSize();
-	    size.width = size.height = Math.max(size.width, 
-	      size.height);
-	    setPreferredSize(size);*/
-
-        // This call causes the JButton not to paint
-        // the background.
-        // This allows us to paint a round background.
         setContentAreaFilled(false);
     }
 
@@ -170,36 +86,6 @@ class RoundButton extends JButton {
         return shape.contains(x, y);
     }
 }
-
-class panel_with_image extends JPanel {
-
-    BufferedImage curBufferedImage;
-
-    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
-        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g2d = dimg.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-
-        return dimg;
-    }
-
-    public panel_with_image() {
-        try {
-            curBufferedImage = resize(ImageIO.read(this.getClass().getResource("/images/bgguioopatl1.jpg")), 800, 800);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        // TODO Auto-generated constructor stub
-    }
-
-    protected void paintComponent(Graphics g) {
-        g.drawImage(curBufferedImage, 0, 0, null);
-    }
-}
-
 
 public class MainWindow extends JPanel {
     //    public panel_with_image mainPanel;
@@ -431,7 +317,7 @@ public class MainWindow extends JPanel {
             }
         }
 
-        panel_bawah.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.WHITE));
+//        panel_bawah.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.WHITE));
 
         deckCardLayout = new CardLayout();
         panel_bawah.setLayout(deckCardLayout);
@@ -456,6 +342,8 @@ public class MainWindow extends JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         JLabel temp = new JLabel("DECK: 40/40");
+        temp.setForeground(Color.WHITE);
+        temp.setFont(new Font("Linux Libertine", Font.BOLD, 16));
 
         for (int i = 0; i < 6; i++) {
             gridBagConstraints.gridx = i;
@@ -764,12 +652,14 @@ public class MainWindow extends JPanel {
         gridBagConstraints.insets = new Insets(10, 10, 10, 10);
 
         labelNext = new JLabel("Number of Turn: 1");
+        labelNext.setFont(new Font("Linux Libertine", 1, 14));
         labelNext.setBackground(Color.red);
         labelNext.setOpaque(false);
 
         uwuPanel.add(labelNext, gridBagConstraints);
 
         roundButton = new RoundButton("Next Turn");
+        roundButton.setFont(new Font("Linux Libertine", 1, 14));
         roundButton.setBackground(Color.black);
         gridBagConstraints.gridx = 1;
         gridBagConstraints.weighty = 0.0;
@@ -832,6 +722,7 @@ public class MainWindow extends JPanel {
         imageIcon = new ImageIcon(newimg);  // transform it back
 
         JLabel myselfMoniesJPanel = new JLabel("Player 1");
+        myselfMoniesJPanel.setFont(new Font("Linux Libertine", 1, 16));;
         myselfMoniesJPanel.setBackground(Color.green);
         myselfMoniesJPanel.setOpaque(false);
         newGridBagConstraints.insets = new Insets(0, 10, 0, 0);
@@ -839,12 +730,14 @@ public class MainWindow extends JPanel {
 
         JLabel hisMoniesJPanel = new JLabel("Player 2");
         hisMoniesJPanel.setBackground(Color.red);
+        hisMoniesJPanel.setFont(new Font("Linux Libertine", 1, 16));
         hisMoniesJPanel.setOpaque(false);
         newGridBagConstraints.gridy = 1;
 
         moniesJPanel.add(hisMoniesJPanel, newGridBagConstraints);
 
         howMuchMyMoneyJLabel = new JLabel(Integer.toString(gameEngine.getPlayerAtIndex(0).getGulden()));
+        howMuchMyMoneyJLabel.setFont(new Font("Linux Libertine", 1, 16));
         howMuchMyMoneyJLabel.setBackground(Color.cyan);
         howMuchMyMoneyJLabel.setOpaque(false);
         howMuchMyMoneyJLabel.setIcon(imageIcon);
@@ -860,6 +753,7 @@ public class MainWindow extends JPanel {
         howMuchHisMoneyJLabel = new JLabel(Integer.toString(gameEngine.getPlayerAtIndex(1).getGulden()));
 
         howMuchHisMoneyJLabel.setBackground(Color.orange);
+        howMuchHisMoneyJLabel.setFont(new Font("Linux Libertine", 1, 16));
         howMuchHisMoneyJLabel.setOpaque(false);
         howMuchHisMoneyJLabel.setIcon(imageIcon);
         howMuchHisMoneyJLabel.setHorizontalAlignment(JLabel.RIGHT);
@@ -1026,13 +920,14 @@ public class MainWindow extends JPanel {
 
     public boolean productDrop(Player cardOwner, Product dropProduct, Animal animal, int colDeck) {
         if (!cardOwner.equals(gameEngine.getCurrPlayer())) {
+            JOptionPane.showMessageDialog(mainFrame, "Cannot give food to enemy's field", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         try {
             animal.eat(dropProduct);
             gameEngine.getCurrPlayer().setHandIdx(null, colDeck);
-
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -1041,6 +936,7 @@ public class MainWindow extends JPanel {
     public boolean itemDrop(Player cardOwner, Item dropItem, Cultivable cultivableObj, int colIdx, int row, int col) {
         if (dropItem instanceof Delay || dropItem instanceof Destroy) {
             if (cardOwner.equals(gameEngine.getCurrPlayer())) {
+                JOptionPane.showMessageDialog(mainFrame, "Cannot put Delay and Destroy on your own field", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             if (dropItem instanceof Delay) {
@@ -1048,8 +944,8 @@ public class MainWindow extends JPanel {
                     dropItem.runEffect(cultivableObj);
                     gameEngine.getCurrPlayer().setHandIdx(null, colIdx);
                     return true;
-
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
 
@@ -1060,11 +956,13 @@ public class MainWindow extends JPanel {
                     cardOwner.setNullField(row, col);
                     return true;
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
             }
         } else {
             if (!cardOwner.equals(gameEngine.getCurrPlayer())) {
+                JOptionPane.showMessageDialog(mainFrame, "Cannot put item on enemy's field", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
@@ -1078,6 +976,7 @@ public class MainWindow extends JPanel {
                 updatePlayerHandDisplay();
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

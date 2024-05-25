@@ -59,9 +59,6 @@ public class Shop {
         for (Product key: products.keySet()) {
             if(key.getName().equals(newProduct.getName())) {
                 check = true;
-                if (products.get(key) == 0) {
-                    throw new Exception("No product to buy");
-                }
                 products.put(key, products.get(key) + 1);
                 break;
             }
