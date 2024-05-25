@@ -2,12 +2,10 @@ package org.lbr;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.jar.JarEntry;
@@ -20,16 +18,13 @@ import org.lbr.gameobject.product.*;
 import org.lbr.gameobject.cultivable.animal.*;
 import org.lbr.gameobject.cultivable.plant.*;
 import org.lbr.load_save.SaveLoad;
-import org.lbr.load_save.SaveLoadJSON;
 import org.lbr.load_save.SaveLoadTXT;
-import org.lbr.load_save.SaveLoadYAML;
 import org.lbr.player.*;
 import org.lbr.shop.Shop;
 
 public class GameEngine {
     private final Player[] currPlayer;
     private int currTurn;
-    private ArrayList<String> cardKeys;
     private String winner;
     private ScheduledExecutorService timerService;
     private final Shop mainShop;
@@ -46,15 +41,15 @@ public class GameEngine {
 
         Map<Product, Integer> productArrayList = new HashMap<>();
 
-        productArrayList.put(new Product("SIRIP_HIU"), 1);
-        productArrayList.put(new Product("SUSU"), 1);
-        productArrayList.put(new Product("DAGING_DOMBA"), 1);
-        productArrayList.put(new Product("DAGING_KUDA"), 1);
-        productArrayList.put(new Product("TELUR"), 1);
-        productArrayList.put(new Product("DAGING_BERUANG"), 1);
-        productArrayList.put(new Product("JAGUNG"), 1);
-        productArrayList.put(new Product("LABU"), 1);
-        productArrayList.put(new Product("STROBERI"), 1);
+        productArrayList.put(new Product("SIRIP_HIU"), 0);
+        productArrayList.put(new Product("SUSU"), 0);
+        productArrayList.put(new Product("DAGING_DOMBA"), 0);
+        productArrayList.put(new Product("DAGING_KUDA"), 0);
+        productArrayList.put(new Product("TELUR"), 0);
+        productArrayList.put(new Product("DAGING_BERUANG"), 0);
+        productArrayList.put(new Product("JAGUNG"), 0);
+        productArrayList.put(new Product("LABU"), 0);
+        productArrayList.put(new Product("STROBERI"), 0);
 
         mainShop = Shop.getInstance(productArrayList);
     }
@@ -80,7 +75,6 @@ public class GameEngine {
             for (Map.Entry<Product, Integer> entry : shopGoods.entrySet()) {
                 String key = entry.getKey().getName().toUpperCase().replace(" ", "_");
                 int value = entry.getValue();
-                System.out.println(key + " " + value);
                 if (value > 0) {
                     newShop.put(key, value);
                 }
@@ -270,6 +264,7 @@ public class GameEngine {
                         return;
                     }
                 }
+                jar.close();
                 throw new Exception("Extension loader not found");
             } catch (Exception e) {
                 throw new Exception("Extension loader not found");
@@ -316,7 +311,6 @@ public class GameEngine {
             @Override
             public void run() {
                 if (remainingTime > 0) {
-                    System.out.println("Time left: " + remainingTime + " seconds");
                     remainingTime--;
                 } else {
                     timerService.shutdown();
@@ -337,7 +331,6 @@ public class GameEngine {
             }
             nextTurn();
         }
-        System.out.println(getWinner());
         timerService.shutdown();
     }
 }

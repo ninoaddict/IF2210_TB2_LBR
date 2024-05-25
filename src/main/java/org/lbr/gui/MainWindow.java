@@ -8,8 +8,6 @@ import org.lbr.player.Player;
 import org.lbr.GameEngine;
 import org.lbr.gameobject.cultivable.Cultivable;
 import org.lbr.gameobject.cultivable.animal.Animal;
-import org.lbr.gameobject.cultivable.animal.Carnivore;
-import org.lbr.gameobject.cultivable.animal.Herbivore;
 import org.lbr.gameobject.item.Delay;
 import org.lbr.gameobject.item.Destroy;
 import org.lbr.gameobject.item.Item;
@@ -21,7 +19,6 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -428,7 +425,6 @@ public class MainWindow extends JPanel {
             for (int j = 0; j < 3; j++) {
                 gridBagConstraints.gridx = j;
                 gridBagConstraints.gridy = i;
-                System.out.println(productNameStrings.get(3 * i + j));
                 Card card = new Card(new Product(productNameStrings.get(i * 3 + j)), null, i, j, Card.SHOP, 1);
                 shopCard.add(card);
                 shop_card_gridJPanel.add(card, gridBagConstraints);
@@ -568,7 +564,6 @@ public class MainWindow extends JPanel {
                 int fi = secondRemaining / 10;
                 int se = secondRemaining % 10;
                 timeJLabel.setText("Time remaining: " + Integer.toString(fi) + "," + Integer.toString(se));
-                System.out.println(secondRemaining);
                 if (secondRemaining == 0) {
                     canTransferNow = false;
                     timeJLabel.setVisible(false);
@@ -577,9 +572,6 @@ public class MainWindow extends JPanel {
                     int y1 = BearAttack.y1;
                     int x2 = BearAttack.x2;
                     int y2 = BearAttack.y2;
-                    System.out.println("HERE");
-                    System.out.println("BERUANG " + x1 + " " + x2 + " " + y1 + " " + y2);
-                    //System.out.println(gameEngine.getCurrPlayer().getCultivable())
                     if (!BearAttack.execute(gameEngine.getCurrPlayer(), x1, x2, y1, y2, 50) ) {
                         for(int i = y1; i <= y2; i++){
                             for(int j = x1; j <= x2; j++) {
@@ -599,14 +591,13 @@ public class MainWindow extends JPanel {
                                         }
                                     }
                                 });
-                                System.out.println(i + " " + j);
                             }
                         }
                         Omnivore bear = new Omnivore("BERUANG");
                         try {
                             gameEngine.getCurrPlayer().addToHandDeck(bear);
                         } catch (Exception ignored) {
-                            System.out.println(ignored.getMessage());
+
                         }
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
@@ -622,7 +613,6 @@ public class MainWindow extends JPanel {
                         roundButton.setEnabled(true);
                         return;
                     }
-                    System.out.println("MAHAGURU");
                     for(int i = y1; i <= y2; i++){
                         for(int j = x1; j <= x2; j++) {
                             int finalI = i;
@@ -630,7 +620,6 @@ public class MainWindow extends JPanel {
                             SwingUtilities.invokeLater(new Runnable() {
                                 @Override
                                 public void run() {
-                                    System.out.println(Integer.toString(finalI) + " " + Integer.toString(finalJ));
                                     int k = (gameEngine.getCurrTurn() - 1) % 2;
                                     if (k == 0) {
                                         fieldPlayer1.get(finalI).get(finalJ).setBackground(new Color(224, 247, 250));
@@ -642,7 +631,7 @@ public class MainWindow extends JPanel {
                                             try {
                                                 fieldPlayer1.get(finalI).get(finalJ).getOwner().setNullField(finalI, finalJ);
                                             } catch (Exception ignored) {
-                                                System.out.println("IGNORED");
+                                                // 
                                             }
                                         }
 
@@ -656,26 +645,25 @@ public class MainWindow extends JPanel {
                                             try {
                                                 fieldPlayer2.get(finalI).get(finalJ).getOwner().setNullField(finalI, finalJ);
                                             } catch (Exception ignored) {
-                                                System.out.println("IGNORED");
+
                                             }
                                         }
 
 
                                     }
-                                    System.out.println(Integer.toString(finalI) + " " + Integer.toString(finalJ));
                                 }
                             });
 
                             try {
                                 Thread.sleep(100);
                             } catch (InterruptedException e) {
-                                System.out.println("Interrupted!");
+
                             }
                         }
                         try {
                             Thread.sleep(100);
                         } catch (InterruptedException e) {
-                            System.out.println("Interrupted!");
+
                         }
                     }
                     canTransferNow = true;
@@ -965,20 +953,14 @@ public class MainWindow extends JPanel {
     }
 
     public void considerBearAttack() {
-        System.out.println("YA");
         Random rand = new Random();
         int bear_attack_pos = rand.nextInt(11);
-        System.out.println(bear_attack_pos);
         if (bear_attack_pos >= 3) return;
         for(int i = 0; i < 6; i++){
             roundButtons[i].setEnabled(false);
         }
         roundButton.setEnabled(false);
         BearAttack.refresh();
-        System.out.println(BearAttack.x1);
-        System.out.println(BearAttack.y1);
-        System.out.println(BearAttack.x2);
-        System.out.println(BearAttack.y2);
         if (executorUsed) executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(bearAttack, 100, 100, TimeUnit.MILLISECONDS);
     }
@@ -1059,16 +1041,12 @@ public class MainWindow extends JPanel {
     public boolean itemDrop(Player cardOwner, Item dropItem, Cultivable cultivableObj, int colIdx, int row, int col) {
         if (dropItem instanceof Delay || dropItem instanceof Destroy) {
             if (cardOwner.equals(gameEngine.getCurrPlayer())) {
-                System.out.println("CURRPLAYER GOLD: " + Integer.toString(gameEngine.getCurrPlayer().getGulden()));
-                System.out.println("GRGRiNI");
                 return false;
             }
             if (dropItem instanceof Delay) {
                 try {
-                    System.out.println("ITEM HERE");
                     dropItem.runEffect(cultivableObj);
                     gameEngine.getCurrPlayer().setHandIdx(null, colIdx);
-                    System.out.println("CHARGER");
                     return true;
 
                 } catch (Exception e) {

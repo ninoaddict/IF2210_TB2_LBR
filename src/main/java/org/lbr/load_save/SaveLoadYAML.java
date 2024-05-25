@@ -120,20 +120,6 @@ public class SaveLoadYAML implements SaveLoad {
         inputStreamP1.close();
         inputStreamP2.close();
         inputStream.close();
-        for(String name: gameData.shop.keySet()) {
-            System.out.println(name);
-            System.out.println(gameData.shop.get(name));
-        }
-        System.out.println("Player1");
-        for(int i = 0; i < player1.activeDeck.size(); i++) {
-            System.out.println(player1.activeDeck.get(i).name);
-            System.out.println(player1.activeDeck.get(i).coordinate);
-        }
-        System.out.println("Player2");
-        for(int i = 0; i < player2.activeDeck.size(); i++) {
-            System.out.println(player2.activeDeck.get(i).name);
-            System.out.println(player2.activeDeck.get(i).coordinate);
-        }
     }
 
     @Override

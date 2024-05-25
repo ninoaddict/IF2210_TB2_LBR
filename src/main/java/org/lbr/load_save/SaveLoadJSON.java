@@ -153,7 +153,6 @@ public class SaveLoadJSON implements SaveLoad {
             }
             activeFields1.add(new FieldData(Coordinate.translate(fielde.getString("fieldLoc")), (String) fielde.get("fieldName"), (int) fielde.get("required"), effects));
         }
-        System.out.println("PLAYER 1");
         is.close();
         tokener.close();
 
@@ -187,7 +186,6 @@ public class SaveLoadJSON implements SaveLoad {
         }
         is.close();
         tokener.close();
-        System.out.println("PLAYER 2");
 
         // THIS STUFF IS TO LOAD GAME STATE
         chosenPlayer = directory + "/" + "gamestate.json";
@@ -205,7 +203,6 @@ public class SaveLoadJSON implements SaveLoad {
         }
         is.close();
         tokener.close();
-        System.out.println("GAME STATE");
 
         // PUT IT ALL TOGETHEUR
         player1.gulden = gulden1;

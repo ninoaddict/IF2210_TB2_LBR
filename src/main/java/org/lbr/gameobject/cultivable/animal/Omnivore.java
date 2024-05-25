@@ -49,7 +49,7 @@ public class Omnivore extends Animal {
         try {
             this.addWeight(p.getAddWeight());
         } catch(Exception e) {
-            System.out.println(e.getMessage());
+            
         }
     }
     @Override

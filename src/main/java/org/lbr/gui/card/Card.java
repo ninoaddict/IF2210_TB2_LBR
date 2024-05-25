@@ -2,11 +2,8 @@ package org.lbr.gui.card;
 
 import org.lbr.gameobject.GameObject;
 import org.lbr.gameobject.cultivable.Cultivable;
-import org.lbr.gui.MainWindow;
 import org.lbr.gui.ObjectInfoDialog;
-import org.lbr.gui.ShuffleDialog;
 import org.lbr.player.Player;
-import org.lbr.shop.Shop;
 import org.lbr.gameobject.product.*;
 
 import javax.swing.*;
@@ -139,7 +136,6 @@ public class Card extends JPanel {
         gbc.gridy = 0;
 
         if (gameObject != null) {
-            System.out.println(gameObject.getImgUrlPath());
             ImageIcon icon = new ImageIcon(this.getClass().getResource(gameObject.getImgUrlPath()));
             Image image = icon.getImage().getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
             label.setIcon(new ImageIcon(image));

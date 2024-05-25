@@ -9,16 +9,10 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PluginDialog extends JFrame {
-    private GameEngine gameEngine;
     private JPanel roundedPanel;
-    private MainWindow mainWindow;
-    private MainFrame mainFrame;
     private JFileChooser jfk;
 
     public PluginDialog(GameEngine gameEngine, MainFrame mainFrame, MainWindow mainWindow) {
-        this.gameEngine = gameEngine;
-        this.mainFrame = mainFrame;
-        this.mainWindow = mainWindow;
         this.jfk = new JFileChooser();
         this.setUndecorated(true);
         this.setSize(new Dimension(400, 300));
