@@ -1,11 +1,9 @@
 package org.lbr.load_save;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 
-import org.lbr.shop.Shop;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -14,10 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SaveLoadYAML implements SaveLoad {
-    SaveLoadYAML() {
-
-    }
-
     @Override
     public String extensionType() {
         return "YAML";
@@ -100,7 +94,7 @@ public class SaveLoadYAML implements SaveLoad {
             activeDeck2.add(curr);
         }
         player2.activeDeck = activeDeck2;
-        int num_of_card_in_field2 = (Integer) player1Data.get("num_of_card_in_field");
+        int num_of_card_in_field2 = (Integer) player2Data.get("num_of_card_in_field");
         ArrayList<HashMap<String, Object>> card_in_fieldP2 = (ArrayList<HashMap<String, Object>>) player2Data.get("active_field");
         ArrayList<FieldData> field2 = new ArrayList<>();
         for(int i = 0; i < num_of_card_in_field2; i++) {

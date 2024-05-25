@@ -20,7 +20,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -28,6 +32,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -245,6 +252,34 @@ public class MainWindow extends JPanel {
             shopCard = new ArrayList<>();
             fieldPlayer1 = new ArrayList<>(4);
             fieldPlayer2 = new ArrayList<>(4);
+
+            try {
+                File musicFile = new File("D:\\Downloads\\happy-birthday-155461.wav");
+                AudioInputStream audioInputStream =
+                        AudioSystem.getAudioInputStream(musicFile);
+                Clip clip = AudioSystem.getClip();
+
+                if (!musicFile.exists()) {
+                    System.out.println("BAD!!");
+                }
+
+
+                Thread uwu = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            clip.open(audioInputStream);
+                            clip.loop(Clip.LOOP_CONTINUOUSLY);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                });
+                uwu.start();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
 
             for (int i = 0; i < 4; i++) {
                 ArrayList<Card> temp1 = new ArrayList<>(5);
@@ -1029,6 +1064,15 @@ public class MainWindow extends JPanel {
         } else {
             cardLayout.show(card_grid_panel, fieldTwoString);
             deckCardLayout.show(panel_bawah, deckTwoString);
+        }
+
+        // update shop
+        Map<Product, Integer> mp = gameEngine.getShop().getProducts();
+        int idx = 0;
+        for (Map.Entry<Product, Integer> entry : mp.entrySet()) {
+            shopCard.get(idx).setGameObject(new Product(entry.getKey()));
+            shopCard.get(idx).updateStock(entry.getValue());
+            idx++;
         }
     }
 

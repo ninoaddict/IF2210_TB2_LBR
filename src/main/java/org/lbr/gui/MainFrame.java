@@ -20,7 +20,9 @@ public class MainFrame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setMainFrame(this);
         this.add(mainWindow);
+        this.setResizable(false);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
         mainWindow.start();
     }
 }
