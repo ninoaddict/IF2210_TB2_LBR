@@ -1,10 +1,12 @@
 <h1 align="center">🧑‍🌾 Permainan Peternakan 🧑‍🌾</h1>
 
+<div align="center">
+  <img src="/sample1.png"/> <br />
+</div>
+
 <h2 id = "description">✨ Deskripsi </h2>
 
 Tugas Besar 02 Pemrograman Berorientasi Objek (IF2210) berbasis _graphical user interface_ (GUI). Program ini adalah permainan yang terdiri atas dua pemain yang akan bermain sebanyak 20 kali _turn_. Permainan ini mirip seperti permainan kartu di mana setiap kartu melambangkan sebuah objek misalnya tanaman atau hewan. Nantinya setiap kartu dapat diletakkan pada ladang ataupun dijual pada toko bila kartu tersebut berada pada deck aktif pemain. Selain itu, objek pada ladang juga dapat dihancurkan bilamana terdapat serangan dari beruang yang terjadi secara random. Program ini juga memiliki fitur save & load untuk menyimpan dan memuat state program pada format txt. Program juga bersifat extensible dengan menyediakan dukungan plugin, sehingga pengguna dapat menambahkan format file untuk save & load selain format txt secara mudah. Pada permainan ini, juga terdapat _background music_ untuk memaksimalkan pengalaman bermain.
-
-
 
 <h2 id = "table-of-contents">🔍 Daftar Isi</h2>
 - <a href="#description">Deskripsi</a><br/>

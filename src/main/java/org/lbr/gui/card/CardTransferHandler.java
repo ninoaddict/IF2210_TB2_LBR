@@ -186,8 +186,11 @@ public class CardTransferHandler extends TransferHandler {
                 }
 
                 GameObject targetGameObject = targetCard.getGameObject();
-        		((MainWindow)sourceCard.getParent().getParent().getParent().getParent()).swapField(sourceCard.getRow(), sourceCard.getCol(), targetCard.getRow(), targetCard.getCol());
+        		boolean ownerEqual = ((MainWindow)sourceCard.getParent().getParent().getParent().getParent()).swapField(sourceCard.getRow(), sourceCard.getCol(), targetCard.getRow(), targetCard.getCol(), sourceCard.getOwner());
 
+                if(!ownerEqual) {
+                    return false;
+                }
 
         		targetCard.setGameObject(droppedGameObject);
                 sourceCard.setGameObject(targetGameObject); 
