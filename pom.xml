@@ -118,6 +118,11 @@
                 <configuration>
                     <source>21</source>
                     <target>21</target>
+                    <excludes>
+                        <exclude>
+                            org/lbr/load_save/*.java
+                        </exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
