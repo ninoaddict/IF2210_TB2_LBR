@@ -146,8 +146,8 @@ public class SaveLoadJSON implements SaveLoad {
             int lenes = fielde.getInt("effectNum");
             ArrayList<String> effects = new ArrayList<>();
             if (lenes > 0) {
-                JSONObject effect = effecte.getJSONObject(0);
                 for (int j = 0; j < lenes; j++) {
+                    JSONObject effect = effecte.getJSONObject(j);
                     effects.add(effect.getString("effect_"+(j+1)));
                 }
             }
@@ -177,8 +177,8 @@ public class SaveLoadJSON implements SaveLoad {
             int lenes = fielde.getInt("effectNum");
             ArrayList<String> effects = new ArrayList<>();
             if (lenes > 0) {
-                JSONObject effect = effecte.getJSONObject(0);
                 for (int j = 0; j < lenes; j++) {
+                    JSONObject effect = effecte.getJSONObject(j);
                     effects.add(effect.getString("effect_"+(j+1)));
                 }
             }
