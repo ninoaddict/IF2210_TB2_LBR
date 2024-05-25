@@ -81,7 +81,7 @@ public class PluginDialog extends JFrame {
             } catch (Exception eee) {
                 // HANDLE EXCEPTION
             }
-            jfk = new JFileChooser("C:");
+            jfk = new JFileChooser();
             jfk.setFileFilter(new FileNameExtensionFilter("jar", "jar"));
             int returnVal = jfk.showOpenDialog(this);
             try {

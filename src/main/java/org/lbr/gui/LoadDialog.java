@@ -106,7 +106,7 @@ public class LoadDialog extends JFrame {
             } catch (Exception eee) {
 
             }
-            jfk = new JFileChooser("C:");
+            jfk = new JFileChooser();
             jfk.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int returnVal = jfk.showOpenDialog(this);
             try {
