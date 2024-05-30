@@ -25,10 +25,15 @@
 <!--                <configuration>-->
 <!--                    <source>21</source>-->
 <!--                    <target>21</target>-->
-<!--                    <includes>-->
-<!--                        <include>org/lbr/load_save/SaveLoadJSON.java</include>-->
-<!--                        <include>org/lbr/load_save/SaveLoad.java</include>-->
-<!--                    </includes>-->
+<!--                    <excludes>-->
+<!--                        <exclude>org/lbr/controller/*.java</exclude>-->
+<!--                        <exclude>org/lbr/view/*.java</exclude>-->
+<!--                        <exclude>org/lbr/model/*.java</exclude>-->
+<!--                        <exclude>org/lbr/saveload/SaveLoadYAML.java</exclude>-->
+<!--                        <exclude>org/lbr/saveload/SaveLoadTXT.java</exclude>-->
+<!--                        <exclude>org/lbr/Main.java</exclude>-->
+<!--                        <exclude>org/lbr/view/card/*.java</exclude>-->
+<!--                    </excludes>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
 
@@ -45,12 +50,6 @@
 <!--                        </goals>-->
 <!--                        <configuration>-->
 <!--                            <finalName>save-load-json</finalName> &lt;!&ndash; Custom JAR name &ndash;&gt;-->
-<!--                            <artifactSet>-->
-<!--                                <includes>-->
-<!--                                    <include>org/lbr/load_save/SaveLoadJSON.class</include>-->
-<!--                                    <include>org/lbr/load_save/SaveLoad.class</include>-->
-<!--                                </includes>-->
-<!--                            </artifactSet>-->
 <!--                        </configuration>-->
 <!--                    </execution>-->
 <!--                </executions>-->
@@ -69,10 +68,15 @@
 <!--                <configuration>-->
 <!--                    <source>21</source>-->
 <!--                    <target>21</target>-->
-<!--                    <includes>-->
-<!--                        <include>org/lbr/load_save/SaveLoadYAML.java</include>-->
-<!--                        <include>org/lbr/load_save/SaveLoad.java</include>-->
-<!--                    </includes>-->
+<!--                    <excludes>-->
+<!--                        <exclude>org/lbr/controller/*.java</exclude>-->
+<!--                        <exclude>org/lbr/view/*.java</exclude>-->
+<!--                        <exclude>org/lbr/model/*.java</exclude>-->
+<!--                        <exclude>org/lbr/saveload/SaveLoadJSON.java</exclude>-->
+<!--                        <exclude>org/lbr/saveload/SaveLoadTXT.java</exclude>-->
+<!--                        <exclude>org/lbr/Main.java</exclude>-->
+<!--                        <exclude>org/lbr/view/card/*.java</exclude>-->
+<!--                    </excludes>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
 
@@ -89,12 +93,6 @@
 <!--                        </goals>-->
 <!--                        <configuration>-->
 <!--                            <finalName>save-load-yaml</finalName> &lt;!&ndash; Custom JAR name &ndash;&gt;-->
-<!--                            <artifactSet>-->
-<!--                                <includes>-->
-<!--                                    <include>org/lbr/load_save/SaveLoadYAML.class</include>-->
-<!--                                    <include>org/lbr/load_save/SaveLoad.class</include>-->
-<!--                                </includes>-->
-<!--                            </artifactSet>-->
 <!--                        </configuration>-->
 <!--                    </execution>-->
 <!--                </executions>-->
@@ -120,10 +118,10 @@
                     <target>21</target>
                     <excludes>
                         <exclude>
-                            org/lbr/load_save/SaveLoadJSON.java
+                            org/lbr/saveload/SaveLoadYAML.java
                         </exclude>
                         <exclude>
-                            org/lbr/load_save/SaveLoadYAML.java
+                            org/lbr/saveload/SaveLoadJSON.java
                         </exclude>
                     </excludes>
                 </configuration>
