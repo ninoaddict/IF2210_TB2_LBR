@@ -1,6 +1,7 @@
 package org.lbr;
 
-import org.lbr.gui.MainFrame;
+import org.lbr.controller.GameEngine;
+import org.lbr.view.MainFrame;
 
 import javax.swing.*;
 public class Main {
